@@ -1,0 +1,66 @@
+@import 'bourbon'
+
+*
+  cursor: default
+
+body
+  -webkit-font-smoothing: antialiased
+
+a, a *, button, input[type=button], input[type=file]
+  cursor: pointer
+
+input[type=text]
+  cursor: text
+
+form.file-upload
+  overflow: hidden
+  margin-top: 20px
+
+  fieldset
+    @include border-radius(3px)
+    background: #fafafa
+    border: 1px solid #d9d9d9
+    position: relative
+    margin: 0 auto
+    padding: 0
+    width: 938px
+
+    input[type=file]
+      position: absolute
+      opacity: 0
+      height: 36px
+      left: 0
+      top: 0
+      width: 938px
+
+    input[type=submit]
+      display: none
+
+    div
+      font-weight: bold
+      line-height: 36px
+      text-align: center
+      width: 938px
+
+      &.uploading
+        display: none
+
+  &.uploading
+    .instructions, input[type=file]
+      display: none
+
+    .uploading
+      display: block
+
+.alert-message
+  text-align: center
+  margin-top: 20px
+
+.chart
+  margin-top: 18px
+  margin-bottom: 18px
+
+iframe
+  display: none
+  width: 0
+  height: 0

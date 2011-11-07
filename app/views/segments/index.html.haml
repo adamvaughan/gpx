@@ -1,0 +1,28 @@
+%form.file-upload{ :action => uploads_path, :method => 'post', :enctype => 'multipart/form-data' }
+  %fieldset
+    %input{ :name => 'file', :type => 'file' }
+    %input.btn.primary{ :type => 'submit', :value => 'Upload' }
+    %div.instructions Select a file to upload.
+    %div.uploading Uploading your file. Please wait...
+
+- if @segments.any?
+  %table
+    %thead
+      %tr
+        %th Date
+        %th Name
+        %th Distance
+        %th
+
+    %tbody
+      - @segments.each do |segment|
+        %tr
+          %td= segment.start_time
+          %td= segment.name
+          %td
+            = segment.distance
+            %abbr{ :title => 'miles' } mi
+          %td
+            = link_to 'View', segment_path(segment)
+            |
+            = link_to 'Edit', edit_segment_path(segment)

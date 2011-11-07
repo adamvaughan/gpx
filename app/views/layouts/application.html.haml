@@ -1,0 +1,20 @@
+!!!
+%html
+  %head
+    %title GPX Analyzer
+    = stylesheet_link_tag 'application'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+  %body{ :class => page_class }
+    .container
+      - if flash[:notice]
+        .alert-message.success
+          %p
+            %strong= flash[:notice]
+
+      - if flash[:error]
+        .alert-message.error
+          %p
+            %strong= flash[:error]
+
+      = yield

@@ -1,0 +1,14 @@
+%form.form-stacked{ :action => segment_path(@segment), :method => 'post' }
+  %input{ :type => 'hidden', :name => '_method', :value => 'put' }
+
+  %fieldset
+    %div{ :class => @segment.valid? ? 'clearfix' : 'clearfix error' }
+      %label{ :for => 'segment_name' } Name
+      .input
+        %input#segment_name{ :type => 'text', :name => 'segment[name]', :value => @segment.name }
+        - if @segment.errors[:name].any?
+          %span.help-inline= "Name #{@segment.errors[:name].first}."
+
+  %fieldset
+    %input.btn.primary{ :type => 'submit', :value => 'Save' }
+    = link_to 'Cancel', root_path, :class => 'btn'
