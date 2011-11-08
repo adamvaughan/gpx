@@ -14,10 +14,14 @@
 ActiveRecord::Schema.define(:version => 20111106052626) do
 
   create_table "points", :force => true do |t|
+    t.datetime "time"
     t.decimal  "latitude",   :precision => 20, :scale => 10
     t.decimal  "longitude",  :precision => 20, :scale => 10
     t.decimal  "elevation",  :precision => 20, :scale => 10
-    t.datetime "time"
+    t.decimal  "distance",   :precision => 20, :scale => 10
+    t.decimal  "duration",   :precision => 20, :scale => 10
+    t.decimal  "pace",       :precision => 20, :scale => 10
+    t.decimal  "speed",      :precision => 20, :scale => 10
     t.integer  "segment_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -25,6 +29,31 @@ ActiveRecord::Schema.define(:version => 20111106052626) do
 
   create_table "segments", :force => true do |t|
     t.string   "name"
+    t.datetime "start_time"
+    t.decimal  "latitude",                 :precision => 20, :scale => 10
+    t.decimal  "distance",                 :precision => 20, :scale => 10
+    t.decimal  "ascending_distance",       :precision => 20, :scale => 10
+    t.decimal  "descending_distance",      :precision => 20, :scale => 10
+    t.decimal  "flat_distance",            :precision => 20, :scale => 10
+    t.decimal  "elevation_gain",           :precision => 20, :scale => 10
+    t.decimal  "elevation_loss",           :precision => 20, :scale => 10
+    t.decimal  "elevation_change",         :precision => 20, :scale => 10
+    t.decimal  "maximum_elevation",        :precision => 20, :scale => 10
+    t.decimal  "minimum_elevation",        :precision => 20, :scale => 10
+    t.decimal  "duration",                 :precision => 20, :scale => 10
+    t.decimal  "active_duration",          :precision => 20, :scale => 10
+    t.decimal  "ascending_duration",       :precision => 20, :scale => 10
+    t.decimal  "descending_duration",      :precision => 20, :scale => 10
+    t.decimal  "flat_duration",            :precision => 20, :scale => 10
+    t.decimal  "average_pace",             :precision => 20, :scale => 10
+    t.decimal  "average_ascending_pace",   :precision => 20, :scale => 10
+    t.decimal  "average_descending_pace",  :precision => 20, :scale => 10
+    t.decimal  "average_flat_pace",        :precision => 20, :scale => 10
+    t.decimal  "average_speed",            :precision => 20, :scale => 10
+    t.decimal  "average_ascending_speed",  :precision => 20, :scale => 10
+    t.decimal  "average_descending_speed", :precision => 20, :scale => 10
+    t.decimal  "average_flat_speed",       :precision => 20, :scale => 10
+    t.decimal  "maximum_speed",            :precision => 20, :scale => 10
     t.datetime "created_at"
     t.datetime "updated_at"
   end

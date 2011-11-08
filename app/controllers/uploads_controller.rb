@@ -6,6 +6,8 @@ class UploadsController < ApplicationController
       Ox.sax_parse(handler, file)
 
       if handler.segments.any?
+        handler.segments.each { |segment| Gpx::Statistics::SegmentStatistics.calculate(segment) }
+
         if handler.segments.all?(&:save)
           flash[:notice] = 'Upload successful.'
         else

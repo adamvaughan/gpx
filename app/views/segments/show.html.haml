@@ -2,17 +2,26 @@
   = @segment.name
   %small= @segment.start_time
 
-= link_to 'Back', root_path
-|
-= link_to 'Edit', edit_segment_path(@segment)
+.action-links
+  = link_to 'Back', root_path
+  |
+  = link_to 'Edit', edit_segment_path(@segment)
 
-#elevation_chart.chart
+%ul.tabs
+  %li.active
+    %a.elevation{ :href => '#' } Elevation
+  %li
+    %a.speed{ :href => '#' } Speed
+  %li
+    %a.pace{ :href => '#' } Pace
 
-%small TODO: change this chart to be over distance instead of over time
-%br
-%small TODO: add speed and pace to the chart
-%br
-%br
+#chart.chart
+
+%ul.pills
+  %li.active
+    %a.distance{ :href => '#' } Distance
+  %li
+    %a.time{ :href => '#' } Time
 
 %table
   %tbody
@@ -20,7 +29,7 @@
       %td
         %h2 Distance
 
-        %dl
+        %dl.statistics
           %dt Total Distance
           %dd
             = @segment.distance
@@ -43,7 +52,7 @@
       %td
         %h2 Elevation
 
-        %dl
+        %dl.statistics
           %dt Elevation Gain
           %dd
             = @segment.elevation_gain
@@ -54,23 +63,25 @@
             = @segment.elevation_loss
             %abbr{ :title => 'feet' } ft
 
+          %dt Maximum Elevation
+          %dd
+            = @segment.maximum_elevation
+            %abbr{ :title => 'feet' } ft
+
+          %dt Minimum Elevation
+          %dd
+            = @segment.minimum_elevation
+            %abbr{ :title => 'feet' } ft
+
           %dt Elevation Change
           %dd
             = @segment.elevation_change
             %abbr{ :title => 'feet' } ft
 
-          %dt Minimum Elevation
-          %dd
-            %em Coming Soon...
-
-          %dt Maximum Elevation
-          %dd
-            %em Coming Soon...
-
       %td
         %h2 Duration
 
-        %dl
+        %dl.statistics
           %dt Total Duration
           %dd= @segment.duration
 
@@ -89,7 +100,7 @@
       %td
         %h2 Pace
 
-        %dl
+        %dl.statistics
           %dt Average Pace
           %dd= "#{@segment.average_pace} per mile"
 
@@ -105,7 +116,7 @@
       %td
         %h2 Speed
 
-        %dl
+        %dl.statistics
           %dt Average Speed
           %dd
             = @segment.average_speed

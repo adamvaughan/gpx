@@ -33,6 +33,14 @@ class SegmentDecorator < ApplicationDecorator
     format_number(meters_to_feet(segment.elevation_change))
   end
 
+  def maximum_elevation
+    format_number(meters_to_feet(segment.maximum_elevation))
+  end
+
+  def minimum_elevation
+    format_number(meters_to_feet(segment.minimum_elevation))
+  end
+
   def duration
     format_time(segment.duration)
   end
@@ -92,7 +100,7 @@ class SegmentDecorator < ApplicationDecorator
   private
 
   def format_number(number)
-    '%.2f' % number
+    helpers.number_to_currency(number, :unit => '')
   end
 
   def meters_to_feet(meters)
