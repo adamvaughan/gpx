@@ -1,0 +1,180 @@
+<h1>
+  {{name}}
+  <small>{{formatLongTime epoch_start_time}}</small>
+</h1>
+
+<div class="action-links">
+  <a href="#" rel="back" title="Back">Back</a>
+  |
+  <a href="#" rel="edit" title="Edit">Edit</a>
+</div>
+
+<ul class="tabs">
+  <li class="active">
+    <a href="#" rel="elevation" title="Elevation">Elevation</a>
+  </li>
+  <li>
+    <a href="#" rel="speed" title="Speed">Speed</a>
+  </li>
+  <li>
+    <a href="#" rel="pace" title="Pace">Pace</a>
+  </li>
+</ul>
+
+<div id="chart" class="chart"></div>
+
+<ul class="pills">
+  <li class="active">
+    <a href="#" rel="distance" title="Distance">Distance</a>
+  </li>
+  <li>
+    <a href="#" rel="time" title="Time">Time</a>
+  </li>
+</ul>
+
+<table class="statistics">
+  <tbody>
+    <tr>
+      <td>
+        <h2>Distance</h2>
+
+        <dl class="statistics">
+          <dt>Total Distance</dt>
+          <dd>
+            {{metersToMiles distance}}
+            <abbr title="miles">mi</abbr>
+          </dd>
+
+          <dt>Ascending Distance</dt>
+          <dd>
+            {{metersToMiles ascending_distance}}
+            <abbr title="miles">mi</abbr>
+          </dd>
+
+          <dt>Descending Distance</dt>
+          <dd>
+            {{metersToMiles descending_distance}}
+            <abbr title="miles">mi</abbr>
+          </dd>
+
+          <dt>Flat Distance</dt>
+          <dd>
+            {{metersToMiles flat_distance}}
+            <abbr title="miles">mi</abbr>
+          </dd>
+        </dl>
+      </td>
+
+      <td>
+        <h2>Elevation</h2>
+
+        <dl class="statistics">
+          <dt>Elevation Gain</dt>
+          <dd>
+            {{metersToFeet elevation_gain}}
+            <abbr title="feet">ft</abbr>
+          </dd>
+
+          <dt>Elevation Loss</dt>
+          <dd>
+            {{metersToFeet elevation_loss}}
+            <abbr title="feet">ft</abbr>
+          </dd>
+
+          <dt>Maximum Elevation</dt>
+          <dd>
+            {{metersToFeet maximum_elevation}}
+            <abbr title="feet">ft</abbr>
+          </dd>
+
+          <dt>Minimum Elevation</dt>
+          <dd>
+            {{metersToFeet minimum_elevation}}
+            <abbr title="feet">ft</abbr>
+          </dd>
+
+          <dt>Elevation Change</dt>
+          <dd>
+            {{metersToFeet elevation_change}}
+            <abbr title="feet">ft</abbr>
+          </dd>
+        </dl>
+      </td>
+
+      <td>
+        <h2>Duration</h2>
+
+        <dl class="statistics">
+          <dt>Total Duration</dt>
+          <dd>{{formatTime duration}}</dd>
+
+          <dt>Active Duration</dt>
+          <dd>{{formatTime active_duration}}</dd>
+
+          <dt>Ascending Duration</dt>
+          <dd>{{formatTime ascending_duration}}</dd>
+
+          <dt>Descending Duration</dt>
+          <dd>{{formatTime descending_duration}}</dd>
+
+          <dt>Flat Duration</dt>
+          <dd>{{formatTime flat_duration}}</dd>
+        </dl>
+      </td>
+
+      <td>
+        <h2>Pace</h2>
+
+        <dl class="statistics">
+          <dt>Average Pace</dt>
+          <dd>{{secondsPerMeterToMinutesPerMile average_pace}} per mile</dd>
+
+          <dt>Average Ascending Pace</dt>
+          <dd>{{secondsPerMeterToMinutesPerMile average_ascending_pace}} per mile</dd>
+
+          <dt>Average Descending Pace</dt>
+          <dd>{{secondsPerMeterToMinutesPerMile average_descending_pace}} per mile</dd>
+
+          <dt>Average Flat Pace</dt>
+          <dd>{{secondsPerMeterToMinutesPerMile average_flat_pace}} per mile</dd>
+        </dl>
+      </td>
+
+      <td>
+        <h2>Speed</h2>
+
+        <dl class="statistics">
+          <dt>Average Speed</dt>
+          <dd>
+            {{metersPerSecondToMilesPerHour average_speed}}
+            <abbr title="miles per hour">mph</abbr>
+          </dd>
+
+          <dt>Average Ascending Speed</dt>
+          <dd>
+            {{metersPerSecondToMilesPerHour average_ascending_speed}}
+            <abbr title="miles per hour">mph</abbr>
+          </dd>
+
+          <dt>Average Descending Speed</dt>
+          <dd>
+            {{metersPerSecondToMilesPerHour average_descending_speed}}
+            <abbr title="miles per hour">mph</abbr>
+          </dd>
+
+          <dt>Average Flat Speed</dt>
+          <dd>
+            {{metersPerSecondToMilesPerHour average_flat_speed}}
+            <abbr title="miles per hour">mph</abbr>
+          </dd>
+
+          <dt>Maximum Speed</dt>
+          <dd>
+            {{metersPerSecondToMilesPerHour maximum_speed}}
+            <abbr title="miles per hour">mph</abbr>
+          </dd>
+        </dl>
+      </td>
+    </tr>
+  </tbody>
+</table>
