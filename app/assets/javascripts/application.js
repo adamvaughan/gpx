@@ -7,4 +7,45 @@
 //= require jquery
 //= require highcharts
 //= require underscore
-//= require_tree .
+//= require backbone
+//= require handlebars.vm
+//= require date
+//= require_self
+//= require_tree ./helpers
+//= require_tree ./models
+//= require_tree ./collections
+//= require_tree ./views
+//= require_tree ./routers
+//= require_tree ../templates
+//= require initialize
+
+window.App = {
+  Helpers: {},
+  Models: {},
+  Collections: {},
+  Views: {},
+  Routers: {}
+};
+
+Highcharts.setOptions({
+  plotOptions: {
+    series: {
+      animation: false
+    }
+  },
+  chart: {
+    renderTo: 'chart',
+    type: 'spline',
+    width: 900,
+    height: 300
+  },
+  legend: {
+    enabled: false
+  },
+  credits: {
+    enabled: false
+  },
+  title: {
+    text: ''
+  }
+});
