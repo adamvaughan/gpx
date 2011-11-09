@@ -75,3 +75,19 @@ iframe
   display: none
   width: 0
   height: 0
+
+.segment-view
+  td
+    p, a[rel='edit']
+      display: inline
+      padding-left: 10px
+
+    input
+      display: none
+
+    &.editing
+      p, a[rel='edit']
+        display: none
+
+      input
+        display: block

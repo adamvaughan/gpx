@@ -32,3 +32,5 @@ node(:_type) { 'Segment' }
 node(:href) { |segment| segment_path(segment) }
 node(:points_href) { |segment| segment_points_path(segment) }
 node(:epoch_start_time) { |segment| segment.start_time.to_i }
+node(:epoch_created_at) { |segment| segment.created_at.to_i }
+node(:epoch_updated_at) { |segment| segment.created_at.to_i }
