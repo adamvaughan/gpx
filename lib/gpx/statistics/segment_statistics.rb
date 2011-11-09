@@ -94,15 +94,7 @@ module Gpx
         #
         # Returns the elevation change in meters.
         def elevation_change(segment)
-          Rails.logger.debug "DEBUG: computing elevation change"
-          max = maximum_elevation(segment)
-          Rails.logger.debug "DEBUG: max is #{max}"
-          min = minimum_elevation(segment)
-          Rails.logger.debug "DEBUG: min is #{min}"
-          result = max - min
-          Rails.logger.debug "DEBUG: result is #{result}"
-          #maximum_elevation(segment) - minimum_elevation(segment)
-          result
+          maximum_elevation(segment) - minimum_elevation(segment)
         end
 
         # Calculates the maximum elevation reached on a segment.
