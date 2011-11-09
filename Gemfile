@@ -9,17 +9,18 @@ gem 'draper'
 gem 'rabl'
 gem 'yajl-ruby', :require => 'yajl'
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.1.4'
-  gem 'coffee-rails', '~> 3.1.1'
-  gem 'uglifier', '>= 1.0.3'
-  gem 'bourbon'
-  gem 'jquery-rails'
-  gem 'twitter-bootstrap-rails'
-  gem 'underscore-rails'
-end
+gem 'sass-rails', '~> 3.1.4'
+gem 'coffee-rails', '~> 3.1.1'
+gem 'uglifier', '>= 1.0.3'
+
+gem 'bourbon'
+gem 'twitter-bootstrap-rails'
+
+gem 'jquery-rails'
+gem 'backbone-rails'
+gem 'handlebars_assets'
+
+gem 'execjs'
 
 group :development, :test do
   gem 'rspec-rails'
