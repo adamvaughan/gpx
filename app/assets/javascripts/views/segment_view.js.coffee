@@ -5,6 +5,8 @@ class App.Views.SegmentView extends Backbone.View
     'click a[rel=view]' : 'view'
     'click a[rel=edit]' : 'edit'
 
+  # TODO listen for changes to the name and re-render
+
   render: =>
     $(@el).html JST['segment_view'](@model.toJSON())
     @
@@ -15,4 +17,4 @@ class App.Views.SegmentView extends Backbone.View
 
   edit: =>
     event.preventDefault()
-    window.location.hash = "/edit/#{@model.id}"
+    # TODO add in place editing for the name
