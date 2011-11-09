@@ -4,17 +4,9 @@
     %title GPX Analyzer
     = stylesheet_link_tag 'application'
     = javascript_include_tag 'application'
+    :javascript
+      window.segments = new App.Collections.SegmentCollection(#{render :file => 'segments/index.json.rabl'})
     = csrf_meta_tags
-  %body{ :class => page_class }
+  %body
     .container
-      - if flash[:notice]
-        .alert-message.success
-          %p
-            %strong= flash[:notice]
-
-      - if flash[:error]
-        .alert-message.error
-          %p
-            %strong= flash[:error]
-
       = yield
