@@ -1,16 +1,7 @@
 class SegmentsController < ApplicationController
   def index
     # TODO add caching support
-    @segments = SegmentDecorator.decorate(Segment.all.sort)
-  end
-
-  def show
-    # TODO add caching support
-    @segment = SegmentDecorator.find(params[:id])
-  end
-
-  def edit
-    @segment = Segment.find(params[:id])
+    @segments = Segment.all.sort
   end
 
   def update

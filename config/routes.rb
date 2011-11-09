@@ -1,6 +1,6 @@
 Gpx::Application.routes.draw do
-  resources :segments, :only => [:index, :show, :edit, :update] do
-    resources :points, :only => :index, :constraints => { :format => 'application/json' }
+  resources :segments, :only => [:index, :update] do
+    resources :points, :only => :index
   end
 
   resources :uploads, :only => :create
