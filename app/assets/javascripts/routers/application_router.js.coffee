@@ -3,9 +3,6 @@ class App.Routers.ApplicationRouter extends Backbone.Router
     '': 'index'
     '/:id': 'show'
 
-  initialize: ->
-    window.location.hash = ''
-
   index: =>
     $('.container').empty()
 
