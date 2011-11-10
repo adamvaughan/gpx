@@ -12,3 +12,6 @@ App.Helpers.secondsPerMeterToSecondsPerMile = (secondsPerMeter) ->
 
 App.Helpers.metersPerSecondToMilesPerHour = (metersPerSecond) ->
   metersPerSecond * 2.23693629
+
+App.Helpers.secondsPerMeterToMinutesPerMile = (secondsPerMeter) ->
+  secondsPerMeter * 26.8224
