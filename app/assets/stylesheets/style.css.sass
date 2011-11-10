@@ -60,10 +60,6 @@ form.file-upload
   margin-top: 18px
   margin-bottom: 18px
 
-.action-links
-  margin-top: 18px
-  margin-bottom: 18px
-
 table.statistics
   td
     width: 20%
@@ -78,16 +74,69 @@ iframe
 
 .segment-view
   td
-    p, a[rel='edit']
+    line-height: 28px
+
+  td.name
+    width: 500px
+
+    p
       display: inline
-      padding-left: 10px
 
     input
       display: none
 
-    &.editing
-      p, a[rel='edit']
+  td.links a[rel='edit']
+    display: inline
+    padding-left: 10px
+
+  &.editing
+    td.name
+      p
         display: none
 
       input
         display: block
+        width: 100%
+
+    td.links a[rel='edit']
+      display: none
+
+.segment-detail-view
+  h1
+    margin-top: 10px
+
+    p
+      display: inline
+      margin-bottom: 18px
+      font-size: 30px
+      line-height: 46px
+      font-weight: bold
+
+    small
+      display: inline
+
+    input
+      font-size: 30px
+      height: 36px
+      font-weight: bold
+      display: none
+      width: 100%
+
+  div.links
+    margin-top: 18px
+    margin-bottom: 18px
+
+    a[rel='edit']
+      display: inline
+      padding-left: 10px
+
+  &.editing
+    h1
+      p, small
+        display: none
+
+      input
+        display: block
+
+    div.links a[rel='edit']
+      display: none

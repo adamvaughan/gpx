@@ -7,10 +7,9 @@ class App.Views.SegmentView extends Backbone.View
     'click a[rel=view]': 'view'
     'click a[rel=edit]': 'edit'
     'keypress input': 'save'
+    'blur input': 'cancel'
 
   initialize: ->
-    @model.bind 'change:name', @render
-
     $(document).bind 'keydown', @cancel
 
   render: =>
@@ -27,28 +26,31 @@ class App.Views.SegmentView extends Backbone.View
 
   save: (event) =>
     if event.which == 13 and @isEditing()
-     event.preventDefault()
-     value = $.trim $(@el).find('td.name input').val()
+      event.preventDefault()
+      value = $.trim $(@el).find('td.name input').val()
 
-     if value == @model.get('name')
-       @toggleEditInPlace()
-     else
-       # TODO handle errors
-       @model.save {name: $(@el).find('td.name input').val()}
+      if value == @model.get('name')
+        @toggleEditInPlace()
+      else
+        # TODO handle errors
+        @model.save { name: value },
+          success: =>
+            $(@el).find('td.name p').html(value)
+            @toggleEditInPlace()
 
   cancel: (event) =>
-    if event.which == 27 and @isEditing()
-     @toggleEditInPlace()
+    if (not event.which? or event.which == 27) and @isEditing()
+      @toggleEditInPlace()
 
   toggleEditInPlace: =>
-    $(@el).find('td').toggleClass 'editing'
+    $(@el).toggleClass 'editing'
 
-    p = $(@el).find('td.name p')
-    input = $(@el).find('td.name input')
+    if $(@el).is('.editing')
+      p = $(@el).find('td.name p')
+      input = $(@el).find('td.name input')
 
-    input.val $.trim(p.text())
-    input.focus().select()
+      input.val $.trim(p.text())
+      input.focus().select()
 
   isEditing: =>
-    input = $(@el).find('td.name input')
-    input.is(':visible') and input.is(':focus')
+    $(@el).is('.editing')
