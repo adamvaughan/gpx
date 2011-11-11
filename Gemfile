@@ -2,7 +2,10 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.1.1'
 
-gem 'pg'
+group :production do
+  gem 'pg'
+end
+
 gem 'haml'
 gem 'ox'
 gem 'draper'
@@ -23,6 +26,7 @@ gem 'handlebars_assets'
 gem 'execjs'
 
 group :development, :test do
+  gem 'sqlite3'
   gem 'rspec-rails'
   gem 'powder'
   gem 'wirble'
