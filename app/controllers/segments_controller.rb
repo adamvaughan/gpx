@@ -1,7 +1,10 @@
 class SegmentsController < ApplicationController
   def index
-    # TODO add caching support
-    @segments = Segment.all.sort
+    last_modified = Segment.maximum(:updated_at)
+
+    if stale?(:last_modified => last_modified, :etag => [Segment, last_modified, request.format])
+      @segments = Segment.all
+    end
   end
 
   def update

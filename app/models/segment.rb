@@ -3,8 +3,5 @@ class Segment < ActiveRecord::Base
 
   validates :name, :presence => true
 
-  # Compares two segments for order based on start time.
-  def <=>(other)
-    start_time <=> other.start_time
-  end
+  default_scope :order => 'start_time, created_at DESC'
 end
