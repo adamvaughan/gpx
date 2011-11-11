@@ -35,11 +35,13 @@ class App.Views.SegmentDetailView extends Backbone.View
       if value == @model.get('name')
         @toggleEditInPlace()
       else
-        # TODO handle errors
         @model.save { name: value },
           success: =>
             $(@el).find('h1 p').html(value)
             @toggleEditInPlace()
+          error: (model, error) =>
+            $(@el).find('div.error-message').html(error)
+            $(@el).addClass 'error'
 
   cancel: (event) =>
     if (not event.which? or event.which == 27) and @isEditing()
@@ -47,6 +49,7 @@ class App.Views.SegmentDetailView extends Backbone.View
 
   toggleEditInPlace: =>
     $(@el).toggleClass 'editing'
+    $(@el).removeClass 'error'
 
     if $(@el).is('.editing')
       p = $(@el).find('h1 p')

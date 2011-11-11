@@ -12,6 +12,9 @@ a, a *, button, input[type=button], input[type=file]
 input[type=text]
   cursor: text
 
+.error-message
+  color: #b94a48
+
 form.file-upload
   overflow: hidden
   margin-top: 20px
@@ -85,9 +88,16 @@ iframe
     input
       display: none
 
-  td.links a[rel='edit']
-    display: inline
-    padding-left: 10px
+  td.links
+    width: 120px
+    text-align: right
+
+    a[rel='edit']
+      display: inline
+      padding-left: 10px
+
+  .error-message
+    display: none
 
   &.editing
     td.name
@@ -100,6 +110,14 @@ iframe
 
     td.links a[rel='edit']
       display: none
+
+  &.error
+    .error-message
+      display: block
+
+    input
+      color: #b94a48
+      border-color: #ee5f5b
 
 .segment-detail-view
   h1
@@ -130,6 +148,9 @@ iframe
       display: inline
       padding-left: 10px
 
+  .error-message
+    display: none
+
   &.editing
     h1
       p, small
@@ -144,3 +165,11 @@ iframe
   &.loading
     .chart, .tabs, .pills
       display: none
+
+  &.error
+    .error-message
+      display: block
+
+    input
+      color: #b94a48
+      border-color: #ee5f5b
