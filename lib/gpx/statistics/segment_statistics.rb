@@ -136,7 +136,21 @@ module Gpx
         #
         # Returns the active duration in seconds.
         def active_duration(segment)
-          point_pairs(segment).inject(0) { |total, pair| total + (active_between?(*pair) ? time_between(*pair) : 0) }
+          if segment.points.size < 2
+            segment.points.each { |point| point.active_duration = 0 }
+            return 0
+          end
+
+          segment.points.first.active_duration = 0
+
+          point_pairs(segment).inject(0) do |total, pair|
+            if active_between?(*pair)
+              pair.last.active_duration = total + time_between(*pair)
+            else
+              pair.last.active_duration = 0
+              total
+            end
+          end
         end
 
         # Calculates the time elapsed between points while ascending on a segment.
@@ -183,19 +197,13 @@ module Gpx
         #
         # Returns the average pace in seconds per meter.
         def average_active_pace(segment)
-          if segment.points.size < 2
-            segment.points.each { |point| point.active_pace = 0 }
-            return 0
-          end
-
-          segment.points.first.active_pace = 0
+          return 0 if segment.points.size < 2
           count = 0
 
           total_pace = point_pairs(segment).inject(0) do |total, pair|
             if active_between?(*pair)
               count += 1
-              pair.last.active_pace = pace_between(*pair)
-              total + pair.last.active_pace
+              total + pace_between(*pair)
             else
               total
             end
@@ -273,19 +281,13 @@ module Gpx
         #
         # Returns the average speed in meters per second.
         def average_active_speed(segment)
-          if segment.points.size < 2
-            segment.points.each { |point| point.active_speed = 0 }
-            return 0
-          end
-
-          segment.points.first.active_speed = 0
+          return 0 if segment.points.size < 2
           count = 0
 
           total_speed = point_pairs(segment).inject(0) do |total, pair|
             if active_between?(*pair)
               count += 1
-              pair.last.speed = speed_between(*pair)
-              total + pair.last.speed
+              total + speed_between(*pair)
             else
               total
             end

@@ -7,10 +7,9 @@ class CreatePoints < ActiveRecord::Migration
       t.decimal :elevation, :precision => 20, :scale => 10
       t.decimal :distance, :precision => 20, :scale => 10
       t.decimal :duration, :precision => 20, :scale => 10
+      t.decimal :active_duration, :precision => 20, :scale => 10
       t.decimal :pace, :precision => 20, :scale => 10
-      t.decimal :active_pace, :precision => 20, :scale => 10
       t.decimal :speed, :precision => 20, :scale => 10
-      t.decimal :active_speed, :precision => 20, :scale => 10
       t.references :segment
       t.timestamps
     end

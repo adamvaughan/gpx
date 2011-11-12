@@ -87,24 +87,26 @@ class App.Views.SegmentDetailView extends Backbone.View
     @showChart()
 
   showChart: =>
-    plotBy = if $(@el).find('ul.pills .active a').is('[rel=distance]') then 'distance' else 'time'
+    plotFor = $(@el).find('ul.tabs li.active a').attr('rel')
+    plotBy = $(@el).find('ul.pills li.active a').attr('rel')
     $(@el).removeClass 'loading'
     $(@el).find('#chart').empty()
 
-    if $(@el).find('ul.tabs li.active a').is('[rel=elevation]')
-      if plotBy == 'distance'
-        chartView = new App.Views.ElevationDistanceChartView(points: @points)
-      else
-        chartView = new App.Views.ElevationTimeChartView(points: @points)
-    else if $(@el).find('ul.tabs li.active a').is('[rel=speed]')
-      if plotBy == 'distance'
-        chartView = new App.Views.SpeedDistanceChartView(points: @points)
-      else
-        chartView = new App.Views.SpeedTimeChartView(points: @points)
-    else if $(@el).find('ul.tabs li.active a').is('[rel=pace]')
-      if plotBy == 'distance'
-        chartView = new App.Views.PaceDistanceChartView(points: @points)
-      else
-        chartView = new App.Views.PaceTimeChartView(points: @points)
+    chartView = switch plotFor
+      when 'elevation'
+        switch plotBy
+          when 'distance' then new App.Views.ElevationDistanceChartView(points: @points)
+          when 'active-time' then new App.Views.ElevationActiveTimeChartView(points: @points)
+          else new App.Views.ElevationTimeChartView(points: @points)
+      when 'speed'
+        switch plotBy
+          when 'distance' then new App.Views.SpeedDistanceChartView(points: @points)
+          when 'active-time' then new App.Views.SpeedActiveTimeChartView(points: @points)
+          else new App.Views.SpeedTimeChartView(points: @points)
+      when 'pace'
+        switch plotBy
+          when 'distance' then new App.Views.PaceDistanceChartView(points: @points)
+          when 'active-time' then new App.Views.PaceActiveTimeChartView(points: @points)
+          else new App.Views.PaceTimeChartView(points: @points)
 
     chartView.render()
