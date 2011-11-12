@@ -475,14 +475,26 @@ module Gpx
         #
         # Returns the speed in meters per second.
         def speed_between(start_point, end_point)
-          distance_between(start_point, end_point) / time_between(start_point, end_point)
+          time = time_between(start_point, end_point)
+          return 0 if time == 0
+
+          distance = distance_between(start_point, end_point)
+          return 0 if distance == 0
+
+          distance / time
         end
 
         # Computes the pace the distance between two points was traveled at.
         #
         # Returns the pace in seconds per meter.
         def pace_between(start_point, end_point)
-          time_between(start_point, end_point) / distance_between(start_point, end_point)
+          time = time_between(start_point, end_point)
+          return 0 if time == 0
+
+          distance = distance_between(start_point, end_point)
+          return 0 if distance == 0
+
+          time / distance
         end
 
         # Computes the time elapsed between two points.

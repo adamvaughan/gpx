@@ -1,5 +1,10 @@
 require 'spec_helper'
 
+# TODO move these specs to only test the statistics module
+# TODO make sure all calculations are tested
+# TODO test with points where the time between the points is zero
+# TODO test with points where the distance between the points is zero
+
 describe Segment do
   let(:segment) { Segment.new }
 
