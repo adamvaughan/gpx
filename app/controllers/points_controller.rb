@@ -5,9 +5,8 @@ class PointsController < ApplicationController
 
     if stale?(:last_modified => last_modified, :etag => [params[:segment_id], Point, last_modified, request.format])
       respond_to do |format|
-        format.json do
-          @points = @segment.points
-        end
+        format.json { @points = @segment.points }
+        format.html { render "#{Rails.root}/public/404.html", :layout => false, :status => :not_found }
       end
     end
   end
