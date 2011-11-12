@@ -103,16 +103,14 @@ module Gpx
         #
         # Returns the maximum elevation in meters.
         def maximum_elevation(segment)
-          return 0 if segment.points.size < 2
-          segment.points.map(&:elevation).max
+          segment.points.map(&:elevation).max || 0
         end
 
         # Calculates the minimum elevation reached on a segment.
         #
         # Returns the minimum elevation in meters.
         def minimum_elevation(segment)
-          return 0 if segment.points.size < 2
-          segment.points.map(&:elevation).min
+          segment.points.map(&:elevation).min || 0
         end
 
         # Calculates the time elapsed between points on a segment.
@@ -458,6 +456,8 @@ module Gpx
         #
         # Returns the distance in meters.
         def haversine_distance(from_point, to_point)
+          return 0 unless from_point.latitude && from_point.longitude && to_point.latitude && to_point.longitude
+
           delta_latitude = degrees_to_radians(to_point.latitude - from_point.latitude)
           delta_longitude = degrees_to_radians(to_point.longitude - from_point.longitude)
           from_latitude = degrees_to_radians(from_point.latitude)
@@ -501,6 +501,7 @@ module Gpx
         #
         # Returns the time in seconds.
         def time_between(start_point, end_point)
+          return 0 unless start_point.time && end_point.time
           end_point.time - start_point.time
         end
 
@@ -508,6 +509,7 @@ module Gpx
         #
         # Returns the elevation change in meters.
         def elevation_between(start_point, end_point)
+          return 0 unless start_point.elevation && end_point.elevation
           end_point.elevation - start_point.elevation
         end
 
