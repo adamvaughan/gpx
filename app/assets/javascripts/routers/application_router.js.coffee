@@ -15,6 +15,10 @@ class App.Routers.ApplicationRouter extends Backbone.Router
   show: (id) =>
     $('.container').empty()
 
-    segmentDetailView = new App.Views.SegmentDetailView(model: window.segments.get(id))
-    $('.container').append segmentDetailView.render().el
+    segment = window.segments.get(id)
 
+    if segment?
+      segmentDetailView = new App.Views.SegmentDetailView(model: window.segments.get(id))
+      $('.container').append segmentDetailView.render().el
+    else
+      window.location.hash = ''
