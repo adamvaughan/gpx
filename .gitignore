@@ -4,3 +4,4 @@ tmp/
 .sass-cache/
 config/database.yml
 db/*.sqlite3
+TODO
