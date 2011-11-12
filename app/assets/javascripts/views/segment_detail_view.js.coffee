@@ -6,8 +6,11 @@ class App.Views.SegmentDetailView extends Backbone.View
   events:
     'click a[rel=back]': 'back'
     'click a[rel=edit]': 'edit'
-    'keypress input': 'save'
-    'blur input': 'cancel'
+    'click a[rel=delete]': 'delete'
+    'click .delete-confirmation input[rel=confirm]': 'confirmDelete'
+    'click .delete-confirmation input[rel=cancel]': 'cancelDelete'
+    'keypress input[type=text]': 'save'
+    'blur input[type=text]': 'cancel'
     'click ul.tabs a': 'selectPlotFor'
     'click ul.pills a': 'selectPlotBy'
 
@@ -25,12 +28,35 @@ class App.Views.SegmentDetailView extends Backbone.View
 
   edit: (event) =>
     event.preventDefault()
+    $(@el).removeClass 'error'
+    $(@el).removeClass 'deleting'
     @toggleEditInPlace()
+
+  delete: (event) =>
+    event.preventDefault()
+    $(@el).removeClass 'error'
+    $(@el).addClass 'deleting'
+
+  confirmDelete: (event) =>
+    event.preventDefault()
+    $(@el).removeClass 'error'
+
+    @model.destroy
+      success: =>
+        window.location.hash = ''
+      error: =>
+        $(@el).addClass 'error'
+        $(@el).find('div.error-message').html('An unknown error has occurred. Please try again.')
+
+  cancelDelete: (event) =>
+    event.preventDefault()
+    $(@el).removeClass 'deleting'
+    $(@el).removeClass 'error'
 
   save: (event) =>
     if event.which == 13 and @isEditing()
       event.preventDefault()
-      value = $.trim $(@el).find('h1 input').val()
+      value = $.trim $(@el).find('h1 input[type=text]').val()
 
       if value == @model.get('name')
         @toggleEditInPlace()
@@ -58,7 +84,7 @@ class App.Views.SegmentDetailView extends Backbone.View
 
     if $(@el).is('.editing')
       p = $(@el).find('h1 p')
-      input = $(@el).find('h1 input')
+      input = $(@el).find('h1 input[type=text]')
 
       input.val $.trim(p.text())
       input.focus().select()

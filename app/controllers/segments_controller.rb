@@ -18,6 +18,19 @@ class SegmentsController < ApplicationController
           render :show, :status => :unprocessable_entity
         end
       end
+      format.html { render "#{Rails.root}/public/404.html", :layout => false, :status => :not_found }
+    end
+  end
+
+  def destroy
+    @segment = Segment.find(params[:id])
+
+    respond_to do |format|
+      format.json do
+        @segment.destroy
+        render :show, :status => :ok
+      end
+      format.html { render "#{Rails.root}/public/404.html", :layout => false, :status => :not_found }
     end
   end
 end

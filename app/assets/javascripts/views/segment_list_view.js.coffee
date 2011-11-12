@@ -6,6 +6,7 @@ class App.Views.SegmentListView extends Backbone.View
   initialize: ->
     @collection.bind 'reset', @addAll
     @collection.bind 'add', @addOne
+    @collection.bind 'destroy', @updateVisibility
 
   render: =>
     $(@el).html JST['segment_list_view']([])
@@ -14,11 +15,17 @@ class App.Views.SegmentListView extends Backbone.View
     @
 
   addOne: (segment) =>
-    $(@el).show()
     view = new App.Views.SegmentView(model: segment)
     $(@el).find('tbody').append view.render().el
+    @updateVisibility()
 
   addAll: =>
     $(@el).find('tbody').empty()
     @collection.each (segment) =>
       @addOne(segment)
+
+  updateVisibility: =>
+    if @collection.length > 0
+      $(@el).show()
+    else
+      $(@el).hide()

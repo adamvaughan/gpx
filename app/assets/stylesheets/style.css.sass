@@ -6,10 +6,10 @@
 body
   -webkit-font-smoothing: antialiased
 
-a, a *, button, input[type=button], input[type=file]
+a, a *, button, input[type='button'], input[type='file']
   cursor: pointer
 
-input[type=text]
+input[type='text']
   cursor: text
 
 .error-message
@@ -34,7 +34,7 @@ form.file-upload
     padding: 0
     width: 938px
 
-    input[type=file]
+    input[type='file']
       position: absolute
       opacity: 0
       height: 36px
@@ -42,7 +42,7 @@ form.file-upload
       top: 0
       width: 938px
 
-    input[type=submit]
+    input[type='submit']
       display: none
 
     div
@@ -55,14 +55,14 @@ form.file-upload
         display: none
 
   &.uploading
-    .instructions, .response-message, input[type=file]
+    .instructions, .response-message, input[type='file']
       display: none
 
     .uploading-message
       display: block
 
   &.error, &.success
-    .instructions, .uploading-message, input[type=file]
+    .instructions, .uploading-message, input[type='file']
       display: none
 
     .response-message
@@ -84,10 +84,12 @@ form.file-upload
   margin-top: 18px
   margin-bottom: 18px
 
-  p.error-message
-    font-weight: bold
-    text-align: center
-    display: block
+  p
+    &.error-message, &.status-message
+      font-weight: bold
+      text-align: center
+      display: block
+
 
 table.statistics
   td
@@ -114,18 +116,18 @@ iframe
     p
       display: inline
 
-    input
+    input[type='text']
       display: none
 
   td.links
     width: 120px
     text-align: right
 
-    a[rel='edit']
+    a[rel='edit'], a[rel='delete']
       display: inline
       padding-left: 10px
 
-  .error-message
+  .error-message, .delete-confirmation
     display: none
 
   &.editing
@@ -133,18 +135,29 @@ iframe
       p
         display: none
 
-      input
+      input[type='text']
         display: block
         width: 100%
 
-    td.links a[rel='edit']
+    td.links a
+      display: none
+
+  &.deleting
+    td.name
+      p, input[type='text']
+        display: none
+
+    .delete-confirmation
+      display: block
+
+    td.links a
       display: none
 
   &.error
     .error-message
       display: block
 
-    input
+    input[type='text']
       color: #b94a48
       border-color: #ee5f5b
 
@@ -162,7 +175,7 @@ iframe
     small
       display: inline
 
-    input
+    input[type='text']
       font-size: 30px
       height: 36px
       font-weight: bold
@@ -172,12 +185,13 @@ iframe
   div.links
     margin-top: 18px
     margin-bottom: 18px
+    height: 18px
 
-    a[rel='edit']
+    a[rel='edit'], a[rel='delete']
       display: inline
       padding-left: 10px
 
-  .error-message
+  .error-message, .delete-confirmation
     display: none
 
   &.editing
@@ -185,21 +199,38 @@ iframe
       p, small
         display: none
 
-      input
+      input[type='text']
         display: block
 
-    div.links a[rel='edit']
+    div.links a
       display: none
 
+  &.deleting
+    h1
+      p, small, input[type='text']
+        display: none
+
+    .delete-confirmation
+      padding-bottom: 5px
+      padding-top: 5px
+      display: block
+
+    div.links a
+      display: none
+
+    input[type='button']
+      vertical-align: top
+      margin-top: 5px
+
   &.loading
-    .chart, .tabs, .pills
+    .tabs, .pills
       display: none
 
   &.error
     .error-message
       display: block
 
-    input
+    input[type='text']
       color: #b94a48
       border-color: #ee5f5b
 

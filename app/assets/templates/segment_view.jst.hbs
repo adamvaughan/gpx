@@ -2,6 +2,11 @@
 <td class="name">
   <p>{{name}}</p>
   <input type="text" value="{{name}}">
+  <div class="delete-confirmation">
+    Are you sure you want to delete this ride?
+    <input type="button" rel="confirm" value="Yes" class="btn danger">
+    <input type="button" rel="cancel" value="No" class="btn">
+  </div>
   <div class="error-message"></div>
 </td>
 <td>
@@ -11,4 +16,5 @@
 <td class="links">
   <a href="#" rel="view" title="View">View</a>
   <a href="#" rel="edit" title="Edit">Edit</a>
+  <a href="#" rel="delete" title="Delete">Delete</a>
 </td>
