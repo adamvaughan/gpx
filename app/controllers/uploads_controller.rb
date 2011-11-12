@@ -18,7 +18,7 @@ class UploadsController < ApplicationController
             @error = 'The uploaded file could not be saved.'
           end
         rescue => e
-          Rails.logger.error e, e.backtrace
+          Rails.logger.error [e.inspect, e.backtrace].flatten.join("\n    ")
           @error = 'The uploaded file could not be parsed.'
         end
       else
