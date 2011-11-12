@@ -3,5 +3,5 @@ class Segment < ActiveRecord::Base
 
   validates :name, :presence => true
 
-  default_scope :order => 'start_time, created_at DESC'
+  default_scope :order => 'start_time DESC, created_at DESC'
 end
