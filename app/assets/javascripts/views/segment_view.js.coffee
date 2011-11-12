@@ -37,8 +37,12 @@ class App.Views.SegmentView extends Backbone.View
             $(@el).find('td.name p').html(value)
             @toggleEditInPlace()
           error: (model, error) =>
-            $(@el).find('div.error-message').html(error)
             $(@el).addClass 'error'
+
+            if _.isString error
+              $(@el).find('div.error-message').html(error)
+            else
+              $(@el).find('div.error-message').html('An unknown error has occurred. Please try again.'))
 
   cancel: (event) =>
     if (not event.which? or event.which == 27) and @isEditing()

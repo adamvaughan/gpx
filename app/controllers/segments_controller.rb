@@ -10,10 +10,14 @@ class SegmentsController < ApplicationController
   def update
     @segment = Segment.find(params[:id])
 
-    if @segment.update_attributes(params[:segment])
-      redirect_to root_url, :notice => 'Update successful.'
-    else
-      render :action => :edit
+    respond_to do |format|
+      format.json do
+        if @segment.update_attributes(params[:segment])
+          render :show, :status => :ok
+        else
+          render :show, :status => :unprocessable_entity
+        end
+      end
     end
   end
 end
