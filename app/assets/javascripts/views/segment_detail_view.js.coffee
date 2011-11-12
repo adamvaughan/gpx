@@ -69,7 +69,9 @@ class App.Views.SegmentDetailView extends Backbone.View
   loadPoints: =>
     @points = new App.Collections.PointCollection(href: @model.get('points_href'))
     @points.bind 'reset', @showChart
-    @points.fetch()
+    @points.fetch
+      error: =>
+        $(@el).find('#chart').show().html('<p class="error-message">Unable to load the chart data. Please try again.</p>')
 
   selectPlotFor: (event) =>
     event.preventDefault()
