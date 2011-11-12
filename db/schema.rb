@@ -15,13 +15,15 @@ ActiveRecord::Schema.define(:version => 20111106052626) do
 
   create_table "points", :force => true do |t|
     t.datetime "time"
-    t.decimal  "latitude",   :precision => 20, :scale => 10
-    t.decimal  "longitude",  :precision => 20, :scale => 10
-    t.decimal  "elevation",  :precision => 20, :scale => 10
-    t.decimal  "distance",   :precision => 20, :scale => 10
-    t.decimal  "duration",   :precision => 20, :scale => 10
-    t.decimal  "pace",       :precision => 20, :scale => 10
-    t.decimal  "speed",      :precision => 20, :scale => 10
+    t.decimal  "latitude",     :precision => 20, :scale => 10
+    t.decimal  "longitude",    :precision => 20, :scale => 10
+    t.decimal  "elevation",    :precision => 20, :scale => 10
+    t.decimal  "distance",     :precision => 20, :scale => 10
+    t.decimal  "duration",     :precision => 20, :scale => 10
+    t.decimal  "pace",         :precision => 20, :scale => 10
+    t.decimal  "active_pace",  :precision => 20, :scale => 10
+    t.decimal  "speed",        :precision => 20, :scale => 10
+    t.decimal  "active_speed", :precision => 20, :scale => 10
     t.integer  "segment_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -46,10 +48,12 @@ ActiveRecord::Schema.define(:version => 20111106052626) do
     t.decimal  "descending_duration",      :precision => 20, :scale => 10
     t.decimal  "flat_duration",            :precision => 20, :scale => 10
     t.decimal  "average_pace",             :precision => 20, :scale => 10
+    t.decimal  "average_active_pace",      :precision => 20, :scale => 10
     t.decimal  "average_ascending_pace",   :precision => 20, :scale => 10
     t.decimal  "average_descending_pace",  :precision => 20, :scale => 10
     t.decimal  "average_flat_pace",        :precision => 20, :scale => 10
     t.decimal  "average_speed",            :precision => 20, :scale => 10
+    t.decimal  "average_active_speed",     :precision => 20, :scale => 10
     t.decimal  "average_ascending_speed",  :precision => 20, :scale => 10
     t.decimal  "average_descending_speed", :precision => 20, :scale => 10
     t.decimal  "average_flat_speed",       :precision => 20, :scale => 10
