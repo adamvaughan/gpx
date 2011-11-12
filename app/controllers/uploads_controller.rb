@@ -9,18 +9,23 @@ class UploadsController < ApplicationController
       Ox.sax_parse(handler, file)
 
       if handler.segments.any?
-        handler.segments.each { |segment| Gpx::Statistics::SegmentStatistics.calculate(segment) }
+        begin
+          handler.segments.each { |segment| Gpx::Statistics::SegmentStatistics.calculate(segment) }
 
-        if handler.segments.all?(&:save)
-          @segments = handler.segments
-        else
-          @errors << 'The uploaded file could not be saved.'
+          if handler.segments.all?(&:save)
+            @segments = handler.segments
+          else
+            @error = 'The uploaded file could not be saved.'
+          end
+        rescue => e
+          Rails.logger.error e, e.backtrace
+          @error = 'The uploaded file could not be parsed.'
         end
       else
-        @errors << 'The uploaded file did not contain any data.'
+        @error = 'The uploaded file did not contain any data.'
       end
     else
-      @errors << 'Please select a file.'
+      @error = 'Please select a file.'
     end
 
     render :file => 'uploads/response.json.rabl'

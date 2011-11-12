@@ -19,6 +19,12 @@ form.file-upload
   overflow: hidden
   margin-top: 20px
 
+  &.error fieldset
+    border-color: #882425
+
+  &.success fieldset
+    border-color: #3d773d
+
   fieldset
     @include border-radius(3px)
     background: #fafafa
@@ -45,15 +51,30 @@ form.file-upload
       text-align: center
       width: 938px
 
-      &.uploading
+      &.uploading-message, &.response-message
         display: none
 
   &.uploading
-    .instructions, input[type=file]
+    .instructions, .response-message, input[type=file]
       display: none
 
-    .uploading
+    .uploading-message
       display: block
+
+  &.error, &.success
+    .instructions, .uploading-message, input[type=file]
+      display: none
+
+    .response-message
+      color: #fff
+      display: block
+      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25)
+
+  &.error .response-message
+    @include background-image(linear-gradient(#ee5f5b, #c43c35))
+
+  &.success .response-message
+    @include background-image(linear-gradient(#62c462, #57a957))
 
 .alert-message
   text-align: center
@@ -173,3 +194,6 @@ iframe
     input
       color: #b94a48
       border-color: #ee5f5b
+
+.file-upload
+  .error-message

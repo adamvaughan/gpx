@@ -19,18 +19,27 @@ class App.Views.FileUploadForm extends Backbone.View
     form.attr 'target', iframeId
     form.submit()
 
-    # TODO handle errors here
-
-    iframe.load ->
+    iframe.load =>
       form.attr 'target', null
-      response = JSON.parse($(iframe.contents()).text())
-
-      if response.errors?
-        # TODO show the error message
-      else
-        # TODO show success message
-        # TODO highlight the new row(s)?
-        window.segments.add response.segments
-
       form.removeClass 'uploading'
+
+      try
+        response = JSON.parse($(iframe.contents()).text())
+
+        if response.error?
+          @showMessage JSON.parse(response.error), 'error'
+        else
+          window.segments.add response.segments
+          @showMessage 'File uploaded successfully.', 'success'
+      catch error
+        @showMessage 'An error occurred while processing the file. Please try again.', 'error'
+
       iframe.remove()
+
+  showMessage: (message, style) =>
+    form = $(@el).find 'form'
+    form.addClass style
+    form.find('.response-message').html(message)
+    form.find('.response-message').delay(4000).fadeOut(100, () =>
+      form.removeClass style
+    )
