@@ -9,10 +9,12 @@ class App.Views.SegmentListView extends Backbone.View
 
   render: =>
     $(@el).html JST['segment_list_view']([])
+    $(@el).hide()
     @addAll()
     @
 
   addOne: (segment) =>
+    $(@el).show()
     view = new App.Views.SegmentView(model: segment)
     $(@el).find('tbody').append view.render().el
 
