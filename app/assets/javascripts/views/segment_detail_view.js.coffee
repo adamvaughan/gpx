@@ -124,8 +124,12 @@ class App.Views.SegmentDetailView extends Backbone.View
     plotBy = $(@el).find('ul.pills li.active a').attr('rel')
     $(@el).removeClass 'loading'
     $(@el).find('#chart').empty()
+    $(@el).find('.pills').show()
 
     chartView = switch plotFor
+      when 'map'
+        $(@el).find('.pills').hide()
+        new App.Views.MapView(points: @points)
       when 'elevation'
         switch plotBy
           when 'distance' then new App.Views.ElevationDistanceChartView(points: @points)
