@@ -14,7 +14,7 @@ class App.Views.SegmentView extends Backbone.View
 
   initialize: ->
     $(document).bind 'keydown', @cancel
-    $(document).bind 'keydown', @cancelDelete
+    $(document).bind 'keydown', @cancelDeleteOnKeydown
 
   render: =>
     $(@el).html JST['segment_view'](@model.toJSON())
@@ -47,8 +47,12 @@ class App.Views.SegmentView extends Backbone.View
         $(@el).find('div.error-message').html('An unknown error has occurred. Please try again.')
 
   cancelDelete: (event) =>
+    event.preventDefault()
+    $(@el).removeClass 'deleting'
+    $(@el).removeClass 'error'
+
+  cancelDeleteOnKeydown: (event) =>
     if (not event.which? or event.which == 27) and @isDeleting()
-      event.preventDefault() unless event.which?
       $(@el).removeClass 'deleting'
       $(@el).removeClass 'error'
 
