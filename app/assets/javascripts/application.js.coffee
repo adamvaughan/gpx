@@ -26,6 +26,7 @@ window.App =
   Routers: {}
 
 Highcharts.setOptions
+  colors: ['#b94a48']
   plotOptions:
     series:
       animation: false
@@ -34,12 +35,33 @@ Highcharts.setOptions
     type: 'spline'
     width: 900
     height: 300
+    borderRadius: 0
   legend:
     enabled: false
   credits:
     enabled: false
   title:
     text: ''
+  xAxis:
+    lineColor: '#404040'
+    tickColor: '#404040'
+    gridLineColor: '#c0c0c0'
+    labels:
+      style:
+        color: '#404040'
+    title:
+      style:
+        color: '#404040'
+  yAxis:
+    lineColor: '#404040'
+    tickColor: '#404040'
+    gridLineColor: '#c0c0c0'
+    labels:
+      style:
+        color: '#404040'
+    title:
+      style:
+        color: '#404040'
 
 $ ->
   router = new App.Routers.ApplicationRouter
