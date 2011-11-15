@@ -24,7 +24,7 @@ class App.Views.FileUploadForm extends Backbone.View
       form.removeClass 'uploading'
 
       try
-        response = JSON.parse($(iframe.contents()).text())
+        response = JSON.parse($(iframe.contents()).find('textarea').val())
 
         if response.error?
           @showMessage JSON.parse(response.error), 'error'
@@ -40,6 +40,4 @@ class App.Views.FileUploadForm extends Backbone.View
     form = $(@el).find 'form'
     form.addClass style
     form.find('.response-message').html(message)
-    form.find('.response-message').delay(4000).fadeOut(100, () =>
-      form.removeClass style
-    )
+    form.find('.response-message').delay(4000).fadeOut(100, @render)

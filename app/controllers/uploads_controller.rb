@@ -28,6 +28,6 @@ class UploadsController < ApplicationController
       @error = 'Please select a file.'
     end
 
-    render :file => 'uploads/response.json.rabl'
+    render :action => 'response', :layout => false
   end
 end
