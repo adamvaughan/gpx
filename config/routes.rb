@@ -4,6 +4,7 @@ Gpx::Application.routes.draw do
   end
 
   resources :uploads, :only => :create
+  resources :history, :only => :index
 
   root :to => 'segments#index'
 end

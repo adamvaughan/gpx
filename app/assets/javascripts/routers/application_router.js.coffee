@@ -9,6 +9,9 @@ class App.Routers.ApplicationRouter extends Backbone.Router
     fileUploadForm = new App.Views.FileUploadForm
     $('.container').append fileUploadForm.render().el
 
+    historyView = new App.Views.HistoryView
+    $('.container').append historyView.render().el
+
     segmentList = new App.Views.SegmentListView(collection: window.segments)
     $('.container').append segmentList.render().el
 
