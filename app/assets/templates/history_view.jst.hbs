@@ -1,10 +1,18 @@
-<dl>
-  <dt>Rides This Year</dt>
-  <dd>{{segments_this_year}}</dd>
-  <dt>Distance This Year</dt>
-  <dd>{{metersToMiles distance_this_year}}</dd>
-  <dt>Distance This Month</dt>
-  <dd>{{metersToMiles distance_this_month}}</dd>
-  <dt>Distance This Week</dt>
-  <dd>{{metersToMiles distance_this_week}}</dd>
-</dl>
+<table>
+  <thead>
+    <tr>
+      <th>Rides This Year</th>
+      <th>Distance This Year</th>
+      <th>Distance This Month</th>
+      <th>Distance This Week</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{segments_this_year}}</td>
+      <td>{{metersToMiles distance_this_year}}</td>
+      <td>{{metersToMiles distance_this_month}}</td>
+      <td>{{metersToMiles distance_this_week}}</td>
+    </tr>
+  </tbody>
+</table>
