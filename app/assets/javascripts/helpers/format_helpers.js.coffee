@@ -1,4 +1,5 @@
 App.Helpers.formatAmount = (value) ->
+  return '' if _.isNaN(value)
   originalValue = value
   value = Math.abs(value) + ''
   start = value.indexOf('.', 0) + 1
@@ -10,10 +11,14 @@ App.Helpers.formatAmount = (value) ->
 
   parts = value.split('.');
   parts[0] = '0' if parts[0].length == 0
-  parts[1] = parts[1] + '0' while parts[1].length < 2
-  parts[1] = parts[1].substr(0, 2) if parts[1].length > 2
 
-  value = addCommas(parts[0]) + '.' + parts[1]
+  if parts.length == 2
+    parts[1] = parts[1] + '0' while parts[1].length < 2
+    parts[1] = parts[1].substr(0, 2) if parts[1].length > 2
+
+    value = addCommas(parts[0]) + '.' + parts[1]
+  else
+    value = addCommas(parts[0]) + '.00'
 
   if originalValue < 0
     "-#{value})"
