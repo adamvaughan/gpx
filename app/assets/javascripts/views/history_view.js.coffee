@@ -4,10 +4,16 @@ class App.Views.HistoryView extends Backbone.View
   className: 'history-view'
 
   initialize: ->
+    @collection.bind 'reset', @loadHistory
+    @collection.bind 'add', @loadHistory
+    @collection.bind 'destroy', @loadHistory
     @loadHistory()
 
   render: =>
-    $(@el).html JST['history_view'](@model.toJSON())
+    if @collection.length > 0
+      $(@el).html JST['history_view'](@model.toJSON())
+    else
+      $(@el).html('').hide()
     @
 
   loadHistory: =>
