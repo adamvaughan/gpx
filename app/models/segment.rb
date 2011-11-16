@@ -1,5 +1,5 @@
 class Segment < ActiveRecord::Base
-  has_many :points, :dependent => :destroy
+  has_many :points, :dependent => :delete_all
 
   validates :name, :presence => true
 
