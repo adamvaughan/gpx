@@ -385,7 +385,7 @@ module Gpx
           pairs = []
 
           point_pairs(segment) do |point, next_point|
-            if elevation_between(point, next_point) > 0.3
+            if (elevation_between(point, next_point) / distance_between(point, next_point)) > 0.003
               if block_given?
                 yield(point, next_point)
               else
@@ -406,7 +406,7 @@ module Gpx
           pairs = []
 
           point_pairs(segment) do |point, next_point|
-            if elevation_between(next_point, point) > 0.3
+            if (elevation_between(next_point, point) / distance_between(point, next_point)) > 0.003
               if block_given?
                 yield(point, next_point)
               else
