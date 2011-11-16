@@ -49,5 +49,5 @@ class App.Views.SpeedActiveTimeChartView extends Backbone.View
         hover:
           lineWidth: 3
       name: 'Speed'
-      data: App.Helpers.smoothData(@dataPoints(), 1)
+      data: App.Helpers.reduceData(@dataPoints())
     }]

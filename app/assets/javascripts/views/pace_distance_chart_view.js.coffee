@@ -43,5 +43,5 @@ class App.Views.PaceDistanceChartView extends Backbone.View
         hover:
           lineWidth: 3
       name: 'Pace'
-      data: App.Helpers.smoothData(@dataPoints(), 1)
+      data: App.Helpers.reduceData(@dataPoints())
     }]

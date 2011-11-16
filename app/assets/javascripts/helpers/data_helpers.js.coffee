@@ -10,17 +10,3 @@ App.Helpers.reduceData = (data) =>
       result.push point if distance > threshold
 
   result
-
-App.Helpers.smoothData = (data) ->
-  reducedData = App.Helpers.reduceData(data)
-  result = []
-
-  for i in [0..reducedData.length]
-    if i == 0 or i > reducedData.length - 2
-      result.push reducedData[i]
-    else
-      x = (reducedData[i - 1][0] + (2 * reducedData[i][0]) + reducedData[i + 1][0]) / 4
-      y = (reducedData[i - 1][1] + (2 * reducedData[i][1]) + reducedData[i + 1][1]) / 4
-      result.push [x, y]
-
-  result
