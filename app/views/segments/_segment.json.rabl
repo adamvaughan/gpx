@@ -1,7 +1,6 @@
 object @segment
 attributes :id,
   :name,
-  :start_time,
   :distance,
   :ascending_distance,
   :descending_distance,
@@ -26,13 +25,10 @@ attributes :id,
   :average_ascending_speed,
   :average_descending_speed,
   :average_flat_speed,
-  :maximum_speed,
-  :created_at,
-  :updated_at
+  :maximum_speed
 
-node(:_type) { 'Segment' }
 node(:href) { |segment| segment_path(segment) }
 node(:points_href) { |segment| segment_points_path(segment) }
-node(:epoch_start_time) { |segment| segment.start_time.to_i }
-node(:epoch_created_at) { |segment| segment.created_at.to_i }
-node(:epoch_updated_at) { |segment| segment.created_at.to_i }
+node(:start_time) { |segment| segment.start_time.to_i }
+node(:created_at) { |segment| segment.created_at.to_i }
+node(:updated_at) { |segment| segment.updated_at.to_i }
