@@ -10,7 +10,8 @@ class HistoryController < ApplicationController
           @distance_this_month = segments_this_month(@segments).inject(0) { |total, segment| total + segment.distance }
           @distance_this_week = segments_this_week(@segments).inject(0) { |total, segment| total + segment.distance }
         end
-        format.html { render "#{Rails.root}/public/404.html", :layout => false, :status => :not_found }
+
+        format.html { render_404 }
       end
     end
   end
