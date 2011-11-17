@@ -13,6 +13,7 @@ class UploadsController < ApplicationController
           handler.segments.each { |segment| Gpx::Statistics::SegmentStatistics.calculate(segment) }
 
           if handler.segments.all?(&:save)
+            Gpx::Reports::ReportGenerator.create_current!
             @segments = handler.segments
           else
             @error = 'The uploaded file could not be saved.'

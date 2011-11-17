@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111106052626) do
+ActiveRecord::Schema.define(:version => 20111106052632) do
 
   create_table "points", :force => true do |t|
     t.datetime "time"
@@ -24,6 +24,21 @@ ActiveRecord::Schema.define(:version => 20111106052626) do
     t.decimal  "pace",            :precision => 20, :scale => 10
     t.decimal  "speed",           :precision => 20, :scale => 10
     t.integer  "segment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "reports", :force => true do |t|
+    t.integer  "year"
+    t.integer  "month"
+    t.integer  "week"
+    t.integer  "segment_count"
+    t.decimal  "year_distance",  :precision => 20, :scale => 10
+    t.decimal  "year_duration",  :precision => 20, :scale => 10
+    t.decimal  "month_distance", :precision => 20, :scale => 10
+    t.decimal  "month_duration", :precision => 20, :scale => 10
+    t.decimal  "week_distance",  :precision => 20, :scale => 10
+    t.decimal  "week_duration",  :precision => 20, :scale => 10
     t.datetime "created_at"
     t.datetime "updated_at"
   end
