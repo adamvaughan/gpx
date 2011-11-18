@@ -29,6 +29,8 @@ class SegmentsController < ApplicationController
     respond_to do |format|
       format.json do
         @segment.destroy
+        Gpx::Reports::ReportGenerator.create_current!
+        Gpx::Records::RecordGenerator.create_current!
         render :show, :status => :ok
       end
 

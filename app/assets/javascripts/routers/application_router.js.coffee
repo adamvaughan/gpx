@@ -12,6 +12,9 @@ class App.Routers.ApplicationRouter extends Backbone.Router
     reportView = new App.Views.ReportView(collection: window.segments)
     $('.container').append reportView.render().el
 
+    recordView = new App.Views.RecordView(collection: window.segments)
+    $('.container').append recordView.render().el
+
     segmentListView = new App.Views.SegmentListView(collection: window.segments)
     $('.container').append segmentListView.render().el
 

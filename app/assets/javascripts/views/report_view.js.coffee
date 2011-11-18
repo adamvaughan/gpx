@@ -1,5 +1,5 @@
 class App.Views.ReportView extends Backbone.View
-  tagName: 'div'
+  tagName: 'table'
 
   className: 'report-view'
 
