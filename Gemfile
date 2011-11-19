@@ -28,7 +28,6 @@ gem 'execjs'
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
-  gem 'powder'
   gem 'wirble'
   gem 'silent-postgres'
   gem 'active_reload'
