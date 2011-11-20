@@ -155,7 +155,13 @@ module Gpx
         #
         # Returns the elapsed time while ascending in seconds.
         def ascending_duration(segment)
-          ascending_point_pairs(segment).inject(0) { |total, pair| total + time_between(*pair) }
+          point_pairs(segment).inject(0) do |total, pair|
+            if active_between?(*pair) && ascending_between?(*pair)
+              total + time_between(*pair)
+            else
+              total
+            end
+          end
         end
 
         # Calculates the time elapsed between points while descending on a
@@ -163,7 +169,13 @@ module Gpx
         #
         # Returns the elapsed time while descending in seconds.
         def descending_duration(segment)
-          descending_point_pairs(segment).inject(0) { |total, pair| total + time_between(*pair) }
+          point_pairs(segment).inject(0) do |total, pair|
+            if active_between?(*pair) && descending_between?(*pair)
+              total + time_between(*pair)
+            else
+              total
+            end
+          end
         end
 
         # Calculates the time elapsed between points with little to no elevation
@@ -171,7 +183,13 @@ module Gpx
         #
         # Returns the elapsed time with no elevation change in seconds.
         def flat_duration(segment)
-          flat_point_pairs(segment).inject(0) { |total, pair| total + time_between(*pair) }
+          point_pairs(segment).inject(0) do |total, pair|
+            if active_between?(*pair) && flat_between?(*pair)
+              total + time_between(*pair)
+            else
+              total
+            end
+          end
         end
 
         # Calculates the average pace traveled between points on a segment.
@@ -385,7 +403,7 @@ module Gpx
           pairs = []
 
           point_pairs(segment) do |point, next_point|
-            if (elevation_between(point, next_point) / distance_between(point, next_point)) > 0.003
+            if ascending_between?(point, next_point)
               if block_given?
                 yield(point, next_point)
               else
@@ -406,7 +424,7 @@ module Gpx
           pairs = []
 
           point_pairs(segment) do |point, next_point|
-            if (elevation_between(next_point, point) / distance_between(point, next_point)) > 0.003
+            if descending_between?(point, next_point)
               if block_given?
                 yield(point, next_point)
               else
@@ -427,7 +445,7 @@ module Gpx
           pairs = []
 
           point_pairs(segment) do |point, next_point|
-            if elevation_between(point, next_point).abs <= 0.3
+            if flat_between?(point, next_point)
               if block_given?
                 yield(point, next_point)
               else
@@ -518,6 +536,18 @@ module Gpx
         # Returns true if there is activity; otherwise, false.
         def active_between?(start_point, end_point)
           speed_between(start_point, end_point) > 0.5
+        end
+
+        def ascending_between?(start_point, end_point)
+          (elevation_between(start_point, end_point) / distance_between(start_point, end_point)) > 0.003
+        end
+
+        def descending_between?(start_point, end_point)
+          (elevation_between(end_point, start_point) / distance_between(start_point, end_point)) > 0.003
+        end
+
+        def flat_between?(start_point, end_point)
+          (elevation_between(start_point, end_point) / distance_between(start_point, end_point)).abs <= 0.003
         end
       end
     end
