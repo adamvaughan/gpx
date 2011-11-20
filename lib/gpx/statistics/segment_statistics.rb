@@ -466,11 +466,29 @@ module Gpx
           degrees * DEG_TO_RAD
         end
 
-        # average radius of the Earth, in meters
-        EARTH_RADIUS = 6378137
+        # radius of the Earth at the equator
+        EARTH_EQUATORIAL_RADIUS = 6378137.0
+
+        # radius of the Earth at the poles
+        EARTH_POLAR_RADIUS = 6356752.3
+
+        # Computes the radius of the earth at a given point.
+        #
+        # See http://en.wikipedia.org/wiki/Earth_radius#Radii_with_location_dependence
+        #
+        # Returns the radius in meters
+        def earth_radius(point)
+          a = EARTH_EQUATORIAL_RADIUS
+          b = EARTH_POLAR_RADIUS
+          latitude = point.latitude
+
+          Math.sqrt(((a**2 * Math.cos(latitude))**2 + (b**2 * Math.sin(latitude))**2) / ((a * Math.cos(latitude))**2 + (b * Math.sin(latitude))**2))
+        end
 
         # Computes the distance traveled between two points as the shortest distance
         # between those two points.
+        #
+        # See http://en.wikipedia.org/wiki/Haversine_formula
         #
         # Returns the distance in meters.
         def haversine_distance(from_point, to_point)
@@ -484,7 +502,7 @@ module Gpx
           a = Math.sin(delta_latitude / 2) * Math.sin(delta_latitude / 2) +
               Math.sin(delta_longitude / 2) * Math.sin(delta_longitude / 2) * Math.cos(from_latitude) * Math.cos(to_latitude)
           c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
-          EARTH_RADIUS * c
+          earth_radius(from_point) * c
         end
 
         alias :distance_between :haversine_distance
