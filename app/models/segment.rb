@@ -7,4 +7,8 @@ class Segment < ActiveRecord::Base
   scope :this_year, where(:start_time => Time.now.utc.beginning_of_year..Time.now.utc.end_of_year)
 
   attr_accessible :name
+
+  def self.total_distance_for_month(date)
+    where(:start_time => date.to_time.utc.beginning_of_month..date.to_time.utc.end_of_month).sum(:distance)
+  end
 end
