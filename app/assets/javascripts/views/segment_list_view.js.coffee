@@ -1,6 +1,8 @@
 class App.Views.SegmentListView extends Backbone.View
   tagName: 'table'
 
+  className: 'segment-list'
+
   # TODO make sure the segment views are in the right order
 
   initialize: ->
