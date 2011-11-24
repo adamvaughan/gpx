@@ -25,6 +25,8 @@ gem 'handlebars_assets'
 
 gem 'execjs'
 
+gem 'rubyzip'
+
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
