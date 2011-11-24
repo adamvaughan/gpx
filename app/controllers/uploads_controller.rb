@@ -28,10 +28,15 @@ class UploadsController < ApplicationController
         read_data_file(entry.get_input_stream)
       end
     end
+
+    Gpx::Reports::ReportGenerator.create_current!
+    Gpx::Records::RecordGenerator.create_current!
   end
 
   def read_gpx_file(file)
     read_data_file(file.open)
+    Gpx::Reports::ReportGenerator.create_current!
+    Gpx::Records::RecordGenerator.create_current!
   end
 
   def read_data_file(file)
@@ -43,8 +48,6 @@ class UploadsController < ApplicationController
         handler.segments.each { |segment| Gpx::Statistics::SegmentStatistics.calculate(segment) }
 
         if handler.segments.all?(&:save)
-          Gpx::Reports::ReportGenerator.create_current!
-          Gpx::Records::RecordGenerator.create_current!
           @segments = handler.segments
         else
           @error = 'The uploaded file could not be saved.'
