@@ -17,9 +17,12 @@ class App.Views.TotalsView extends Backbone.View
     @
 
   loadTotals: =>
+    window.busy(true)
     @model = new App.Models.ReportTotals
     @model.fetch
       error: =>
+        window.busy(false)
         $(@el).html('<p class="error-message">Unable to load the report data. Please try again.</p>')
       success: =>
+        window.busy(false)
         @render()

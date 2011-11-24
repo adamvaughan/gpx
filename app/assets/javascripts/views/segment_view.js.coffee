@@ -39,10 +39,13 @@ class App.Views.SegmentView extends Backbone.View
     event.preventDefault()
     $(@el).removeClass 'error'
 
+    window.busy(true)
     @model.destroy
       success: =>
+        window.busy(false)
         @remove()
       error: =>
+        window.busy(false)
         $(@el).addClass 'error'
         $(@el).find('div.error-message').html('An unknown error has occurred. Please try again.')
 
@@ -64,11 +67,14 @@ class App.Views.SegmentView extends Backbone.View
       if value == @model.get('name')
         @toggleEditInPlace()
       else
+        window.busy(true)
         @model.save { name: value },
           success: =>
+            window.busy(false)
             $(@el).find('td.name p').html(value)
             @toggleEditInPlace()
           error: (model, error) =>
+            window.busy(false)
             if @isEditing()
               $(@el).addClass 'error'
 

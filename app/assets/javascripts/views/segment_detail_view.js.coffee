@@ -42,10 +42,13 @@ class App.Views.SegmentDetailView extends Backbone.View
     event.preventDefault()
     $(@el).removeClass 'error'
 
+    window.busy(true)
     @model.destroy
       success: =>
+        window.busy(false)
         window.location.hash = ''
       error: =>
+        window.busy(false)
         $(@el).addClass 'error'
         $(@el).find('div.error-message').html('An unknown error has occurred. Please try again.')
 
@@ -67,11 +70,14 @@ class App.Views.SegmentDetailView extends Backbone.View
       if value == @model.get('name')
         @toggleEditInPlace()
       else
+        window.busy(true)
         @model.save { name: value },
           success: =>
+            window.busy(false)
             $(@el).find('h1 p').html(value)
             @toggleEditInPlace()
           error: (model, error) =>
+            window.busy(false)
             if @isEditing()
               $(@el).addClass 'error'
 
@@ -102,11 +108,15 @@ class App.Views.SegmentDetailView extends Backbone.View
     $(@el).is('.deleting')
 
   loadPoints: =>
+    window.busy(true)
     @points = new App.Collections.PointCollection(href: @model.get('points_href'))
     @points.bind 'reset', @showChart
     @points.fetch
       error: =>
+        window.busy(false)
         $(@el).find('#chart').show().html('<p class="error-message">Unable to load the chart data. Please try again.</p>')
+      success: =>
+        window.busy(false)
 
   selectPlotFor: (event) =>
     event.preventDefault()

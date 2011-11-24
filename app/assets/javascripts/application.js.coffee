@@ -64,5 +64,10 @@ Highcharts.setOptions
         color: '#404040'
 
 $ ->
+  window.busyHelper = new App.Helpers.BusyHelper
+
+  window.busy = (busy) ->
+    if busy then busyHelper.increment() else busyHelper.decrement()
+
   router = new App.Routers.ApplicationRouter
   Backbone.history.start()

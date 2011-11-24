@@ -17,9 +17,12 @@ class App.Views.RecordView extends Backbone.View
     @
 
   loadRecords: =>
+    window.busy(true)
     @model = new App.Models.Record
     @model.fetch
       error: =>
+        window.busy(false)
         $(@el).html('<p class="error-message">Unable to load the record data. Please try again.</p>')
       success: =>
+        window.busy(false)
         @render()

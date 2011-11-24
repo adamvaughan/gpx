@@ -10,11 +10,14 @@ class App.Views.MonthlyDistanceChartView extends Backbone.View
     @
 
   loadMonthlyTotals: =>
+    window.busy(true)
     @model = new App.Models.MonthlyReport
     @model.fetch
       error: =>
+        window.busy(false)
         $('#chart').html('<p class="error-message">Unable to load the chart data. Please try again.</p>')
       success: =>
+        window.busy(false)
         chart = new Highcharts.Chart(@chartOptions())
 
   chartOptions: =>

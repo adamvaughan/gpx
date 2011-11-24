@@ -7,6 +7,7 @@ class App.Views.FileUploadForm extends Backbone.View
     @
 
   uploadFile: (event) =>
+    window.busy(true)
     form = $(@el).find 'form'
     form.addClass 'uploading'
 
@@ -35,6 +36,7 @@ class App.Views.FileUploadForm extends Backbone.View
         @showMessage 'An error occurred while processing the file. Please try again.', 'error'
 
       iframe.remove()
+      window.busy(false)
 
   showMessage: (message, style) =>
     form = $(@el).find 'form'
