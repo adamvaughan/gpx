@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.1'
+gem 'rails', '3.1.3'
 
 group :production do
   gem 'pg'
@@ -12,9 +12,11 @@ gem 'draper'
 gem 'rabl'
 gem 'yajl-ruby', :require => 'yajl'
 
-gem 'sass-rails', '~> 3.1.4'
-gem 'coffee-rails', '~> 3.1.1'
-gem 'uglifier', '>= 1.0.3'
+group :assets do
+  gem 'sass-rails', '~> 3.1.5'
+  gem 'coffee-rails', '~> 3.1.1'
+  gem 'uglifier', '>= 1.0.3'
+end
 
 gem 'bourbon'
 gem 'twitter-bootstrap-rails'
