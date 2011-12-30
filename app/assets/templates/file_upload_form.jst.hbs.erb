@@ -1,4 +1,4 @@
-<form class="file-upload" action="<%= uploads_path %>" method="post" enctype="multipart/form-data">
+<form class="file-upload" action="<%= ENV['RAILS_RELATIVE_URL_ROOT'] || '' %>/uploads" method="post" enctype="multipart/form-data">
   <fieldset>
     <input name="file" type="file">
     <input class="btn primary" type="submit" value="Upload">

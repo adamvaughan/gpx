@@ -1,4 +1,3 @@
-
 if ENV['RAILS_ENV'] == 'production'
   ENV['RAILS_RELATIVE_URL_ROOT'] = '/gpx'
 end
