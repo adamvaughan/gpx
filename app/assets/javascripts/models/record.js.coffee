@@ -1,2 +1,2 @@
 class App.Models.Record extends Backbone.Model
-  url: '/records'
+  url: "#{CONTEXT_ROOT}"/records"

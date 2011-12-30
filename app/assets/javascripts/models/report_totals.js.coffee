@@ -1,2 +1,2 @@
 class App.Models.ReportTotals extends Backbone.Model
-  url: '/reports/totals'
+  url: "#{CONTEXT_ROOT}/reports/totals"
