@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '3.1.3'
 
 group :production do
-  gem 'pg'
+  gem 'mysql2'
 end
 
 gem 'haml'
