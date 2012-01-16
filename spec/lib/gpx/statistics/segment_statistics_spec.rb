@@ -35,7 +35,7 @@ describe Gpx::Statistics::SegmentStatistics do
       segment.points << Point.new(:latitude => 39.384598000, :longitude => -105.274850000)
 
       Gpx::Statistics::SegmentStatistics.calculate(segment)
-      segment.distance.should be_within(0.0000001).of(6936.4947082)
+      segment.distance.should be_within(0.0000001).of(6913.4565666)
     end
   end
 
@@ -65,7 +65,7 @@ describe Gpx::Statistics::SegmentStatistics do
       segment.points << Point.new(:latitude => 39.384598000, :longitude => -105.274850000, :elevation => 1000)
 
       Gpx::Statistics::SegmentStatistics.calculate(segment)
-      segment.ascending_distance.should be_within(0.0000001).of(6936.4947082)
+      segment.ascending_distance.should be_within(0.0000001).of(6913.4565666)
     end
   end
 
@@ -95,7 +95,7 @@ describe Gpx::Statistics::SegmentStatistics do
       segment.points << Point.new(:latitude => 39.384598000, :longitude => -105.274850000, :elevation => 500)
 
       Gpx::Statistics::SegmentStatistics.calculate(segment)
-      segment.descending_distance.should be_within(0.0000001).of(6936.4947082)
+      segment.descending_distance.should be_within(0.0000001).of(6913.4565666)
     end
   end
 
@@ -133,7 +133,7 @@ describe Gpx::Statistics::SegmentStatistics do
       segment.points << Point.new(:latitude => 39.384598000, :longitude => -105.274850000, :elevation => 1000)
 
       Gpx::Statistics::SegmentStatistics.calculate(segment)
-      segment.flat_distance.should be_within(0.0000001).of(6936.4947082)
+      segment.flat_distance.should be_within(0.0000001).of(6913.4565666)
     end
   end
 
@@ -262,8 +262,8 @@ describe Gpx::Statistics::SegmentStatistics do
     end
 
     it "correctly computes the duration between points" do
-      segment.points << Point.new(:time => Time.at(1000))
-      segment.points << Point.new(:time => Time.at(2000))
+      segment.points << Point.new(:time => Time.at(1000), :elevation => 1000)
+      segment.points << Point.new(:time => Time.at(2000), :elevation => 1000)
 
       Gpx::Statistics::SegmentStatistics.calculate(segment)
       segment.duration.should be_within(0.0000001).of(1000.0)
@@ -317,16 +317,24 @@ describe Gpx::Statistics::SegmentStatistics do
     end
 
     it "is zero when all points are descending" do
-      segment.points << Point.new(:time => Time.at(1000), :elevation => 1000)
-      segment.points << Point.new(:time => Time.at(2000), :elevation => 500)
+      segment.points << Point.new(:time => Time.at(1000), :elevation => 1000, :latitude => 39.366613000, :longitude => -105.352029000)
+      segment.points << Point.new(:time => Time.at(2000), :elevation => 500, :latitude => 39.384598000, :longitude => -105.274850000)
+
+      Gpx::Statistics::SegmentStatistics.calculate(segment)
+      segment.ascending_duration.should eq(0)
+    end
+
+    it "is zero when inactive" do
+      segment.points << Point.new(:time => Time.at(1000), :elevation => 500, :latitude => 39.366613000, :longitude => -105.352029000)
+      segment.points << Point.new(:time => Time.at(2000), :elevation => 1000, :latitude => 39.366613000, :longitude => -105.352029000)
 
       Gpx::Statistics::SegmentStatistics.calculate(segment)
       segment.ascending_duration.should eq(0)
     end
 
     it "correctly computes the elapsed time between points when ascending" do
-      segment.points << Point.new(:time => Time.at(1000), :elevation => 500)
-      segment.points << Point.new(:time => Time.at(2000), :elevation => 1000)
+      segment.points << Point.new(:time => Time.at(1000), :elevation => 500, :latitude => 39.366613000, :longitude => -105.352029000)
+      segment.points << Point.new(:time => Time.at(2000), :elevation => 1000, :latitude => 39.384598000, :longitude => -105.274850000)
 
       Gpx::Statistics::SegmentStatistics.calculate(segment)
       segment.ascending_duration.should eq(1000.0)
@@ -347,16 +355,24 @@ describe Gpx::Statistics::SegmentStatistics do
     end
 
     it "is zero when all points are ascending" do
-      segment.points << Point.new(:time => Time.at(1000), :elevation => 500)
-      segment.points << Point.new(:time => Time.at(2000), :elevation => 1000)
+      segment.points << Point.new(:time => Time.at(1000), :elevation => 500, :latitude => 39.366613000, :longitude => -105.352029000)
+      segment.points << Point.new(:time => Time.at(2000), :elevation => 1000, :latitude => 39.384598000, :longitude => -105.274850000)
+
+      Gpx::Statistics::SegmentStatistics.calculate(segment)
+      segment.descending_duration.should eq(0)
+    end
+
+    it "is zero when inactive" do
+      segment.points << Point.new(:time => Time.at(1000), :elevation => 500, :latitude => 39.366613000, :longitude => -105.352029000)
+      segment.points << Point.new(:time => Time.at(2000), :elevation => 1000, :latitude => 39.366613000, :longitude => -105.352029000)
 
       Gpx::Statistics::SegmentStatistics.calculate(segment)
       segment.descending_duration.should eq(0)
     end
 
     it "correctly computes the elapsed time between points when descending" do
-      segment.points << Point.new(:time => Time.at(1000), :elevation => 1000)
-      segment.points << Point.new(:time => Time.at(2000), :elevation => 500)
+      segment.points << Point.new(:time => Time.at(1000), :elevation => 1000, :latitude => 39.366613000, :longitude => -105.352029000)
+      segment.points << Point.new(:time => Time.at(2000), :elevation => 500, :latitude => 39.384598000, :longitude => -105.274850000)
 
       Gpx::Statistics::SegmentStatistics.calculate(segment)
       segment.descending_duration.should eq(1000.0)
@@ -377,24 +393,32 @@ describe Gpx::Statistics::SegmentStatistics do
     end
 
     it "is zero when all points are ascending" do
-      segment.points << Point.new(:time => Time.at(1000), :elevation => 500)
-      segment.points << Point.new(:time => Time.at(2000), :elevation => 1000)
+      segment.points << Point.new(:time => Time.at(1000), :elevation => 500, :latitude => 39.366613000, :longitude => -105.352029000)
+      segment.points << Point.new(:time => Time.at(2000), :elevation => 1000, :latitude => 39.384598000, :longitude => -105.274850000)
 
       Gpx::Statistics::SegmentStatistics.calculate(segment)
       segment.flat_duration.should eq(0)
     end
 
     it "is zero when all points are descending" do
-      segment.points << Point.new(:time => Time.at(1000), :elevation => 1000)
-      segment.points << Point.new(:time => Time.at(2000), :elevation => 500)
+      segment.points << Point.new(:time => Time.at(1000), :elevation => 1000, :latitude => 39.366613000, :longitude => -105.352029000)
+      segment.points << Point.new(:time => Time.at(2000), :elevation => 500, :latitude => 39.384598000, :longitude => -105.274850000)
+
+      Gpx::Statistics::SegmentStatistics.calculate(segment)
+      segment.flat_duration.should eq(0)
+    end
+
+    it "is zero when inactive" do
+      segment.points << Point.new(:time => Time.at(1000), :elevation => 1000, :latitude => 39.366613000, :longitude => -105.352029000)
+      segment.points << Point.new(:time => Time.at(2000), :elevation => 500, :latitude => 39.366613000, :longitude => -105.352029000)
 
       Gpx::Statistics::SegmentStatistics.calculate(segment)
       segment.flat_duration.should eq(0)
     end
 
     it "correctly computes the elapsed time between points with no elevation change" do
-      segment.points << Point.new(:time => Time.at(1000), :elevation => 1000)
-      segment.points << Point.new(:time => Time.at(2000), :elevation => 1000)
+      segment.points << Point.new(:time => Time.at(1000), :elevation => 1000, :latitude => 39.366613000, :longitude => -105.352029000)
+      segment.points << Point.new(:time => Time.at(2000), :elevation => 1000, :latitude => 39.384598000, :longitude => -105.274850000)
 
       Gpx::Statistics::SegmentStatistics.calculate(segment)
       segment.flat_duration.should eq(1000.0)
@@ -420,7 +444,7 @@ describe Gpx::Statistics::SegmentStatistics do
       segment.points << Point.new(:latitude => 39.284698000, :longitude => -105.374860000, :time => Time.at(300000))
 
       Gpx::Statistics::SegmentStatistics.calculate(segment)
-      segment.average_pace.should be_within(0.0000001).of(11.3234376)
+      segment.average_pace.should be_within(0.0000001).of(11.3610436)
     end
   end
 
@@ -453,7 +477,7 @@ describe Gpx::Statistics::SegmentStatistics do
       segment.points << Point.new(:latitude => 39.370149, :longitude => -105.339224, :time => Time.at(10000))
 
       Gpx::Statistics::SegmentStatistics.calculate(segment)
-      segment.average_active_pace.should be_within(0.0000001).of(0.8262746)
+      segment.average_active_pace.should be_within(0.0000001).of(0.8290261)
     end
   end
 
@@ -484,7 +508,7 @@ describe Gpx::Statistics::SegmentStatistics do
       segment.points << Point.new(:latitude => 39.284698000, :longitude => -105.374860000, :time => Time.at(300000), :elevation => 1500)
 
       Gpx::Statistics::SegmentStatistics.calculate(segment)
-      segment.average_ascending_pace.should be_within(0.0000001).of(11.3234376)
+      segment.average_ascending_pace.should be_within(0.0000001).of(11.3610436)
     end
   end
 
@@ -515,7 +539,7 @@ describe Gpx::Statistics::SegmentStatistics do
       segment.points << Point.new(:latitude => 39.284698000, :longitude => -105.374860000, :time => Time.at(300000), :elevation => 500)
 
       Gpx::Statistics::SegmentStatistics.calculate(segment)
-      segment.average_descending_pace.should be_within(0.0000001).of(11.3234376)
+      segment.average_descending_pace.should be_within(0.0000001).of(11.3610436)
     end
   end
 
@@ -554,7 +578,7 @@ describe Gpx::Statistics::SegmentStatistics do
       segment.points << Point.new(:latitude => 39.284698000, :longitude => -105.374860000, :time => Time.at(300000), :elevation => 1000)
 
       Gpx::Statistics::SegmentStatistics.calculate(segment)
-      segment.average_flat_pace.should be_within(0.0000001).of(11.3234376)
+      segment.average_flat_pace.should be_within(0.0000001).of(11.3610436)
     end
   end
 
@@ -577,7 +601,7 @@ describe Gpx::Statistics::SegmentStatistics do
       segment.points << Point.new(:latitude => 39.284698000, :longitude => -105.374860000, :time => Time.at(3000))
 
       Gpx::Statistics::SegmentStatistics.calculate(segment)
-      segment.average_speed.should be_within(0.0000001).of(10.5006881)
+      segment.average_speed.should be_within(0.0000001).of(10.4659019)
     end
   end
 
@@ -610,7 +634,7 @@ describe Gpx::Statistics::SegmentStatistics do
       segment.points << Point.new(:latitude => 39.370149, :longitude => -105.339224, :time => Time.at(10000))
 
       Gpx::Statistics::SegmentStatistics.calculate(segment)
-      segment.average_active_speed.should be_within(0.0000001).of(1.3398617)
+      segment.average_active_speed.should be_within(0.0000001).of(1.3354146)
     end
   end
 
@@ -642,7 +666,7 @@ describe Gpx::Statistics::SegmentStatistics do
       segment.points << Point.new(:latitude => 39.284698000, :longitude => -105.374860000, :time => Time.at(3000), :elevation => 1500)
 
       Gpx::Statistics::SegmentStatistics.calculate(segment)
-      segment.average_ascending_speed.should be_within(0.0000001).of(10.5006881)
+      segment.average_ascending_speed.should be_within(0.0000001).of(10.4659019)
     end
   end
 
@@ -674,7 +698,7 @@ describe Gpx::Statistics::SegmentStatistics do
       segment.points << Point.new(:latitude => 39.284698000, :longitude => -105.374860000, :time => Time.at(3000), :elevation => 500)
 
       Gpx::Statistics::SegmentStatistics.calculate(segment)
-      segment.average_descending_speed.should be_within(0.0000001).of(10.5006881)
+      segment.average_descending_speed.should be_within(0.0000001).of(10.4659019)
     end
   end
 
@@ -715,7 +739,7 @@ describe Gpx::Statistics::SegmentStatistics do
       segment.points << Point.new(:latitude => 39.284698000, :longitude => -105.374860000, :time => Time.at(3000), :elevation => 1000)
 
       Gpx::Statistics::SegmentStatistics.calculate(segment)
-      segment.average_flat_speed.should be_within(0.0000001).of(10.5006881)
+      segment.average_flat_speed.should be_within(0.0000001).of(10.4659019)
     end
   end
 
@@ -738,7 +762,7 @@ describe Gpx::Statistics::SegmentStatistics do
       segment.points << Point.new(:latitude => 39.284698000, :longitude => -105.374860000, :time => Time.at(3000))
 
       Gpx::Statistics::SegmentStatistics.calculate(segment)
-      segment.maximum_speed.should be_within(0.0000001).of(14.0648815)
+      segment.maximum_speed.should be_within(0.0000001).of(14.0183473)
     end
   end
 end
