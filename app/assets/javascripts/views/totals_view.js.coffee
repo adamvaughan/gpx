@@ -4,6 +4,7 @@ class App.Views.TotalsView extends Backbone.View
   className: 'report-view'
 
   initialize: ->
+    @currentDisplay = 'distance'
     @collection.bind 'reset', @loadTotals
     @collection.bind 'add', @loadTotals
     @collection.bind 'destroy', @loadTotals
@@ -11,7 +12,7 @@ class App.Views.TotalsView extends Backbone.View
 
   render: =>
     if @collection.length > 0
-      $(@el).html(JST['totals_view'](@model.toJSON())).show()
+      $(@el).html(JST["#{@currentDisplay}_totals_view"](@model.toJSON())).show()
     else
       $(@el).html('').hide()
     @
@@ -26,3 +27,11 @@ class App.Views.TotalsView extends Backbone.View
       success: =>
         window.busy(false)
         @render()
+
+  displayDistanceTotals: =>
+    @currentDisplay = 'distance'
+    @render()
+
+  displayDurationTotals: =>
+    @currentDisplay = 'duration'
+    @render()

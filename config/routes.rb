@@ -6,7 +6,8 @@ Gpx::Application.routes.draw do
 
     resources :uploads, :only => :create
     match '/reports/totals' => 'reports#totals'
-    match '/reports/monthly' => 'reports#monthly'
+    match '/reports/monthly/distance' => 'reports#monthly_distance'
+    match '/reports/monthly/duration' => 'reports#monthly_duration'
     match '/records' => 'records#show'
 
     root :to => 'segments#index'

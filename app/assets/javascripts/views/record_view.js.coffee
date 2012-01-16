@@ -4,6 +4,7 @@ class App.Views.RecordView extends Backbone.View
   className: 'record-view'
 
   initialize: ->
+    @currentDisplay = 'distance'
     @collection.bind 'reset', @loadRecords
     @collection.bind 'add', @loadRecords
     @collection.bind 'destroy', @loadRecords
@@ -11,7 +12,7 @@ class App.Views.RecordView extends Backbone.View
 
   render: =>
     if @collection.length > 0
-      $(@el).html(JST['record_view'](@model.toJSON())).show()
+      $(@el).html(JST["#{@currentDisplay}_record_view"](@model.toJSON())).show()
     else
       $(@el).html('').hide()
     @
@@ -26,3 +27,11 @@ class App.Views.RecordView extends Backbone.View
       success: =>
         window.busy(false)
         @render()
+
+  displayDistanceRecords: =>
+    @currentDisplay = 'distance'
+    @render()
+
+  displayDurationRecords: =>
+    @currentDisplay = 'duration'
+    @render()

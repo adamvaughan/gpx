@@ -12,33 +12,86 @@ module Gpx
           record.save!
         end
 
-        # Sets the best segment record.
+        # Sets the best segment records.
         def update_best_segment(record)
+          update_best_segment_distance(record)
+          update_best_segment_duration(record)
+        end
+
+        # Sets the best segment distance record.
+        def update_best_segment_distance(record)
           segment = Segment.unscoped.order('distance DESC').first
 
           if segment
-            record.best_segment_id = segment.id unless record.best_segment_id == segment.id
+            record.best_distance_segment_id = segment.id unless record.best_distance_segment_id == segment.id
           else
-            record.best_segment = 0
+            record.best_distance_segment = 0
           end
         end
 
-        # Sets the best year record.
+        # Sets the best segment duration record.
+        def update_best_segment_duration(record)
+          segment = Segment.unscoped.order('duration DESC').first
+
+          if segment
+            record.best_duration_segment_id = segment.id unless record.best_duration_segment_id == segment.id
+          else
+            record.best_duration_segment = 0
+          end
+        end
+
+        # Sets the best year records.
         def update_best_year(record)
+          update_best_year_distance(record)
+          update_best_year_duration(record)
+        end
+
+        # Sets the best year distance record.
+        def update_best_year_distance(record)
           segment = Segment.find_by_sql('SELECT SUM(distance) AS distance FROM segments GROUP BY strftime("%Y", start_time) ORDER BY distance DESC').first
-          record.best_year = segment.distance ? segment.distance : 0
+          record.best_year_distance = segment.distance || 0
         end
 
-        # Sets the best year record.
+        # Sets the best year duration record.
+        def update_best_year_duration(record)
+          segment = Segment.find_by_sql('SELECT SUM(duration) AS duration FROM segments GROUP BY strftime("%Y", start_time) ORDER BY duration DESC').first
+          record.best_year_duration = segment.duration || 0
+        end
+
+        # Sets the best month records.
         def update_best_month(record)
-          segment = Segment.find_by_sql('SELECT SUM(distance) AS distance FROM segments GROUP BY strftime("%Y %m", start_time) ORDER BY distance DESC').first
-          record.best_month = segment.distance ? segment.distance : 0
+          update_best_month_distance(record)
+          update_best_month_duration(record)
         end
 
-        # Sets the best year record.
+        # Sets the best month distance record.
+        def update_best_month_distance(record)
+          segment = Segment.find_by_sql('SELECT SUM(distance) AS distance FROM segments GROUP BY strftime("%Y %m", start_time) ORDER BY distance DESC').first
+          record.best_month_duration = segment.distance || 0
+        end
+
+        # Sets the best month duration record.
+        def update_best_month_duration(record)
+          segment = Segment.find_by_sql('SELECT SUM(duration) AS duration FROM segments GROUP BY strftime("%Y %m", start_time) ORDER BY duration DESC').first
+          record.best_month_duration = segment.duration || 0
+        end
+
+        # Sets the best week records.
         def update_best_week(record)
+          update_best_week_distance(record)
+          update_best_week_duration(record)
+        end
+
+        # Sets the best week distance record.
+        def update_best_week_distance(record)
           segment = Segment.find_by_sql('SELECT SUM(distance) AS distance FROM segments GROUP BY strftime("%Y %W", start_time) ORDER BY distance DESC').first
-          record.best_week = segment.distance ? segment.distance : 0
+          record.best_week_duration = segment.distance || 0
+        end
+
+        # Sets the best week duration record.
+        def update_best_week_duration(record)
+          segment = Segment.find_by_sql('SELECT SUM(duration) AS duration FROM segments GROUP BY strftime("%Y %W", start_time) ORDER BY duration DESC').first
+          record.best_week_duration = segment.duration || 0
         end
       end
     end

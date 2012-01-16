@@ -11,7 +11,7 @@ class App.Views.MonthlyDistanceChartView extends Backbone.View
 
   loadMonthlyTotals: =>
     window.busy(true)
-    @model = new App.Models.MonthlyReport
+    @model = new App.Models.MonthlyDistanceReport
     @model.fetch
       error: =>
         window.busy(false)
@@ -32,22 +32,11 @@ class App.Views.MonthlyDistanceChartView extends Backbone.View
         text: 'Distance (miles)'
     tooltip:
       formatter: ->
-        "<strong>Distance:</strong>#{Highcharts.numberFormat(this.y, 1)} mi"
+        "<strong>Distance:</strong>#{Highcharts.numberFormat(@y, 1)} mi"
     series: [{
-      marker:
-        enabled: false
-        fillColor: '#444'
-        symbol: 'circle'
-        radius: 4
-        lineWidth: 2
-        states:
-          hover:
-            enabled: true
-      lineWidth: 3
       shadow: false
       states:
-        hover:
-          lineWidth: 3
+        hover: false
       name: ''
       data: @model.get('distances').map (distance) -> App.Helpers.metersToMiles(distance)
     }]

@@ -11,4 +11,8 @@ class Segment < ActiveRecord::Base
   def self.total_distance_for_month(date)
     where(:start_time => date.to_time.utc.beginning_of_month..date.to_time.utc.end_of_month).sum(:distance)
   end
+
+  def self.total_duration_for_month(date)
+    where(:start_time => date.to_time.utc.beginning_of_month..date.to_time.utc.end_of_month).sum(:duration)
+  end
 end

@@ -1,0 +1,25 @@
+<thead>
+  <tr>
+    <th>Rides This Year</th>
+    <th>Distance This Year</th>
+    <th>Distance This Month</th>
+    <th>Distance This Week</td>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>{{segment_count}}</td>
+    <td>
+      {{metersToMiles year_distance}}
+      <abbr title="miles">mi</abbr>
+    </td>
+    <td>
+      {{metersToMiles month_distance}}
+      <abbr title="miles">mi</abbr>
+    </td>
+    <td>
+      {{metersToMiles week_distance}}
+      <abbr title="miles">mi</abbr>
+    </td>
+  </tr>
+</tbody>
