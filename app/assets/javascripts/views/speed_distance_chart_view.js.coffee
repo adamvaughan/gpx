@@ -20,7 +20,7 @@ class App.Views.SpeedDistanceChartView extends Backbone.View
   chartOptions: =>
     xAxis:
       title:
-        text: 'Distance (miles)'
+        text: ''
     yAxis:
       title:
         text: 'Speed (mph)'

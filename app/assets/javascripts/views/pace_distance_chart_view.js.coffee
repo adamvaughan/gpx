@@ -20,7 +20,7 @@ class App.Views.PaceDistanceChartView extends Backbone.View
   chartOptions: =>
     xAxis:
       title:
-        text: 'Distance (miles)'
+        text: ''
     yAxis:
       title:
         text: 'Pace (min/mile)'

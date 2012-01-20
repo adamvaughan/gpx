@@ -1,4 +1,4 @@
-class App.Views.MonthlyDurationChartView extends Backbone.View
+class App.Views.AnnualDistanceChartView extends Backbone.View
 
   initialize: (options) ->
     @collection.bind 'reset', @render
@@ -6,12 +6,12 @@ class App.Views.MonthlyDurationChartView extends Backbone.View
     @collection.bind 'destroy', @render
 
   render: =>
-    @loadMonthlyTotals()
+    @loadAnnualTotals()
     @
 
-  loadMonthlyTotals: =>
+  loadAnnualTotals: =>
     window.busy(true)
-    @model = new App.Models.MonthlyDurationReport
+    @model = new App.Models.AnnualDistanceReport
     @model.fetch
       error: =>
         window.busy(false)
@@ -26,23 +26,17 @@ class App.Views.MonthlyDurationChartView extends Backbone.View
     xAxis:
       title:
         text: ''
-      categories: @model.get('months')
+      categories: @model.get('years')
     yAxis:
-      type: 'datetime'
       title:
-        text: 'Duration'
-      labels:
-        formatter: ->
-          time = App.Helpers.formatTime(@value / 1000)
-          parts = time.split(':')
-          "#{parts[0]}:#{parts[1]}"
+        text: 'Distance (miles)'
     tooltip:
       formatter: ->
-        "<strong>Duration:</strong>#{App.Helpers.formatTime(@y / 1000)}"
+        "<strong>Distance:</strong>#{Highcharts.numberFormat(@y, 1)} mi"
     series: [{
       shadow: false
       states:
         hover: false
       name: ''
-      data: @model.get('durations').map (duration) -> parseFloat(duration) * 1000
+      data: @model.get('distances').map (distance) -> App.Helpers.metersToMiles(distance)
     }]

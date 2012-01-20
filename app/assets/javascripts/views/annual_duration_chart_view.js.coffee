@@ -1,4 +1,4 @@
-class App.Views.MonthlyDurationChartView extends Backbone.View
+class App.Views.AnnualDurationChartView extends Backbone.View
 
   initialize: (options) ->
     @collection.bind 'reset', @render
@@ -6,12 +6,12 @@ class App.Views.MonthlyDurationChartView extends Backbone.View
     @collection.bind 'destroy', @render
 
   render: =>
-    @loadMonthlyTotals()
+    @loadAnnualTotals()
     @
 
-  loadMonthlyTotals: =>
+  loadAnnualTotals: =>
     window.busy(true)
-    @model = new App.Models.MonthlyDurationReport
+    @model = new App.Models.AnnualDurationReport
     @model.fetch
       error: =>
         window.busy(false)
@@ -26,7 +26,7 @@ class App.Views.MonthlyDurationChartView extends Backbone.View
     xAxis:
       title:
         text: ''
-      categories: @model.get('months')
+      categories: @model.get('years')
     yAxis:
       type: 'datetime'
       title:

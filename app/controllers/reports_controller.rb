@@ -39,4 +39,34 @@ class ReportsController < ApplicationController
       end
     end
   end
+
+  def annual_distance
+    last_modified = Segment.maximum(:updated_at)
+
+    if stale?(:last_modified => last_modified, :etag => [Report, 'annual_distance', last_modified, request.format])
+      respond_to do |format|
+        format.json do
+          @years = (0..10).inject([]) { |years, index| years.push((Date.today - index.year).strftime('%Y')) }
+          @distances = (0..10).inject([]) { |distances, index| distances.push(Segment.total_distance_for_year(Date.today - index.year)) }
+        end
+
+        format.html { render_404 }
+      end
+    end
+  end
+
+  def annual_duration
+    last_modified = Segment.maximum(:updated_at)
+
+    if stale?(:last_modified => last_modified, :etag => [Report, 'annual_duration', last_modified, request.format])
+      respond_to do |format|
+        format.json do
+          @years = (0..10).inject([]) { |years, index| years.push((Date.today - index.year).strftime('%Y')) }
+          @durations = (0..10).inject([]) { |durations, index| durations.push(Segment.total_duration_for_year(Date.today - index.year)) }
+        end
+
+        format.html { render_404 }
+      end
+    end
+  end
 end

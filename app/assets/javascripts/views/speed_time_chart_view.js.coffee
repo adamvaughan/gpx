@@ -20,7 +20,7 @@ class App.Views.SpeedTimeChartView extends Backbone.View
   chartOptions: =>
     xAxis:
       title:
-        text: 'Time'
+        text: ''
       type: 'datetime'
       dateTimeLabelFormats:
         hour: '%H:%M'

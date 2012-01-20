@@ -20,7 +20,7 @@ class App.Views.ElevationDistanceChartView extends Backbone.View
   chartOptions: =>
     xAxis:
       title:
-        text: 'Distance (miles)'
+        text: ''
     yAxis:
       title:
         text: 'Elevation (ft)'
