@@ -67,7 +67,7 @@ module Gpx
         # Sets the best month distance record.
         def update_best_month_distance(record)
           segment = Segment.find_by_sql('SELECT SUM(distance) AS distance FROM segments GROUP BY strftime("%Y %m", start_time) ORDER BY distance DESC').first
-          record.best_month_duration = segment.distance || 0
+          record.best_month_distance = segment.distance || 0
         end
 
         # Sets the best month duration record.
@@ -85,7 +85,7 @@ module Gpx
         # Sets the best week distance record.
         def update_best_week_distance(record)
           segment = Segment.find_by_sql('SELECT SUM(distance) AS distance FROM segments GROUP BY strftime("%Y %W", start_time) ORDER BY distance DESC').first
-          record.best_week_duration = segment.distance || 0
+          record.best_week_distance = segment.distance || 0
         end
 
         # Sets the best week duration record.
