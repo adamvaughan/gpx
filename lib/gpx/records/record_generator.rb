@@ -48,13 +48,23 @@ module Gpx
 
         # Sets the best year distance record.
         def update_best_year_distance(record)
-          segment = Segment.find_by_sql('SELECT SUM(distance) AS distance FROM segments GROUP BY strftime("%Y", start_time) ORDER BY distance DESC').first
+          if mysql?
+            segment = Segment.find_by_sql('SELECT SUM(distance) AS distance FROM segments GROUP BY date_format(start_time, "%Y") ORDER BY distance DESC').first
+          else
+            segment = Segment.find_by_sql('SELECT SUM(distance) AS distance FROM segments GROUP BY strftime("%Y", start_time) ORDER BY distance DESC').first
+          end
+
           record.best_year_distance = segment.distance || 0
         end
 
         # Sets the best year duration record.
         def update_best_year_duration(record)
-          segment = Segment.find_by_sql('SELECT SUM(duration) AS duration FROM segments GROUP BY strftime("%Y", start_time) ORDER BY duration DESC').first
+          if mysql?
+            segment = Segment.find_by_sql('SELECT SUM(duration) AS duration FROM segments GROUP BY date_format(start_time, "%Y") ORDER BY duration DESC').first
+          else
+            segment = Segment.find_by_sql('SELECT SUM(duration) AS duration FROM segments GROUP BY strftime("%Y", start_time) ORDER BY duration DESC').first
+          end
+
           record.best_year_duration = segment.duration || 0
         end
 
@@ -66,13 +76,23 @@ module Gpx
 
         # Sets the best month distance record.
         def update_best_month_distance(record)
-          segment = Segment.find_by_sql('SELECT SUM(distance) AS distance FROM segments GROUP BY strftime("%Y %m", start_time) ORDER BY distance DESC').first
+          if mysql?
+            segment = Segment.find_by_sql('SELECT SUM(distance) AS distance FROM segments GROUP BY date_format(start_time, "%Y %m") ORDER BY distance DESC').first
+          else
+            segment = Segment.find_by_sql('SELECT SUM(distance) AS distance FROM segments GROUP BY strftime("%Y %m", start_time) ORDER BY distance DESC').first
+          end
+
           record.best_month_distance = segment.distance || 0
         end
 
         # Sets the best month duration record.
         def update_best_month_duration(record)
-          segment = Segment.find_by_sql('SELECT SUM(duration) AS duration FROM segments GROUP BY strftime("%Y %m", start_time) ORDER BY duration DESC').first
+          if mysql?
+            segment = Segment.find_by_sql('SELECT SUM(duration) AS duration FROM segments GROUP BY date_format(start_time, "%Y %m") ORDER BY duration DESC').first
+          else
+            segment = Segment.find_by_sql('SELECT SUM(duration) AS duration FROM segments GROUP BY strftime("%Y %m", start_time) ORDER BY duration DESC').first
+          end
+
           record.best_month_duration = segment.duration || 0
         end
 
@@ -84,14 +104,29 @@ module Gpx
 
         # Sets the best week distance record.
         def update_best_week_distance(record)
-          segment = Segment.find_by_sql('SELECT SUM(distance) AS distance FROM segments GROUP BY strftime("%Y %W", start_time) ORDER BY distance DESC').first
+          if mysql?
+            segment = Segment.find_by_sql('SELECT SUM(distance) AS distance FROM segments GROUP BY date_format(start_time, "%Y %W") ORDER BY distance DESC').first
+          else
+            segment = Segment.find_by_sql('SELECT SUM(distance) AS distance FROM segments GROUP BY strftime("%Y %W", start_time) ORDER BY distance DESC').first
+          end
+
           record.best_week_distance = segment.distance || 0
         end
 
         # Sets the best week duration record.
         def update_best_week_duration(record)
-          segment = Segment.find_by_sql('SELECT SUM(duration) AS duration FROM segments GROUP BY strftime("%Y %W", start_time) ORDER BY duration DESC').first
+          if mysql?
+            segment = Segment.find_by_sql('SELECT SUM(duration) AS duration FROM segments GROUP BY date_format(start_time, "%Y %W") ORDER BY duration DESC').first
+          else
+            segment = Segment.find_by_sql('SELECT SUM(duration) AS duration FROM segments GROUP BY strftime("%Y %W", start_time) ORDER BY duration DESC').first
+          end
+
           record.best_week_duration = segment.duration || 0
+        end
+
+        # Determines if the database is MySQL.
+        def mysql?
+          ActiveRecord::Base.connection.instance_of? ActiveRecord::ConnectionAdapters::MysqlAdapter
         end
       end
     end
