@@ -1,5 +1,5 @@
 App.Helpers.formatAmount = (value) ->
-  return '' if _.isNaN(value)
+  return '--' if _.isUndefined(value) or _.isNaN(value)
   originalValue = value
   value = Math.abs(value) + ''
   start = value.indexOf('.', 0) + 1
@@ -26,14 +26,17 @@ App.Helpers.formatAmount = (value) ->
     value
 
 App.Helpers.formatLongTime = (seconds) ->
+  return '--' if _.isUndefined(seconds) or _.isNaN(seconds)
+
   time = new Date(seconds * 1000)
   time.addMinutes(time.getTimezoneOffset())
   time.toString('M/d/yyyy h:mm tt').toLowerCase()
 
 App.Helpers.formatTime = (seconds) ->
+  return '--' if _.isUndefined(seconds) or _.isNaN(seconds)
+
   hours = 0
   minutes = 0
-  seconds ||= 0
 
   if seconds > 3600
     hours = Math.floor(seconds / 3600)
