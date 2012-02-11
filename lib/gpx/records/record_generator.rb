@@ -126,7 +126,7 @@ module Gpx
 
         # Determines if the database is MySQL.
         def mysql?
-          ActiveRecord::Base.connection.instance_of? ActiveRecord::ConnectionAdapters::MysqlAdapter
+          !!(ActiveRecord::Base.connection.class.name =~ /mysql/i)
         end
       end
     end
