@@ -194,35 +194,14 @@ module Gpx
         #
         # Returns the average pace in seconds per meter.
         def average_pace(segment)
-          return 0 if segment.points.size < 2
-          count = 0
-
-          total_pace = point_pairs(segment).inject(0) do |total, pair|
-            if active_between?(*pair)
-              count += 1
-              total + pace_between(*pair)
-            else
-              total
-            end
-          end
-
-          return 0 if count == 0
-          total_pace / count
+          active_duration(segment) / distance(segment)
         end
 
         # Calculates the average pace between points while ascending on a segment.
         #
         # Returns the average pace while ascending in seconds per meter.
         def average_ascending_pace(segment)
-          count = 0
-
-          total_pace = ascending_point_pairs(segment).inject(0) do |total, pair|
-            count += 1
-            total + pace_between(*pair)
-          end
-
-          return 0 if count == 0
-          total_pace / count
+          ascending_duration(segment) / ascending_distance(segment)
         end
 
         # Calculates the average pace between points while descending on a
@@ -230,15 +209,7 @@ module Gpx
         #
         # Returns the average pace while descending in seconds per meter.
         def average_descending_pace(segment)
-          count = 0
-
-          total_pace = descending_point_pairs(segment).inject(0) do |total, pair|
-            count += 1
-            total + pace_between(*pair)
-          end
-
-          return 0 if count == 0
-          total_pace / count
+          descending_duration(segment) / descending_distance(segment)
         end
 
         # Calculates the average pace between points with little to no elevation
@@ -246,35 +217,14 @@ module Gpx
         #
         # Returns the average pace with no elevation change in seconds per meter.
         def average_flat_pace(segment)
-          count = 0
-
-          total_pace = flat_point_pairs(segment).inject(0) do |total, pair|
-            count += 1
-            total + pace_between(*pair)
-          end
-
-          return 0 if count == 0
-          total_pace / count
+          flat_duration(segment) / flat_distance(segment)
         end
 
         # Calculates the average speed traveled between points on a segment. Only active periods are considered.
         #
         # Returns the average speed in meters per second.
         def average_speed(segment)
-          return 0 if segment.points.size < 2
-          count = 0
-
-          total_speed = point_pairs(segment).inject(0) do |total, pair|
-            if active_between?(*pair)
-              count += 1
-              total + speed_between(*pair)
-            else
-              total
-            end
-          end
-
-          return 0 if count == 0
-          total_speed / count
+          distance(segment) / active_duration(segment)
         end
 
         # Calculates the average speed between points while ascending on a
@@ -282,15 +232,7 @@ module Gpx
         #
         # Returns the average speed while ascending in meters per second.
         def average_ascending_speed(segment)
-          count = 0
-
-          total_speed = ascending_point_pairs(segment).inject(0) do |total, pair|
-            count += 1
-            total + speed_between(*pair)
-          end
-
-          return 0 if count == 0
-          total_speed / count
+          ascending_distance(segment) / ascending_duration(segment)
         end
 
         # Calculates the average speed between points while descending on a
@@ -298,15 +240,7 @@ module Gpx
         #
         # Returns the average speed while descending in meters per second.
         def average_descending_speed(segment)
-          count = 0
-
-          total_speed = descending_point_pairs(segment).inject(0) do |total, pair|
-            count += 1
-            total + speed_between(*pair)
-          end
-
-          return 0 if count == 0
-          total_speed / count
+          descending_distance(segment) / descending_duration(segment)
         end
 
         # Calculates the average speed between points with little to no elevation
@@ -314,15 +248,7 @@ module Gpx
         #
         # Returns the average speed with no elevation change in meters per second.
         def average_flat_speed(segment)
-          count = 0
-
-          total_speed = flat_point_pairs(segment).inject(0) do |total, pair|
-            count += 1
-            total + speed_between(*pair)
-          end
-
-          return 0 if count == 0
-          total_speed / count
+          flat_distance(segment) / flat_duration(segment)
         end
 
         # Calculates the maximum speed traveled between points on a segment.
@@ -482,19 +408,6 @@ module Gpx
           return 0 if distance == 0
 
           distance / time
-        end
-
-        # Computes the pace the distance between two points was traveled at.
-        #
-        # Returns the pace in seconds per meter.
-        def pace_between(start_point, end_point)
-          time = time_between(start_point, end_point)
-          return 0 if time == 0
-
-          distance = distance_between(start_point, end_point)
-          return 0 if distance == 0
-
-          time / distance
         end
 
         # Computes the time elapsed between two points.
