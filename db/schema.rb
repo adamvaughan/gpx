@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120219035602) do
+ActiveRecord::Schema.define(:version => 20120223140917) do
 
   create_table "points", :force => true do |t|
     t.datetime "time"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20120219035602) do
     t.integer  "segment_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "heart_rate"
   end
 
   create_table "records", :force => true do |t|

@@ -55,6 +55,8 @@ module Gpx
           @point.elevation = value.to_f
         when [:gpx, :trk, :trkseg, :trkpt, :time]
           @point.time = Time.parse(value)
+        when [:gpx, :trk, :trkseg, :trkpt, :extensions, :'gpxtpx:TrackPointExtension', :'gpxtpx:hr']
+          @point.heart_rate = value.to_i
         end
       end
     end
