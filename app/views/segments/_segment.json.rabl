@@ -23,7 +23,9 @@ attributes :id,
   :average_ascending_speed,
   :average_descending_speed,
   :average_flat_speed,
-  :maximum_speed
+  :maximum_speed,
+  :average_heart_rate,
+  :maximum_heart_rate
 
 node(:href) { |segment| segment_path(segment) }
 node(:points_href) { |segment| segment_points_path(segment) }

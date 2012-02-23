@@ -28,6 +28,8 @@ module Gpx
           segment.average_descending_speed = average_descending_speed(segment)
           segment.average_flat_speed = average_flat_speed(segment)
           segment.maximum_speed = maximum_speed(segment)
+          segment.average_heart_rate = average_heart_rate(segment)
+          segment.maximum_heart_rate = maximum_heart_rate(segment)
         end
 
         protected
@@ -259,6 +261,22 @@ module Gpx
           point_pairs(segment).map { |pair| speed_between(*pair) }.max
         end
 
+        # Calculates the average heart rate between points on a segment.
+        #
+        # Returns the average heart rate in beats per minute.
+        def average_heart_rate(segment)
+          return 0 if segment.points.size == 0
+          segment.points.map(&:heart_rate).sum / segment.points.count
+        end
+
+        # Calculates the maximum heart rate between two points on a segment.
+        #
+        # Returns the maximum heart rate in beats per minute.
+        def maximum_heart_rate(segment)
+          return 0 if segment.points.size == 0
+          segment.points.map(&:heart_rate).max
+        end
+
         private
 
         # Gathers pairs of adjacent points.
@@ -433,14 +451,23 @@ module Gpx
           speed_between(start_point, end_point) > 0.5
         end
 
+        # Determins if elevation change is positive between two points.
+        #
+        # Returns true if there is elevation gain; otherwise, false.
         def ascending_between?(start_point, end_point)
           (elevation_between(start_point, end_point) / distance_between(start_point, end_point)) > 0.003
         end
 
+        # Determins if elevation change is negative between two points.
+        #
+        # Returns true if there is elevation loss; otherwise, false.
         def descending_between?(start_point, end_point)
           (elevation_between(end_point, start_point) / distance_between(start_point, end_point)) > 0.003
         end
 
+        # Determins if there is no elevation change between two points.
+        #
+        # Returns true if there is no elevation change; otherwise, false.
         def flat_between?(start_point, end_point)
           (elevation_between(start_point, end_point) / distance_between(start_point, end_point)).abs <= 0.003
         end
