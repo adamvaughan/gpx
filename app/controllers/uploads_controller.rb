@@ -1,6 +1,5 @@
 class UploadsController < ApplicationController
   def create
-    @errors = []
     @segments = []
 
     if params['file']
@@ -23,7 +22,7 @@ class UploadsController < ApplicationController
     require 'zip/zipfilesystem'
     require 'zip/zip'
 
-    Zip::ZipFile.foreach('/Users/adam/Rides.zip') do |entry|
+    Zip::ZipFile.foreach(file) do |entry|
       if entry.name =~ /\.gpx$/ && entry.file? && entry.name !=~ /^__MACOSX/
         read_data_file(entry.get_input_stream)
       end
