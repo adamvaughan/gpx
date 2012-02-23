@@ -24,9 +24,6 @@ class App.Views.ElevationActiveTimeChartView extends Backbone.View
       title:
         text: ''
       type: 'datetime'
-      dateTimeLabelFormats:
-        hour: '%H:%M'
-        minute: '%H:%M'
     yAxis:
       title:
         text: 'Elevation (ft)'
