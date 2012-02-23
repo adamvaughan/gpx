@@ -159,5 +159,11 @@ class App.Views.SegmentDetailView extends Backbone.View
           when 'distance' then new App.Views.PaceDistanceChartView(points: @points)
           when 'active-time' then new App.Views.PaceActiveTimeChartView(points: @points)
           else new App.Views.PaceTimeChartView(points: @points)
+      when 'heart_rate'
+        switch plotBy
+          when 'distance' then new App.Views.HeartRateDistanceChartView(points: @points)
+          when 'active-time' then new App.Views.HeartRateActiveTimeChartView(points: @points)
+          else new App.Views.HeartRateTimeChartView(points: @points)
+
 
     chartView.render()

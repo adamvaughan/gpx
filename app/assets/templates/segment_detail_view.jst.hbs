@@ -29,6 +29,9 @@
   <li>
     <a href="#" rel="map" title="Map">Map</a>
   </li>
+  <li>
+    <a href="#" rel="heart_rate" title="Heart Rate">Heart Rate</a>
+  </li>
 </ul>
 
 <div id="chart" class="chart">
@@ -136,7 +139,9 @@
           <dd>{{formatTime flat_duration}}</dd>
         </dl>
       </td>
+    </tr>
 
+    <tr>
       <td>
         <h2>Pace</h2>
 
@@ -187,6 +192,24 @@
           <dd>
             {{metersPerSecondToMilesPerHour maximum_speed}}
             <abbr title="miles per hour">mph</abbr>
+          </dd>
+        </dl>
+      </td>
+
+      <td>
+        <h2>Heart Rate</h2>
+
+        <dl class="statistics">
+          <dt><abbr title="Average">Avg</abbr> Heart Rate</dt>
+          <dd>
+            {{formatAmount average_heart_rate}}
+            <abbr title="beats per minute">bpm</abbr>
+          </dd>
+
+          <dt>Maximum Heart Rate</dt>
+          <dd>
+            {{formatAmount maximum_heart_rate}}
+            <abbr title="beats per minute">bpm</abbr>
           </dd>
         </dl>
       </td>
