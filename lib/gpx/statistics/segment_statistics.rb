@@ -196,6 +196,17 @@ module Gpx
         #
         # Returns the average pace in seconds per meter.
         def average_pace(segment)
+          if segment.points.size < 2
+            segment.points.each { |point| point.pace = 0 }
+            return 0
+          end
+
+          segment.points.first.pace = 0
+
+          point_pairs(segment).each do |pair|
+            pair.last.pace = pace_between(*pair)
+          end
+
           active_duration(segment) / distance(segment)
         end
 
@@ -226,6 +237,17 @@ module Gpx
         #
         # Returns the average speed in meters per second.
         def average_speed(segment)
+          if segment.points.size < 2
+            segment.points.each { |point| point.speed = 0 }
+            return 0
+          end
+
+          segment.points.first.speed = 0
+
+          point_pairs(segment).each do |pair|
+            pair.last.speed = speed_between(*pair)
+          end
+
           distance(segment) / active_duration(segment)
         end
 
@@ -426,6 +448,21 @@ module Gpx
           return 0 if distance == 0
 
           distance / time
+        end
+
+        # Computes the pace the distance between two points was traveled at.
+        #
+        # Returns the pace in seconds per meter.
+        def pace_between(start_point, end_point)
+          return 0 unless active_between?(start_point, end_point)
+
+          time = time_between(start_point, end_point)
+          return 0 if time == 0
+
+          distance = distance_between(start_point, end_point)
+          return 0 if distance == 0
+
+          time / distance
         end
 
         # Computes the time elapsed between two points.
