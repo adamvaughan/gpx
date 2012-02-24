@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120223231637) do
+ActiveRecord::Schema.define(:version => 20120224014707) do
 
   create_table "points", :force => true do |t|
     t.datetime "time"
@@ -60,7 +60,6 @@ ActiveRecord::Schema.define(:version => 20120223231637) do
   create_table "segments", :force => true do |t|
     t.string   "name"
     t.datetime "start_time"
-    t.decimal  "latitude"
     t.decimal  "distance"
     t.decimal  "ascending_distance"
     t.decimal  "descending_distance"
@@ -87,7 +86,7 @@ ActiveRecord::Schema.define(:version => 20120223231637) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "maximum_heart_rate"
-    t.decimal  "average_heart_rate",       :precision => 20, :scale => 10
+    t.decimal  "average_heart_rate"
   end
 
 end
