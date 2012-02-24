@@ -25,7 +25,7 @@ module Gpx
           if segment
             record.best_distance_segment_id = segment.id unless record.best_distance_segment_id == segment.id
           else
-            record.best_distance_segment = 0
+            record.best_distance_segment_id = nil
           end
         end
 
@@ -36,7 +36,7 @@ module Gpx
           if segment
             record.best_duration_segment_id = segment.id unless record.best_duration_segment_id == segment.id
           else
-            record.best_duration_segment = 0
+            record.best_duration_segment_id = nil
           end
         end
 
@@ -54,7 +54,7 @@ module Gpx
             segment = Segment.find_by_sql('SELECT SUM(distance) AS distance FROM segments GROUP BY strftime("%Y", start_time) ORDER BY distance DESC').first
           end
 
-          record.best_year_distance = segment.distance || 0
+          record.best_year_distance = segment ?  segment.distance || 0 : 0
         end
 
         # Sets the best year duration record.
@@ -65,7 +65,7 @@ module Gpx
             segment = Segment.find_by_sql('SELECT SUM(duration) AS duration FROM segments GROUP BY strftime("%Y", start_time) ORDER BY duration DESC').first
           end
 
-          record.best_year_duration = segment.duration || 0
+          record.best_year_duration = segment ?  segment.duration || 0 : 0
         end
 
         # Sets the best month records.
@@ -82,7 +82,7 @@ module Gpx
             segment = Segment.find_by_sql('SELECT SUM(distance) AS distance FROM segments GROUP BY strftime("%Y %m", start_time) ORDER BY distance DESC').first
           end
 
-          record.best_month_distance = segment.distance || 0
+          record.best_month_distance = segment ? segment.distance || 0 : 0
         end
 
         # Sets the best month duration record.
@@ -93,7 +93,7 @@ module Gpx
             segment = Segment.find_by_sql('SELECT SUM(duration) AS duration FROM segments GROUP BY strftime("%Y %m", start_time) ORDER BY duration DESC').first
           end
 
-          record.best_month_duration = segment.duration || 0
+          record.best_month_duration = segment ? segment.duration || 0 : 0
         end
 
         # Sets the best week records.
@@ -110,7 +110,7 @@ module Gpx
             segment = Segment.find_by_sql('SELECT SUM(distance) AS distance FROM segments GROUP BY strftime("%Y %W", start_time) ORDER BY distance DESC').first
           end
 
-          record.best_week_distance = segment.distance || 0
+          record.best_week_distance = segment ? segment.distance || 0 : 0
         end
 
         # Sets the best week duration record.
@@ -121,7 +121,7 @@ module Gpx
             segment = Segment.find_by_sql('SELECT SUM(duration) AS duration FROM segments GROUP BY strftime("%Y %W", start_time) ORDER BY duration DESC').first
           end
 
-          record.best_week_duration = segment.duration || 0
+          record.best_week_duration = segment ? segment.duration || 0 : 0
         end
 
         # Determines if the database is MySQL.
