@@ -287,16 +287,18 @@ module Gpx
         #
         # Returns the average heart rate in beats per minute.
         def average_heart_rate(segment)
-          return 0 if segment.points.size == 0
-          segment.points.map(&:heart_rate).sum / segment.points.count
+          points = segment.points.reject { |point| point.heart_rate.nil? }
+          return nil if points.size == 0
+          points.map(&:heart_rate).sum / points.count
         end
 
         # Calculates the maximum heart rate between two points on a segment.
         #
         # Returns the maximum heart rate in beats per minute.
         def maximum_heart_rate(segment)
-          return 0 if segment.points.size == 0
-          segment.points.map(&:heart_rate).max
+          points = segment.points.reject { |point| point.heart_rate.nil? }
+          return nil if points.size == 0
+          points.map(&:heart_rate).max
         end
 
         private
