@@ -32,6 +32,13 @@ module Gpx
           segment.maximum_heart_rate = maximum_heart_rate(segment)
         end
 
+        # Computes all statistics for a segment and saves the calculations.
+        def calculate!(segment)
+          calculate(segment)
+          segment.save!
+          segment.points.each { |point| point.save! }
+        end
+
         protected
 
         # Gets the starting time for the segment.
