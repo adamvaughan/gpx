@@ -3,6 +3,6 @@ class Record < ActiveRecord::Base
   belongs_to :best_duration_segment, :class_name => 'Segment'
 
   def self.current
-    Record.first || Record.create(:best_year => 0, :best_month => 0, :best_week => 0)
+    Record.first || Record.create(:best_year_distance => 0, :best_month_distance => 0, :best_week_distance => 0, :best_year_duration => 0, :best_month_duration => 0, :best_week_duration => 0)
   end
 end
