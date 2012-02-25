@@ -29,7 +29,6 @@ App.Helpers.formatLongTime = (seconds) ->
   return '--' if _.isUndefined(seconds) or _.isNaN(seconds)
 
   time = new Date(seconds * 1000)
-  time.addMinutes(time.getTimezoneOffset())
   time.toString('M/d/yyyy h:mm tt').toLowerCase()
 
 App.Helpers.formatTime = (seconds) ->
