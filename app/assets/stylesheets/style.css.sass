@@ -4,267 +4,106 @@
   cursor: default
 
 body
+  background-image: image-url('groovepaper.png')
+  font-family: 'Yanone Kaffeesatz', sans-serif
+  width: 1000px
+  margin: 0 auto
   -webkit-font-smoothing: antialiased
 
-body.busy *
-  cursor: wait
-
-  a, a *, button, input[type='button'], input[type='file']
-    cursor: wait
+  & > header > h1
+    font-size: 48px
 
 a, a *, button, input[type='button'], input[type='file']
   cursor: pointer
 
+a
+  text-decoration: none
+
+a:hover
+  text-decoration: underline
+
 input[type='text']
   cursor: text
 
-.error-message
-  color: #b94a48
+section
+  padding-bottom: 60px
 
-form.file-upload
-  overflow: hidden
-  margin-top: 20px
+  & > header
+    padding-bottom: 20px
 
-  &.error fieldset
-    border-color: #882425
+    h1
+      margin: 0
 
-  &.success fieldset
-    border-color: #3d773d
+    h2
+      color: #666
+      font-size: 18px
+      font-weight: normal
+      margin: 0
+      padding-left: 10px
 
-  fieldset
-    @include border-radius(3px)
-    background: #fafafa
-    border: 1px solid #d9d9d9
-    position: relative
-    margin: 0 auto
-    padding: 0
-    width: 938px
+div.summary
+  display: inline-block
+  padding-left: 40px
+  padding-bottom: 20px
+  width: 450px
 
-    input[type='file']
-      position: absolute
-      opacity: 0
-      height: 36px
-      left: 0
-      top: 0
-      width: 938px
-
-    input[type='submit']
-      display: none
-
-    div
-      font-weight: bold
-      line-height: 36px
-      text-align: center
-      width: 938px
-
-      &.uploading-message, &.response-message
-        display: none
-
-  &.uploading
-    .instructions, .response-message, input[type='file']
-      display: none
-
-    .uploading-message
-      display: block
-
-  &.error, &.success
-    .instructions, .uploading-message, input[type='file']
-      display: none
-
-    .response-message
-      color: #fff
-      display: block
-      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25)
-
-  &.error .response-message
-    @include background-image(linear-gradient(#ee5f5b, #c43c35))
-
-  &.success .response-message
-    @include background-image(linear-gradient(#62c462, #57a957))
-
-.alert-message
-  text-align: center
-  margin-top: 20px
-
-.chart
-  margin: 18px auto
-  width: 900px
-  height: 300px
+  h2
+    color: #ccc
+    font-size: 20px
+    font-weight: normal
+    margin: 0
+    text-transform: uppercase
 
   p
-    &.error-message, &.status-message
-      font-weight: bold
-      text-align: center
-      display: block
-
-table.statistics
-  td
-    width: 33%
-
-  dt
-    padding-top: 10px
+    display: inline-block
+    font-size: 36px
+    margin: -10px 0 0 -10px
+    padding-left: 60px
+    width: 140px
 
     abbr
-      font-weight: bold
+      color: #666
+      font-size: 20px
+      font-weight: normal
 
-iframe
-  display: none
-  width: 0
-  height: 0
+  .sparkline
+    display: inline-block
 
-.segment-view
-  td
-    line-height: 28px
-    white-space: nowrap
+    canvas
+      margin-top: -18px
 
-  td.name
-    width: 500px
-
-    p
-      display: inline
-
-    input[type='text']
-      display: none
-
-  td.links
-    width: 120px
-    text-align: right
-
-    a[rel='edit'], a[rel='delete']
-      display: inline
-      padding-left: 10px
-
-  .error-message, .delete-confirmation
-    display: none
-
-  &.editing
-    td.name
-      p
-        display: none
-
-      input[type='text']
-        display: block
-        width: 100%
-
-    td.links a
-      display: none
-
-  &.deleting
-    td.name
-      p, input[type='text']
-        display: none
-
-    .delete-confirmation
-      display: block
-
-    td.links a
-      display: none
-
-  &.error
-    .error-message
-      display: block
-
-    input[type='text']
-      color: #b94a48
-      border-color: #ee5f5b
-
-.segment-detail-view
-  h1
-    margin-top: 10px
-
-    p
-      display: inline
-      margin-bottom: 18px
-      font-size: 30px
-      line-height: 46px
-      font-weight: bold
-
-    small
-      display: inline
-
-    input[type='text']
-      font-size: 30px
-      height: 36px
-      font-weight: bold
-      display: none
-      width: 100%
-
-  div.links
-    margin-top: 18px
-    margin-bottom: 18px
-    height: 18px
-
-    a[rel='edit'], a[rel='delete']
-      display: inline
-      padding-left: 10px
-
-  .error-message, .delete-confirmation
-    display: none
-
-  &.editing
-    h1
-      p, small
-        display: none
-
-      input[type='text']
-        display: block
-
-    div.links a
-      display: none
-
-  &.deleting
-    h1
-      p, small, input[type='text']
-        display: none
-
-    .delete-confirmation
-      padding-bottom: 5px
-      padding-top: 5px
-      display: block
-
-    div.links a
-      display: none
-
-    input[type='button']
-      vertical-align: top
-      margin-top: 5px
-
-  &.loading
-    .tabs, .pills
-      display: none
-
-  &.error
-    .error-message
-      display: block
-
-    input[type='text']
-      color: #b94a48
-      border-color: #ee5f5b
-
-.report-view, .record-view
-  margin-top: 36px
-
-  th, td
-    border-top: none
-    text-align: center
-    padding: 2px
-    width: 25%
-
-.record-view
-  margin-bottom: 36px
-
-.segment-list
-  margin-top: 36px
-
-.pills
+.read-more
   text-align: center
 
+#recent_rides
+  table
+    width: 100%
+
+    thead th
+      padding-bottom: 6px
+
+    tbody
+      tr
+        &:nth-child(odd)
+          background-color: #eee
+
+        td
+          padding: 6px 15px
+
+          &:first-child
+            color: #666
+
+          &.numeric
+            text-align: right
+
+          abbr
+            color: #666
+
+nav
+  float: right
+  margin-top: -75px
+
   li
-    display: inline-block
-    float: none
-
-.distance-summary-view .segments .segment-list .duration
-  display: none
-
-.duration-summary-view .segments .segment-list .distance
-  display: none
+    display: block
+    float: left
+    padding-left: 20px
