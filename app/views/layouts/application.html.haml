@@ -1,14 +1,25 @@
 !!!
 %html
   %head
-    %title GPX Analyzer
+    %title Ride Log
+
+    = stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz'
     = stylesheet_link_tag 'application'
-    = stylesheet_link_tag 'application', :media => 'print'
+
     = javascript_include_tag 'application'
-    %script{ :type => 'text/javascript', :src => 'http://maps.googleapis.com/maps/api/js?sensor=false' }
-    :javascript
-      window.segments = new App.Collections.SegmentCollection(#{render :file => 'segments/index.json.rabl'})
+    = javascript_include_tag 'http://maps.googleapis.com/maps/api/js?sensor=false'
+
     = csrf_meta_tags
-  %body
-    .container
-      = yield
+
+  %body{ :class => "#{controller_name} #{action_name}" }
+    %header
+      %h1 Ride Log
+
+    %nav
+      %ul
+        %li
+          %a{ :href => '#', :title => 'Reports' } Reports
+        %li
+          %a{ :href => '#', :title => 'Upload' } Upload
+
+    = yield
