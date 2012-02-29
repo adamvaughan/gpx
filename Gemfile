@@ -19,11 +19,8 @@ group :assets do
 end
 
 gem 'bourbon'
-gem 'twitter-bootstrap-rails'
 
 gem 'jquery-rails'
-gem 'backbone-rails'
-gem 'handlebars_assets'
 
 gem 'execjs'
 
