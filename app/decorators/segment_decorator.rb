@@ -2,23 +2,23 @@ class SegmentDecorator < ApplicationDecorator
   decorates :segment
 
   def start_time
-    segment.start_time.strftime('%-m/%-d/%y %-I:%M:%S %P')
+    segment.start_time.strftime('%B %-d, %Y -  %-I:%M %P')
   end
 
   def distance
-    format_number(meters_to_miles(segment.distance))
+    format_decimal(meters_to_miles(segment.distance))
   end
 
   def ascending_distance
-    format_number(meters_to_miles(segment.ascending_distance))
+    format_decimal(meters_to_miles(segment.ascending_distance))
   end
 
   def descending_distance
-    format_number(meters_to_miles(segment.descending_distance))
+    format_decimal(meters_to_miles(segment.descending_distance))
   end
 
   def flat_distance
-    format_number(meters_to_miles(segment.flat_distance))
+    format_decimal(meters_to_miles(segment.flat_distance))
   end
 
   def elevation_gain
@@ -34,11 +34,11 @@ class SegmentDecorator < ApplicationDecorator
   end
 
   def maximum_elevation
-    format_number(meters_to_feet(segment.maximum_elevation))
+    format_decimal(meters_to_feet(segment.maximum_elevation))
   end
 
   def minimum_elevation
-    format_number(meters_to_feet(segment.minimum_elevation))
+    format_decimal(meters_to_feet(segment.minimum_elevation))
   end
 
   def duration
@@ -78,29 +78,59 @@ class SegmentDecorator < ApplicationDecorator
   end
 
   def average_speed
-    format_number(meters_per_second_to_miles_per_hour(segment.average_speed))
+    format_decimal(meters_per_second_to_miles_per_hour(segment.average_speed))
   end
 
   def average_ascending_speed
-    format_number(meters_per_second_to_miles_per_hour(segment.average_ascending_speed))
+    format_decimal(meters_per_second_to_miles_per_hour(segment.average_ascending_speed))
   end
 
   def average_descending_speed
-    format_number(meters_per_second_to_miles_per_hour(segment.average_descending_speed))
+    format_decimal(meters_per_second_to_miles_per_hour(segment.average_descending_speed))
   end
 
   def average_flat_speed
-    format_number(meters_per_second_to_miles_per_hour(segment.average_flat_speed))
+    format_decimal(meters_per_second_to_miles_per_hour(segment.average_flat_speed))
   end
 
   def maximum_speed
-    format_number(meters_per_second_to_miles_per_hour(segment.maximum_speed))
+    format_decimal(meters_per_second_to_miles_per_hour(segment.maximum_speed))
+  end
+
+  def average_heart_rate
+    format_number(segment.average_heart_rate)
+  end
+
+  def speed_values
+    segment.points.map do |point|
+      point.speed.to_f if point.speed > 0.5
+    end.compact
+  end
+
+  def pace_values
+    segment.points.map do |point|
+      point.pace.to_f if point.pace > 0 and point.pace < 1
+    end.compact
+  end
+
+  def elevation_values
+    segment.points.map do |point|
+      point.elevation.to_f if point.speed > 0.5
+    end.compact
+  end
+
+  def heart_rate_values
+    segment.points.map(&:heart_rate)
   end
 
   private
 
+  def format_decimal(number)
+    helpers.number_with_precision(number, :precision => 1, :delimiter => ',')
+  end
+
   def format_number(number)
-    helpers.number_to_currency(number, :unit => '')
+    helpers.number_with_precision(number, :precision => 0, :delimiter => ',')
   end
 
   def meters_to_feet(meters)
@@ -129,7 +159,11 @@ class SegmentDecorator < ApplicationDecorator
       seconds = seconds % 60
     end
 
-    "#{hours}:#{'%02d' % minutes}:#{'%02d' % seconds.floor}"
+    if hours > 0
+      "#{hours}:#{'%02d' % minutes}:#{'%02d' % seconds.floor}"
+    else
+      "#{'%2d' % minutes}:#{'%02d' % seconds.floor}"
+    end
   end
 
   def meters_per_second_to_miles_per_hour(meters_per_second)
