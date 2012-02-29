@@ -16,14 +16,14 @@
       %p= @last_segment.duration
 
     .summary.speed
-      %h2 Avgerage Speed
+      %h2 Speed
       %p
         = @last_segment.average_speed
         %abbr{ :title => 'miles per hour' } mph
       .sparkline{ :data => { :values => @last_segment.speed_values } }
 
     .summary.pace
-      %h2 Average Pace
+      %h2 Pace
       %p
         = @last_segment.average_pace
         %abbr{ :title => 'minutes per mile' } min/mi
