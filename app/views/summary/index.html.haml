@@ -1,0 +1,87 @@
+- if @last_segment
+  %section#last_ride
+    %header
+      %hgroup
+        %h1 Last Ride
+        %h2= @last_segment.start_time
+
+    .summary.distance
+      %h2 Distance
+      %p
+        = @last_segment.distance
+        %abbr{ :title => 'miles' } mi
+
+    .summary.duration
+      %h2 Duration
+      %p= @last_segment.duration
+
+    .summary.speed
+      %h2 Avgerage Speed
+      %p
+        = @last_segment.average_speed
+        %abbr{ :title => 'miles per hour' } mph
+      .sparkline{ :data => { :values => @last_segment.speed_values } }
+
+    .summary.pace
+      %h2 Average Pace
+      %p
+        = @last_segment.average_pace
+        %abbr{ :title => 'minutes per mile' } min/mi
+      .sparkline{ :data => { :values => @last_segment.pace_values } }
+
+    .summary.elevation
+      %h2 Elevation
+      %p
+        = @last_segment.elevation_gain
+        %abbr{ :title => 'feet' } ft
+      .sparkline{ :data => { :values => @last_segment.elevation_values } }
+
+    .summary.heart-rate
+      %h2 Heart Rate
+      %p
+        = @last_segment.average_heart_rate
+        %abbr{ :title => 'beats per minute' } bpm
+      .sparkline{ :data => { :values => @last_segment.heart_rate_values } }
+
+    %p.read-more
+      %a{ :href => '#', :title => 'View Complete Ride Details' } View Complete Ride Details
+
+- if @recent_segments.any?
+  %section#recent_rides
+    %header
+      %h1 Recent Rides
+
+    %table
+      %thead
+        %th Date
+        %th Distance
+        %th Duration
+        %th Speed
+        %th Pace
+        %th Elevation
+        %th Heart Rate
+
+      %tbody
+        - @recent_segments.each do |segment|
+          %tr
+            %td= segment.start_time
+            %td.numeric
+              = segment.distance
+              %abbr{ :title => 'miles' } mi
+            %td.numeric= segment.duration
+            %td.numeric
+              = segment.average_speed
+              %abbr{ :title => 'miles per hour' } mph
+            %td.numeric
+              = segment.average_pace
+              %abbr{ :title => 'minutes per mile' } min/mi
+            %td.numeric
+              = segment.elevation_gain
+              %abbr{ :title => 'feet' } ft
+            %td.numeric
+              = segment.average_heart_rate
+              %abbr{ :title => 'beats per minute' } bpm
+
+    - if Segment.count > @recent_segments.count + 1
+      %p.read-more
+        %a{ :href => '#', :title => 'View All Rides' } View All Rides
