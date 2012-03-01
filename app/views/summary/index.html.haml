@@ -44,7 +44,7 @@
       .sparkline{ :data => { :values => @last_segment.heart_rate_values } }
 
     %p.read-more
-      %a{ :href => '#', :title => 'View Complete Ride Details' } View Complete Ride Details
+      = link_to 'View Ride Details', segment_path(@last_segment), :title => 'View Ride Details'
 
 - if @recent_segments.any?
   %section#recent_rides
@@ -65,7 +65,7 @@
         - @recent_segments.each do |segment|
           %tr
             %td
-              %a{ :href => '#', :title => 'View Ride Details' }= segment.start_time
+              = link_to segment.start_time, segment_path(segment), :title => 'View Ride Details'
             %td.numeric
               = segment.distance
               %abbr{ :title => 'miles' } mi
@@ -85,4 +85,4 @@
 
     - if Segment.count > @recent_segments.count + 1
       %p.read-more
-        %a{ :href => '#', :title => 'View All Rides' } View All Rides
+        = link_to 'View All Rides', segments_path, :title => 'View All Rides'
