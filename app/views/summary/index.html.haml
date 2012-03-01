@@ -64,7 +64,8 @@
       %tbody
         - @recent_segments.each do |segment|
           %tr
-            %td= segment.start_time
+            %td
+              %a{ :href => '#', :title => 'View Ride Details' }= segment.start_time
             %td.numeric
               = segment.distance
               %abbr{ :title => 'miles' } mi
