@@ -2,7 +2,7 @@ class SegmentsController < ApplicationController
   def index
     last_modified = Segment.maximum(:updated_at)
 
-    if stale?(:last_modified => last_modified, :etag => [Segment, last_modified, request.format])
+    if stale?(:last_modified => last_modified, :etag => last_modified)
       @segments = Segment.all
     end
   end
