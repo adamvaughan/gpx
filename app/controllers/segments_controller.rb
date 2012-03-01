@@ -12,30 +12,30 @@ class SegmentsController < ApplicationController
     fresh_when @segment
   end
 
-  def update
-    @segment = Segment.find(params[:id])
+  # def update
+  #   @segment = Segment.find(params[:id])
 
-    respond_to do |format|
-      format.json do
-        if @segment.update_attributes(params[:segment])
-          render :show, :status => :ok
-        else
-          render :show, :status => :unprocessable_entity
-        end
-      end
-    end
-  end
+  #   respond_to do |format|
+  #     format.json do
+  #       if @segment.update_attributes(params[:segment])
+  #         render :show, :status => :ok
+  #       else
+  #         render :show, :status => :unprocessable_entity
+  #       end
+  #     end
+  #   end
+  # end
 
-  def destroy
-    @segment = Segment.find(params[:id])
+  # def destroy
+  #   @segment = Segment.find(params[:id])
 
-    respond_to do |format|
-      format.json do
-        @segment.destroy
-        Gpx::Reports::ReportGenerator.create_current!
-        Gpx::Records::RecordGenerator.create_current!
-        render :show, :status => :ok
-      end
-    end
-  end
+  #   respond_to do |format|
+  #     format.json do
+  #       @segment.destroy
+  #       Gpx::Reports::ReportGenerator.create_current!
+  #       Gpx::Records::RecordGenerator.create_current!
+  #       render :show, :status => :ok
+  #     end
+  #   end
+  # end
 end
