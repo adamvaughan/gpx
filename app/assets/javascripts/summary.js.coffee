@@ -5,6 +5,8 @@ class SummaryView
   drawSparklines: ->
     options =
       spotRadius: 0
+      fillColor: '#a9d5de'
+      lineColor: '#439aab'
       width: '250px'
       height: '36px'
 
