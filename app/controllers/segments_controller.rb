@@ -7,6 +7,11 @@ class SegmentsController < ApplicationController
     end
   end
 
+  def show
+    @segment = Segment.find(params[:id])
+    fresh_when @segment
+  end
+
   def update
     @segment = Segment.find(params[:id])
 
