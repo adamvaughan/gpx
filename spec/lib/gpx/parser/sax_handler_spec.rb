@@ -14,6 +14,11 @@ describe Gpx::Parser::SaxHandler do
             <trkpt lat="39.385208000" lon="-105.274872000">
               <ele>2047.5</ele>
               <time>2011-10-30T13:07:34Z</time>
+              <extensions>
+                <gpxtpx:TrackPointExtension>
+                  <gpxtpx:hr>161</gpxtpx:hr>
+                </gpxtpx:TrackPointExtension>
+              </extensions>
             </trkpt>
           </trkseg>
         </trk>
@@ -49,5 +54,9 @@ describe Gpx::Parser::SaxHandler do
 
   it "parses track point time" do
     handler.segments.first.points.first.time.to_s.should eq('2011-10-30 13:07:34 UTC')
+  end
+
+  it "parses track point heart rate" do
+    handler.segments.first.points.first.heart_rate.should eq(161)
   end
 end
