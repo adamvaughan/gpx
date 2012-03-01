@@ -18,8 +18,6 @@ class SegmentsController < ApplicationController
           render :show, :status => :unprocessable_entity
         end
       end
-
-      format.html { render_404 }
     end
   end
 
@@ -33,8 +31,6 @@ class SegmentsController < ApplicationController
         Gpx::Records::RecordGenerator.create_current!
         render :show, :status => :ok
       end
-
-      format.html { render_404 }
     end
   end
 end
