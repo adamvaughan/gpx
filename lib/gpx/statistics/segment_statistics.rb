@@ -214,14 +214,18 @@ module Gpx
             pair.last.pace = pace_between(*pair)
           end
 
-          active_duration(segment) / distance(segment)
+          distance = distance(segment)
+          return 0 if distance == 0
+          active_duration(segment) / distance
         end
 
         # Calculates the average pace between points while ascending on a segment.
         #
         # Returns the average pace while ascending in seconds per meter.
         def average_ascending_pace(segment)
-          ascending_duration(segment) / ascending_distance(segment)
+          distance = ascending_distance(segment)
+          return 0 if distance == 0
+          ascending_duration(segment) / distance
         end
 
         # Calculates the average pace between points while descending on a
@@ -229,7 +233,9 @@ module Gpx
         #
         # Returns the average pace while descending in seconds per meter.
         def average_descending_pace(segment)
-          descending_duration(segment) / descending_distance(segment)
+          distance = descending_distance(segment)
+          return 0 if distance == 0
+          descending_duration(segment) / distance
         end
 
         # Calculates the average pace between points with little to no elevation
@@ -237,7 +243,9 @@ module Gpx
         #
         # Returns the average pace with no elevation change in seconds per meter.
         def average_flat_pace(segment)
-          flat_duration(segment) / flat_distance(segment)
+          distance = flat_distance(segment)
+          return 0 if distance == 0
+          flat_duration(segment) / distance
         end
 
         # Calculates the average speed traveled between points on a segment. Only active periods are considered.
@@ -255,7 +263,9 @@ module Gpx
             pair.last.speed = speed_between(*pair)
           end
 
-          distance(segment) / active_duration(segment)
+          duration = active_duration(segment)
+          return 0 if duration == 0
+          distance(segment) / duration
         end
 
         # Calculates the average speed between points while ascending on a
@@ -263,7 +273,9 @@ module Gpx
         #
         # Returns the average speed while ascending in meters per second.
         def average_ascending_speed(segment)
-          ascending_distance(segment) / ascending_duration(segment)
+          duration = ascending_duration(segment)
+          return 0 if duration == 0
+          ascending_distance(segment) / duration
         end
 
         # Calculates the average speed between points while descending on a
@@ -271,7 +283,9 @@ module Gpx
         #
         # Returns the average speed while descending in meters per second.
         def average_descending_speed(segment)
-          descending_distance(segment) / descending_duration(segment)
+          duration = descending_duration(segment)
+          return 0 if duration == 0
+          descending_distance(segment) / duration
         end
 
         # Calculates the average speed between points with little to no elevation
@@ -279,7 +293,9 @@ module Gpx
         #
         # Returns the average speed with no elevation change in meters per second.
         def average_flat_speed(segment)
-          flat_distance(segment) / flat_duration(segment)
+          duration = flat_duration(segment)
+          return 0 if duration == 0
+          flat_distance(segment) / duration
         end
 
         # Calculates the maximum speed traveled between points on a segment.
