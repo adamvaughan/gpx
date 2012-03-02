@@ -8,7 +8,7 @@ class SegmentsController < ApplicationController
   end
 
   def show
-    @segment = Segment.find(params[:id])
+    @segment = SegmentDecorator.decorate(Segment.find(params[:id]))
     fresh_when @segment
   end
 

@@ -107,3 +107,41 @@ nav
     display: block
     float: left
     padding-left: 20px
+
+.segments.show
+  .start-time
+    text-align: right
+    padding-bottom: 40px
+
+  section
+    padding-bottom: 10px
+
+    header h1
+      color: #ccc
+      display: inline-block
+
+      &:hover
+        color: #000
+        cursor: pointer
+
+    &.active
+      header h1
+        color: #000
+
+      dl
+        display: block
+
+    dl
+      display: none
+      width: 150px
+
+      dt
+        color: #ccc
+        font-size: 20px
+        font-weight: normal
+        margin: 0
+        text-transform: uppercase
+
+      dd
+        padding-bottom: 8px
+        text-align: right
