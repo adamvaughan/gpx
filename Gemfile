@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.1'
+gem 'rails', '3.2.2'
 
 group :production do
   gem 'mysql2'
@@ -9,7 +9,7 @@ end
 gem 'haml'
 gem 'ox'
 gem 'draper'
-gem 'rabl', '0.6.0'
+gem 'rabl', '~> 0.6.0'
 gem 'yajl-ruby', :require => 'yajl'
 
 group :assets do
