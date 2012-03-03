@@ -10,7 +10,7 @@
     = javascript_include_tag 'http://maps.googleapis.com/maps/api/js?sensor=false'
 
     :javascript
-      window.segments = new App.Collections.SegmentCollection(#{render :file => 'segments/index.json.rabl'})
+      App.segments = new App.Collections.SegmentCollection(#{render :file => 'segments/index.json.rabl'})
 
     = csrf_meta_tags
 
