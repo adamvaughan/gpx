@@ -12,6 +12,8 @@ class SegmentsView
         $('section').removeClass('active')
         section.addClass('active')
 
+    $('section#distance').addClass('active')
+
 $ ->
   if $('body.segments.show').length > 0
     new SegmentsView()
