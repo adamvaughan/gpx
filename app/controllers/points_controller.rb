@@ -1,9 +1,9 @@
 class PointsController < ApplicationController
-  # def index
-  #   @segment = Segment.find(params[:segment_id])
+  def index
+    @segment = Segment.find(params[:segment_id])
 
-  #   if stale?(@segment)
-  #     @points = @segment.points
-  #   end
-  # end
+    if stale?(@segment)
+      @points = @segment.points
+    end
+  end
 end

@@ -12,7 +12,28 @@
 #
 #= require jquery
 #= require jquery.sparkline
+#= require underscore
+#= require backbone
+#= require handlebars.runtime
+#= require accounting
+#= require date
 #= require_self
-#= require_tree .
+#= require_tree ./helpers
+#= require_tree ./models
+#= require_tree ./collections
+#= require_tree ./views
+#= require_tree ./routers
+#= require_tree ./templates
 
 window.CONTEXT_ROOT = "<%= ENV['RAILS_RELATIVE_URL_ROOT'] || '' %>"
+
+window.App =
+  Helpers: {}
+  Models: {}
+  Collections: {}
+  Views: {}
+  Routers: {}
+
+$ ->
+  new App.Routers.ApplicationRouter
+  Backbone.history.start()

@@ -8,7 +8,6 @@ end
 
 gem 'haml'
 gem 'ox'
-gem 'draper'
 gem 'rabl', '~> 0.6.0'
 gem 'yajl-ruby', :require => 'yajl'
 
@@ -19,6 +18,8 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'backbone-rails'
+gem 'handlebars_assets'
 
 gem 'execjs'
 

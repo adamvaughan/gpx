@@ -9,9 +9,12 @@
     = javascript_include_tag 'application'
     = javascript_include_tag 'http://maps.googleapis.com/maps/api/js?sensor=false'
 
+    :javascript
+      window.segments = new App.Collections.SegmentCollection(#{render :file => 'segments/index.json.rabl'})
+
     = csrf_meta_tags
 
-  %body{ :class => "#{controller_name} #{action_name}" }
+  %body
     %header
       %h1 Ride Log
 
@@ -22,4 +25,5 @@
         %li
           %a{ :href => '#', :title => 'Upload' } Upload
 
-    = yield
+    #container
+      = yield
