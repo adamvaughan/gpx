@@ -76,29 +76,28 @@ section
 .read-more
   text-align: center
 
-#recent_segments
-  table
-    width: 100%
+table.segments
+  width: 100%
 
-    thead th
-      padding-bottom: 6px
+  thead th
+    padding-bottom: 6px
 
-    tbody
-      tr
-        &:nth-child(odd)
-          background-color: #eee
+  tbody
+    tr
+      &:nth-child(odd)
+        background-color: #eee
 
-        td
-          padding: 6px 15px
+      td
+        padding: 6px 15px
 
-          &:first-child
-            color: #666
+        &:first-child
+          color: #666
 
-          &.numeric
-            text-align: right
+        &.numeric
+          text-align: right
 
-          abbr
-            color: #666
+        abbr
+          color: #666
 
 nav
   float: right
@@ -109,7 +108,7 @@ nav
     float: left
     padding-left: 20px
 
-.segments.show
+#segment
   .start-time
     text-align: right
     padding-bottom: 40px

@@ -1,6 +1,8 @@
 class App.Views.SegmentListView extends Backbone.View
   tagName: 'table'
 
+  className: 'segments'
+
   render: =>
     $(@el).html JST['templates/segment_list_view']([])
     @addAll()

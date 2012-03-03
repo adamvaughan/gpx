@@ -1,4 +1,4 @@
-class App.Views.RecentSegmentListView extends Backbone.View
+class App.Views.Summary.RecentSegmentListView extends Backbone.View
   tagName: 'section'
 
   id: 'recent_segments'

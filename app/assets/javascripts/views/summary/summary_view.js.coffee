@@ -1,11 +1,11 @@
-class App.Views.SummaryView extends Backbone.View
+class App.Views.Summary.SummaryView extends Backbone.View
   render: =>
     unless @collection.isEmpty()
       lastSegment = @collection.first()
-      lastSegmentSummaryView = new App.Views.LastSegmentSummaryView(model: lastSegment)
+      lastSegmentSummaryView = new App.Views.Summary.LastSegmentSummaryView(model: lastSegment)
       $(@el).append lastSegmentSummaryView.render().el
 
-      recentSegmentListView = new App.Views.RecentSegmentListView(collection: @collection)
+      recentSegmentListView = new App.Views.Summary.RecentSegmentListView(collection: @collection)
       $(@el).append recentSegmentListView.render().el
 
     @

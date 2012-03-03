@@ -1,4 +1,4 @@
-class App.Views.LastSegmentSummaryView extends Backbone.View
+class App.Views.Summary.LastSegmentSummaryView extends Backbone.View
   tagName: 'section'
 
   id: 'last_segment'
