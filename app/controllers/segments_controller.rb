@@ -7,10 +7,18 @@ class SegmentsController < ApplicationController
     end
   end
 
-  # def show
-  #   @segment = SegmentDecorator.decorate(Segment.find(params[:id]))
-  #   fresh_when @segment
-  # end
+  def show
+    respond_to do |format|
+      format.json do
+        @segment = Segment.find(params[:id])
+        fresh_when @segment
+      end
+
+      format.html do
+        index()
+      end
+    end
+  end
 
   # def update
   #   @segment = Segment.find(params[:id])

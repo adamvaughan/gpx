@@ -10,6 +10,9 @@ class App.Views.Summary.LastSegmentSummaryView extends Backbone.View
     width: '250px'
     height: '36px'
 
+  events:
+    'click .read-more a': 'followLink'
+
   render: =>
     $(@el).html JST['templates/summary/last_segment_summary_view'](@model.toJSON())
     @drawSparklines()
@@ -30,3 +33,6 @@ class App.Views.Summary.LastSegmentSummaryView extends Backbone.View
     pointCollection = new App.Collections.PointCollection(href: @model.get('points_href'))
     pointCollection.fetch
       success: (collection) => callback(collection)
+
+  followLink: (event) ->
+    App.Helpers.followLink event

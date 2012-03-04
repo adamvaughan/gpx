@@ -3,6 +3,9 @@ class App.Views.Summary.RecentSegmentListView extends Backbone.View
 
   id: 'recent_segments'
 
+  events:
+    'click .read-more a': 'followLink'
+
   render: =>
     $(@el).html JST['templates/summary/recent_segment_list_view']([])
 
@@ -16,3 +19,6 @@ class App.Views.Summary.RecentSegmentListView extends Backbone.View
       $(@el).find('.read-more').hide()
 
     @
+
+  followLink: (event) ->
+    App.Helpers.followLink event
