@@ -41,37 +41,36 @@ section
       margin: 0
       padding-left: 10px
 
-#last_segment
-  div.summary
-    display: inline-block
-    padding-left: 40px
-    padding-bottom: 20px
-    width: 450px
+div.summary
+  display: inline-block
+  padding-left: 40px
+  padding-bottom: 20px
+  width: 450px
 
-    h2
-      color: #ccc
+  h2
+    color: #ccc
+    font-size: 20px
+    font-weight: normal
+    margin: 0
+    text-transform: uppercase
+
+  p
+    display: inline-block
+    font-size: 36px
+    margin: -10px 0 0 -10px
+    padding-left: 60px
+    width: 140px
+
+    abbr
+      color: #666
       font-size: 20px
       font-weight: normal
-      margin: 0
-      text-transform: uppercase
 
-    p
-      display: inline-block
-      font-size: 36px
-      margin: -10px 0 0 -10px
-      padding-left: 60px
-      width: 140px
+  .sparkline
+    display: inline-block
 
-      abbr
-        color: #666
-        font-size: 20px
-        font-weight: normal
-
-    .sparkline
-      display: inline-block
-
-      canvas
-        margin-top: -18px
+    canvas
+      margin-top: -18px
 
 .read-more
   text-align: center
@@ -128,20 +127,8 @@ nav
       header h1
         color: #000
 
-      dl
-        display: block
+      .summary
+        display: inline-block
 
-    dl
+    .summary
       display: none
-      width: 150px
-
-      dt
-        color: #ccc
-        font-size: 20px
-        font-weight: normal
-        margin: 0
-        text-transform: uppercase
-
-      dd
-        padding-bottom: 16px
-        text-align: right

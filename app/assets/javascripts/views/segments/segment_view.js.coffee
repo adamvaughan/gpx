@@ -9,11 +9,6 @@ class App.Views.Segments.SegmentView extends Backbone.View
   prepareExpandingSections: =>
     $(@el).find('section header h1').click (event) =>
       section = $(event.target).closest('section')
+      section.toggleClass('active')
 
-      if section.is('.active')
-        $(@el).find('section').removeClass('active')
-      else
-        $(@el).find('section').removeClass('active')
-        section.addClass('active')
-
-    $(@el).find('section#distance').addClass('active')
+    $(@el).find('section').addClass('active')
