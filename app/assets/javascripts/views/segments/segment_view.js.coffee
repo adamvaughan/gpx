@@ -4,6 +4,10 @@ class App.Views.Segments.SegmentView extends Backbone.View
   render: =>
     $(@el).html JST['templates/segments/segment_view'](@model.toJSON())
     @prepareExpandingSections()
+
+    @loadPoints (points) =>
+      @loadMap points
+
     @
 
   prepareExpandingSections: =>
@@ -12,3 +16,12 @@ class App.Views.Segments.SegmentView extends Backbone.View
       section.toggleClass('active')
 
     $(@el).find('section').addClass('active')
+
+  loadPoints: (callback) =>
+    points = new App.Collections.PointCollection href: @model.get('points_href')
+    points.fetch
+      success: => callback points
+
+  loadMap: (points) =>
+    mapView = new App.Views.Segments.MapView points: points
+    mapView.render()
