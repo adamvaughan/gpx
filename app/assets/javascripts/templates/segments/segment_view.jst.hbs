@@ -2,7 +2,7 @@
   {{formatDateTime start_time}}
 </div>
 
-<section id="distance">
+<section class="distance">
   <header>
     <h1>Distance</h1>
   </header>
@@ -40,7 +40,7 @@
   </div>
 </section>
 
-<section id="duration">
+<section class="duration">
   <header>
     <h1>Duration</h1>
   </header>
@@ -81,91 +81,7 @@
   </div>
 </section>
 
-<section id="speed">
-  <header>
-    <h1>Speed</h1>
-  </header>
-
-  <div class="summary speed">
-    <h2>Speed</h2>
-    <p>
-      {{formatSpeed average_speed}}
-      <abbr title="miles per hour">mph</abbr>
-    </p>
-  </div>
-
-  <div class="summary speed ascending">
-    <h2>Ascending Speed</h2>
-    <p>
-      {{formatSpeed average_ascending_speed}}
-      <abbr title="miles per hour">mph</abbr>
-    </p>
-  </div>
-
-  <div class="summary speed descending">
-    <h2>Descending Speed</h2>
-    <p>
-      {{formatSpeed average_descending_speed}}
-      <abbr title="miles per hour">mph</abbr>
-    </p>
-  </div>
-
-  <div class="summary speed flat">
-    <h2>Flat Speed</h2>
-    <p>
-      {{formatSpeed average_flat_speed}}
-      <abbr title="miles per hour">mph</abbr>
-    </p>
-  </div>
-
-  <div class="summary speed maximum">
-    <h2>Maximum Speed</h2>
-    <p>
-      {{formatSpeed maximum_speed}}
-      <abbr title="miles per hour">mph</abbr>
-    </p>
-  </div>
-</section>
-
-<section id="pace">
-  <header>
-    <h1>Pace</h1>
-  </header>
-
-  <div class="summary pace">
-    <h2>Pace</h2>
-    <p>
-      {{formatPace average_pace }}
-      <abbr title="minutes per mile">min/mi</abbr>
-    </p>
-  </div>
-
-  <div class="summary pace ascending">
-    <h2>Ascending Pace</h2>
-    <p>
-      {{formatPace average_ascending_pace }}
-      <abbr title="minutes per mile">min/mi</abbr>
-    </p>
-  </div>
-
-  <div class="summary pace descending">
-    <h2>Descending Pace</h2>
-    <p>
-      {{formatPace average_descending_pace }}
-      <abbr title="minutes per mile">min/mi</abbr>
-    </p>
-  </div>
-
-  <div class="summary pace flat">
-    <h2>Flat Pace</h2>
-    <p>
-      {{formatPace average_flat_pace }}
-      <abbr title="minutes per mile">min/mi</abbr>
-    </p>
-  </div>
-</section>
-
-<section id="elevation">
+<section class="elevation">
   <header>
     <h1>Elevation</h1>
   </header>
@@ -211,7 +127,91 @@
   </div>
 </section>
 
-<section id="heart_rate">
+<section class="speed">
+  <header>
+    <h1>Speed</h1>
+  </header>
+
+  <div class="summary speed">
+    <h2>Speed</h2>
+    <p>
+      {{formatSpeed average_speed}}
+      <abbr title="miles per hour">mph</abbr>
+    </p>
+  </div>
+
+  <div class="summary speed ascending">
+    <h2>Ascending Speed</h2>
+    <p>
+      {{formatSpeed average_ascending_speed}}
+      <abbr title="miles per hour">mph</abbr>
+    </p>
+  </div>
+
+  <div class="summary speed descending">
+    <h2>Descending Speed</h2>
+    <p>
+      {{formatSpeed average_descending_speed}}
+      <abbr title="miles per hour">mph</abbr>
+    </p>
+  </div>
+
+  <div class="summary speed flat">
+    <h2>Flat Speed</h2>
+    <p>
+      {{formatSpeed average_flat_speed}}
+      <abbr title="miles per hour">mph</abbr>
+    </p>
+  </div>
+
+  <div class="summary speed maximum">
+    <h2>Maximum Speed</h2>
+    <p>
+      {{formatSpeed maximum_speed}}
+      <abbr title="miles per hour">mph</abbr>
+    </p>
+  </div>
+</section>
+
+<section class="pace">
+  <header>
+    <h1>Pace</h1>
+  </header>
+
+  <div class="summary pace">
+    <h2>Pace</h2>
+    <p>
+      {{formatPace average_pace }}
+      <abbr title="minutes per mile">min/mi</abbr>
+    </p>
+  </div>
+
+  <div class="summary pace ascending">
+    <h2>Ascending Pace</h2>
+    <p>
+      {{formatPace average_ascending_pace }}
+      <abbr title="minutes per mile">min/mi</abbr>
+    </p>
+  </div>
+
+  <div class="summary pace descending">
+    <h2>Descending Pace</h2>
+    <p>
+      {{formatPace average_descending_pace }}
+      <abbr title="minutes per mile">min/mi</abbr>
+    </p>
+  </div>
+
+  <div class="summary pace flat">
+    <h2>Flat Pace</h2>
+    <p>
+      {{formatPace average_flat_pace }}
+      <abbr title="minutes per mile">min/mi</abbr>
+    </p>
+  </div>
+</section>
+
+<section class="heart-rate">
   <header>
     <h1>Heart Rate</h1>
   </header>

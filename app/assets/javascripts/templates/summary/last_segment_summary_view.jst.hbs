@@ -18,6 +18,15 @@
   <p>{{formatDuration duration}}</p>
 </div>
 
+<div class="summary elevation">
+  <h2>Elevation</h2>
+  <p>
+    {{formatElevation elevation_gain}}
+    <abbr title="feet">ft</abbr>
+  </p>
+  <div class="sparkline"></div>
+</div>
+
 <div class="summary speed">
   <h2>Speed</h2>
   <p>
@@ -32,15 +41,6 @@
   <p>
     {{formatPace average_pace}}
     <abbr title="minutes per mile">min/mi</abbr>
-  </p>
-  <div class="sparkline"></div>
-</div>
-
-<div class="summary elevation">
-  <h2>Elevation</h2>
-  <p>
-    {{formatElevation elevation_gain}}
-    <abbr title="feet">ft</abbr>
   </p>
   <div class="sparkline"></div>
 </div>
