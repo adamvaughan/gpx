@@ -39,7 +39,7 @@ class App.Views.Segments.SpeedChartView extends Backbone.View
       speed = App.Helpers.metersPerSecondToMilesPerHour(point.get('speed'))
       data.push [distance, speed]
 
-    data
+    App.Helpers.reduceData data
 
   elapsedTimeDataPoints: =>
     data = []
@@ -51,7 +51,7 @@ class App.Views.Segments.SpeedChartView extends Backbone.View
         speed = App.Helpers.metersPerSecondToMilesPerHour(point.get('speed'))
         data.push [time, speed]
 
-    data
+    App.Helpers.reduceData data
 
   distanceChartOptions: =>
     _.extend @commonChartOptions(), {
