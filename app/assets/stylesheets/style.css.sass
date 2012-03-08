@@ -139,7 +139,29 @@ nav
       display: none
 
 .chart
+  background-color: #fff
   margin: 20px 0
   width: 998px
   height: 398px
   border: 1px solid #ccc
+
+  .menu
+    list-style: none
+    text-align: center
+    margin: 0
+    padding: 0
+
+    li
+      display: inline-block
+      margin: 0 20px
+      padding: 3px 6px
+
+      a
+        color: #ccc
+
+        &:hover
+          color: #666
+          text-decoration: none
+
+        &.selected
+          color: #000
