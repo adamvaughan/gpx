@@ -45,5 +45,7 @@ class App.Views.Segments.SegmentView extends Backbone.View
     speedChartView.render()
 
   loadPaceChart: (points) =>
-    paceChartView = new App.Views.Segments.PaceChartView points: points
+    paceChartView = new App.Views.Segments.PaceChartView
+      el: $(@el).find('.chart.pace').get(0)
+      points: points
     paceChartView.render()
