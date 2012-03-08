@@ -39,7 +39,9 @@ class App.Views.Segments.SegmentView extends Backbone.View
     elevationChartView.render()
 
   loadSpeedChart: (points) =>
-    speedChartView = new App.Views.Segments.SpeedChartView points: points
+    speedChartView = new App.Views.Segments.SpeedChartView
+      el: $(@el).find('.chart.speed').get(0)
+      points: points
     speedChartView.render()
 
   loadPaceChart: (points) =>
