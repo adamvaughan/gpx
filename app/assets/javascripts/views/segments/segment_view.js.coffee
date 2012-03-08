@@ -29,7 +29,12 @@ class App.Views.Segments.SegmentView extends Backbone.View
 
   loadCharts: (points) =>
     @loadElevationChart points
+    @loadSpeedChart points
 
   loadElevationChart: (points) =>
     elevationChartView = new App.Views.Segments.ElevationChartView points: points
     elevationChartView.render()
+
+  loadSpeedChart: (points) =>
+    speedChartView = new App.Views.Segments.SpeedChartView points: points
+    speedChartView.render()
