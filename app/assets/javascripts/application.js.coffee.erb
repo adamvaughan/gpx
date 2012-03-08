@@ -12,6 +12,7 @@
 #
 #= require jquery
 #= require jquery.sparkline
+#= require highcharts
 #= require underscore
 #= require backbone
 #= require handlebars.runtime
@@ -35,6 +36,48 @@ window.App =
     Summary: {}
     Segments: {}
   Routers: {}
+
+Highcharts.setOptions
+  colors: ['#b94a48']
+  plotOptions:
+    series:
+      animation: false
+  chart:
+    type: 'spline'
+    width: 998
+    height: 398
+    borderRadius: 0
+  legend:
+    enabled: false
+  credits:
+    enabled: false
+  title:
+    text: ''
+  xAxis:
+    lineColor: '#404040'
+    tickColor: '#404040'
+    gridLineColor: '#c0c0c0'
+    labels:
+      style:
+        color: '#404040'
+    title:
+      style:
+        color: '#404040'
+    dateTimeLabelFormats:
+      week: '%H:%M'
+      day: '%H:%M'
+      hour: '%H:%M'
+      minute: '%H:%M'
+  yAxis:
+    lineColor: '#404040'
+    tickColor: '#404040'
+    gridLineColor: '#c0c0c0'
+    labels:
+      style:
+        color: '#404040'
+    title:
+      style:
+        color: '#404040'
 
 $ ->
   App.router = new App.Routers.ApplicationRouter

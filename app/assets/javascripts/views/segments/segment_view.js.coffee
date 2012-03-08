@@ -7,6 +7,7 @@ class App.Views.Segments.SegmentView extends Backbone.View
 
     @loadPoints (points) =>
       @loadMap points
+      @loadCharts points
 
     @
 
@@ -25,3 +26,10 @@ class App.Views.Segments.SegmentView extends Backbone.View
   loadMap: (points) =>
     mapView = new App.Views.Segments.MapView points: points
     mapView.render()
+
+  loadCharts: (points) =>
+    @loadElevationChart points
+
+  loadElevationChart: (points) =>
+    elevationChartView = new App.Views.Segments.ElevationChartView points: points
+    elevationChartView.render()
