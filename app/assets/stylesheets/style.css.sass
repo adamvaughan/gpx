@@ -26,20 +26,46 @@ input[type='text']
   cursor: text
 
 section
-  padding-bottom: 60px
+  padding-bottom: 0
+  margin-bottom: 20px
+  border-bottom: 1px solid #eee
 
   & > header
     padding-bottom: 20px
 
     h1
       margin: 0
+      color: #ccc
+      display: inline-block
+
+      &:hover
+        color: #666
+        cursor: pointer
 
     h2
       color: #666
+      display: none
       font-size: 18px
       font-weight: normal
       margin: 0
       padding-left: 10px
+
+  .section-content
+    display: none
+
+  &.active
+    header
+      h1
+        color: #000
+
+        &:hover
+          color: #666
+
+      h2
+        display: block
+
+    .section-content
+      display: block
 
 div.summary
   display: inline-block
@@ -111,32 +137,6 @@ nav
   .start-time
     text-align: right
     padding-bottom: 40px
-
-  section
-    padding-bottom: 0
-    margin-bottom: 20px
-    border-bottom: 1px solid #eee
-
-    header h1
-      color: #ccc
-      display: inline-block
-
-      &:hover
-        color: #000
-        cursor: pointer
-
-    &.active
-      header h1
-        color: #000
-
-      .summary
-        display: inline-block
-
-      #map, .chart
-        display: block
-
-    .summary, #map, .chart
-      display: none
 
 .chart
   background-color: #fff

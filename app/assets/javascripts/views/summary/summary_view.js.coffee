@@ -8,4 +8,5 @@ class App.Views.Summary.SummaryView extends Backbone.View
       recentSegmentListView = new App.Views.Summary.RecentSegmentListView(collection: @collection)
       $(@el).append recentSegmentListView.render().el
 
+      App.Helpers.prepareExpandingSections @el
     @

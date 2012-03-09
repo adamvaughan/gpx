@@ -5,55 +5,57 @@
   </hgroup>
 </header>
 
-<div class="summary distance">
-  <h2>Distance</h2>
-  <p>
-    {{formatDistance distance}}
-    <abbr title="miles">mi</abbr>
+<div class="section-content">
+  <div class="summary distance">
+    <h2>Distance</h2>
+    <p>
+      {{formatDistance distance}}
+      <abbr title="miles">mi</abbr>
+    </p>
+  </div>
+
+  <div class="summary duration">
+    <h2>Duration</h2>
+    <p>{{formatDuration duration}}</p>
+  </div>
+
+  <div class="summary elevation">
+    <h2>Elevation</h2>
+    <p>
+      {{formatElevation elevation_gain}}
+      <abbr title="feet">ft</abbr>
+    </p>
+    <div class="sparkline"></div>
+  </div>
+
+  <div class="summary speed">
+    <h2>Speed</h2>
+    <p>
+      {{formatSpeed average_speed}}
+      <abbr title="miles per hour">mph</abbr>
+    </p>
+    <div class="sparkline"></div>
+  </div>
+
+  <div class="summary pace">
+    <h2>Pace</h2>
+    <p>
+      {{formatPace average_pace}}
+      <abbr title="minutes per mile">min/mi</abbr>
+    </p>
+    <div class="sparkline"></div>
+  </div>
+
+  <div class="summary heart-rate">
+    <h2>Heart Rate</h2>
+    <p>
+      {{formatHeartRate average_heart_rate}}
+      <abbr title="beats per minute">bpm</abbr>
+    </p>
+    <div class="sparkline"></div>
+  </div>
+
+  <p class="read-more">
+    <a href="{{href}}" title="View Ride Details">View Ride Details</a>
   </p>
 </div>
-
-<div class="summary duration">
-  <h2>Duration</h2>
-  <p>{{formatDuration duration}}</p>
-</div>
-
-<div class="summary elevation">
-  <h2>Elevation</h2>
-  <p>
-    {{formatElevation elevation_gain}}
-    <abbr title="feet">ft</abbr>
-  </p>
-  <div class="sparkline"></div>
-</div>
-
-<div class="summary speed">
-  <h2>Speed</h2>
-  <p>
-    {{formatSpeed average_speed}}
-    <abbr title="miles per hour">mph</abbr>
-  </p>
-  <div class="sparkline"></div>
-</div>
-
-<div class="summary pace">
-  <h2>Pace</h2>
-  <p>
-    {{formatPace average_pace}}
-    <abbr title="minutes per mile">min/mi</abbr>
-  </p>
-  <div class="sparkline"></div>
-</div>
-
-<div class="summary heart-rate">
-  <h2>Heart Rate</h2>
-  <p>
-    {{formatHeartRate average_heart_rate}}
-    <abbr title="beats per minute">bpm</abbr>
-  </p>
-  <div class="sparkline"></div>
-</div>
-
-<p class="read-more">
-  <a href="{{href}}" title="View Ride Details">View Ride Details</a>
-</p>
