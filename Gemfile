@@ -4,6 +4,7 @@ gem 'rails', '3.2.2'
 
 group :production do
   gem 'mysql2'
+  gem 'therubyracer'
 end
 
 gem 'haml'
