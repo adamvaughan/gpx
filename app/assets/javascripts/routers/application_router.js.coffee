@@ -1,9 +1,9 @@
 class App.Routers.ApplicationRouter extends Backbone.Router
   routes:
-    '': 'index'
-    'rides': 'rides'
-    'rides/:id': 'ride'
-    'upload': 'upload'
+    "#{CONTEXT_ROOT}": 'index'
+    "#{CONTEXT_ROOT}/rides": 'rides'
+    "#{CONTEXT_ROOT}/rides/:id": 'ride'
+    "#{CONTEXT_ROOT}/upload": 'upload'
 
   initialize: =>
     $('body > nav a').click @followLink
