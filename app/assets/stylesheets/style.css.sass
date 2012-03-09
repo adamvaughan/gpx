@@ -1,3 +1,5 @@
+@import 'bourbon'
+
 *
   cursor: default
 
@@ -165,3 +167,63 @@ nav
 
         &.selected
           color: #000
+
+form.file-upload
+  overflow: hidden
+  margin-top: 20px
+
+  &.error fieldset
+    border-color: #882425
+
+  fieldset
+    @include border-radius(3px)
+    background: #fafafa
+    border: 1px solid #d9d9d9
+    position: relative
+    margin: 0 auto
+    padding: 0
+    width: 400px
+
+    input[type='file']
+      position: absolute
+      opacity: 0
+      height: 36px
+      left: 0
+      top: 0
+      width: 400px
+
+    input[type='submit']
+      display: none
+
+    div
+      line-height: 36px
+      text-align: center
+      width: 400px
+
+      &.uploading-message, &.response-message
+        display: none
+
+    .instructions
+      @include background-image(linear-gradient(#fff, #eee))
+
+  &.uploading
+    .instructions, .response-message, input[type='file']
+      display: none
+
+    .uploading-message
+      display: block
+
+  &.error
+    .instructions, .uploading-message, input[type='file']
+      display: none
+
+    .response-message
+      @include background-image(linear-gradient(#ee5f5b, #c43c35))
+      color: #fff
+      display: block
+      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25)
+
+iframe
+  display: none
+  width: 0
+  height: 0

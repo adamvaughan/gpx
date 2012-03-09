@@ -3,29 +3,34 @@ class App.Routers.ApplicationRouter extends Backbone.Router
     '': 'index'
     'rides': 'rides'
     'rides/:id': 'ride'
+    'upload': 'upload'
+
+  initialize: =>
+    $('body > nav a').click @followLink
 
   index: =>
-    @setHeading 'Ride Log'
-    $('#container').empty()
-
     summaryView = new App.Views.Summary.SummaryView(collection: App.segments)
-    $('#container').append summaryView.render().el
+    @changePage 'Ride Log', summaryView
 
   rides: =>
-    @setHeading 'Ride Log'
-    $('#container').empty()
-
     segmentsView = new App.Views.Segments.SegmentsView(collection: App.segments)
-    $('#container').append segmentsView.render().el
+    @changePage 'Ride Log', segmentsView
 
   ride: (id) =>
-    @setHeading 'Ride Details'
-    $('#container').empty()
-
     segment = App.segments.get(id)
     segmentView = new App.Views.Segments.SegmentView(model: segment)
-    $('#container').append segmentView.render().el
+    @changePage 'Ride Details', segmentView
 
-  setHeading: (heading) =>
-    $('body > header > h1').text heading
-    document.title = heading
+  upload: =>
+    fileUploadView = new App.Views.FileUploadView
+    @changePage 'Upload', fileUploadView
+
+  changePage: (title, view) =>
+    $('body > header > h1').text title
+    document.title = title
+
+    $('#container').empty()
+    $('#container').append view.render().el
+
+  followLink: (event) ->
+    App.Helpers.followLink event

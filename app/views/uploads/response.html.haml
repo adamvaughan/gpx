@@ -1,4 +1,4 @@
 !!!
 %html
   %body
-    %textarea= render(:file => 'uploads/response.json.rabl')
+    %textarea= render(:file => 'uploads/response', :formats => [:json], :handlers => [:rabl])

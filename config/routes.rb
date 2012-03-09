@@ -4,6 +4,8 @@ Gpx::Application.routes.draw do
       resources :points, :only => :index
     end
 
+    resource :upload, :only => [:show, :create]
+
     root :to => 'segments#index'
   end
 end

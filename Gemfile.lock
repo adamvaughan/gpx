@@ -31,6 +31,8 @@ GEM
     arel (3.0.2)
     backbone-rails (0.9.0)
       rails (>= 3.0.0)
+    bourbon (1.2.0)
+      sass (>= 3.1)
     builder (3.0.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -132,6 +134,7 @@ PLATFORMS
 
 DEPENDENCIES
   backbone-rails
+  bourbon
   coffee-rails (~> 3.2.1)
   execjs
   haml
