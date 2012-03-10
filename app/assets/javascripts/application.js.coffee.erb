@@ -82,4 +82,12 @@ Highcharts.setOptions
 
 $ ->
   App.router = new App.Routers.ApplicationRouter
-  Backbone.history.start pushState: true
+
+  root = CONTEXT_ROOT
+
+  if root.length > 0
+    root = "#{root.substring(1)}/"
+  else
+    root = '/'
+
+  Backbone.history.start pushState: true, root: root
