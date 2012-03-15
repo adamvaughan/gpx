@@ -9,7 +9,7 @@ class App.Views.Summary.RecentSegmentListView extends Backbone.View
   render: =>
     $(@el).html JST['templates/summary/recent_segment_list_view']([])
 
-    recentSegments = new App.Collections.SegmentCollection(_.first(@collection.rest(), 5))
+    recentSegments = new App.Collections.SegmentCollection(@collection.first(10))
     segmentListView = new App.Views.SegmentListView(collection: recentSegments)
     $(@el).find('.read-more').before segmentListView.render().el
 
