@@ -19,3 +19,6 @@ Handlebars.registerHelper 'formatHeartRate', (value) ->
 Handlebars.registerHelper 'formatDateTime', (value) ->
   value = new Date(value * 1000)
   value.toString('MMMM d, yyyy - h:mm ') + value.toString('tt').toLowerCase()
+
+Handlebars.registerHelper 'formatNumber', (value) ->
+  accounting.formatNumber(value, 0, ',')
