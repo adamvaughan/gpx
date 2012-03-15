@@ -11,25 +11,30 @@ class Report < ActiveRecord::Base
   def year=(year)
     if read_attribute(:year) != year
       write_attribute(:year, year)
-      self.segment_count = 0
+      self.year_segment_count = 0
       self.year_distance = 0
       self.year_duration = 0
+      self.year_elevation_gain = 0
     end
   end
 
   def month=(month)
     if read_attribute(:month) != month
       write_attribute(:month, month)
+      self.month_segment_count = 0
       self.month_distance = 0
       self.month_duration = 0
+      self.month_elevation_gain = 0
     end
   end
 
   def week=(week)
     if read_attribute(:week) != week
       write_attribute(:week, week)
+      self.week_segment_count = 0
       self.week_distance = 0
       self.week_duration = 0
+      self.week_elevation_gain = 0
     end
   end
 end
