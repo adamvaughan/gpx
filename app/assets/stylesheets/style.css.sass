@@ -36,9 +36,9 @@ section
     padding-bottom: 20px
 
     h1
-      margin: 0
-      color: #ccc
+      color: #000
       display: inline-block
+      margin: 0
 
       &:hover
         color: #666
@@ -46,28 +46,28 @@ section
 
     h2
       color: #666
-      display: none
+      display: block
       font-size: 18px
       font-weight: normal
       margin: 0
       padding-left: 10px
 
   .section-content
-    display: none
+    display: block
 
-  &.active
+  &.collapsed
     header
       h1
-        color: #000
+        color: #ccc
 
         &:hover
           color: #666
 
       h2
-        display: block
+        display: none
 
     .section-content
-      display: block
+      display: none
 
 div.summary
   display: inline-block
