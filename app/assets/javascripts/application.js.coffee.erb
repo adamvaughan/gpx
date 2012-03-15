@@ -26,8 +26,6 @@
 #= require_tree ./routers
 #= require_tree ./templates
 
-window.CONTEXT_ROOT = "<%= ENV['RAILS_RELATIVE_URL_ROOT'] || '' %>"
-
 window.App =
   Helpers: {}
   Models: {}
@@ -82,12 +80,4 @@ Highcharts.setOptions
 
 $ ->
   App.router = new App.Routers.ApplicationRouter
-
-  root = CONTEXT_ROOT
-
-  if root.length > 0
-    root = "#{root.substring(1)}/"
-  else
-    root = '/'
-
-  Backbone.history.start pushState: true, root: root
+  Backbone.history.start pushState: true
