@@ -1,8 +1,8 @@
 class ReportsController < ApplicationController
-  # def totals
-  #   @report = Report.current
-  #   fresh_when @report
-  # end
+  def totals
+    @report = Report.current
+    fresh_when @report
+  end
 
   # def monthly_distance
   #   last_modified = Segment.maximum(:updated_at)

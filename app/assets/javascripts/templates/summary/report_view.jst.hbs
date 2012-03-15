@@ -1,0 +1,68 @@
+<section>
+  <header>
+    <hgroup>
+      <h1>This Week</h1>
+    </hgroup>
+  </header>
+
+  <div class="section-content">
+    <div class="summary distance">
+      <h2>Distance</h2>
+      <p>
+        {{formatDistance week_distance}}
+        <abbr title="miles">mi</abbr>
+      </p>
+    </div>
+
+    <div class="summary week_duration">
+      <h2>Duration</h2>
+      <p>{{formatDuration duration}}</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <header>
+    <hgroup>
+      <h1>This Month</h1>
+    </hgroup>
+  </header>
+
+  <div class="section-content">
+    <div class="summary distance">
+      <h2>Distance</h2>
+      <p>
+        {{formatDistance month_distance}}
+        <abbr title="miles">mi</abbr>
+      </p>
+    </div>
+
+    <div class="summary duration">
+      <h2>Duration</h2>
+      <p>{{formatDuration month_duration}}</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <header>
+    <hgroup>
+      <h1>This Year</h1>
+    </hgroup>
+  </header>
+
+  <div class="section-content">
+    <div class="summary distance">
+      <h2>Distance</h2>
+      <p>
+        {{formatDistance year_distance}}
+        <abbr title="miles">mi</abbr>
+      </p>
+    </div>
+
+    <div class="summary duration">
+      <h2>Duration</h2>
+      <p>{{formatDuration year_duration}}</p>
+    </div>
+  </div>
+</section>

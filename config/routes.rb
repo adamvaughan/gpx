@@ -5,6 +5,7 @@ Gpx::Application.routes.draw do
     end
 
     resource :upload, :only => [:show, :create]
+    match '/reports/totals' => 'reports#totals'
 
     root :to => 'segments#index'
   end
