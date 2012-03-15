@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120224014707) do
+ActiveRecord::Schema.define(:version => 20120315082512) do
 
   create_table "points", :force => true do |t|
     t.datetime "time"
@@ -24,21 +24,21 @@ ActiveRecord::Schema.define(:version => 20120224014707) do
     t.decimal  "pace",            :precision => 20, :scale => 10
     t.decimal  "speed",           :precision => 20, :scale => 10
     t.integer  "segment_id"
-    t.datetime "created_at",                                      :null => false
-    t.datetime "updated_at",                                      :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "heart_rate"
   end
 
   create_table "records", :force => true do |t|
     t.integer  "best_distance_segment_id"
-    t.decimal  "best_year_distance",       :precision => 20, :scale => 10
-    t.decimal  "best_month_distance",      :precision => 20, :scale => 10
-    t.decimal  "best_week_distance",       :precision => 20, :scale => 10
-    t.datetime "created_at",                                               :null => false
-    t.datetime "updated_at",                                               :null => false
-    t.decimal  "best_year_duration",       :precision => 20, :scale => 10
-    t.decimal  "best_month_duration",      :precision => 20, :scale => 10
-    t.decimal  "best_week_duration",       :precision => 20, :scale => 10
+    t.decimal  "best_year_distance"
+    t.decimal  "best_month_distance"
+    t.decimal  "best_week_distance"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.decimal  "best_year_duration"
+    t.decimal  "best_month_duration"
+    t.decimal  "best_week_duration"
     t.integer  "best_duration_segment_id"
   end
 
@@ -46,47 +46,52 @@ ActiveRecord::Schema.define(:version => 20120224014707) do
     t.integer  "year"
     t.integer  "month"
     t.integer  "week"
-    t.integer  "segment_count"
-    t.decimal  "year_distance",  :precision => 20, :scale => 10
-    t.decimal  "year_duration",  :precision => 20, :scale => 10
-    t.decimal  "month_distance", :precision => 20, :scale => 10
-    t.decimal  "month_duration", :precision => 20, :scale => 10
-    t.decimal  "week_distance",  :precision => 20, :scale => 10
-    t.decimal  "week_duration",  :precision => 20, :scale => 10
-    t.datetime "created_at",                                     :null => false
-    t.datetime "updated_at",                                     :null => false
+    t.integer  "year_segment_count"
+    t.decimal  "year_distance",        :precision => 20, :scale => 10
+    t.decimal  "year_duration",        :precision => 20, :scale => 10
+    t.decimal  "month_distance",       :precision => 20, :scale => 10
+    t.decimal  "month_duration",       :precision => 20, :scale => 10
+    t.decimal  "week_distance",        :precision => 20, :scale => 10
+    t.decimal  "week_duration",        :precision => 20, :scale => 10
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "week_segment_count"
+    t.integer  "month_segment_count"
+    t.decimal  "year_elevation_gain",  :precision => 20, :scale => 10
+    t.decimal  "month_elevation_gain", :precision => 20, :scale => 10
+    t.decimal  "week_elevation_gain",  :precision => 20, :scale => 10
   end
 
   create_table "segments", :force => true do |t|
     t.string   "name"
     t.datetime "start_time"
-    t.decimal  "distance",                 :precision => 20, :scale => 10
-    t.decimal  "ascending_distance",       :precision => 20, :scale => 10
-    t.decimal  "descending_distance",      :precision => 20, :scale => 10
-    t.decimal  "flat_distance",            :precision => 20, :scale => 10
-    t.decimal  "elevation_gain",           :precision => 20, :scale => 10
-    t.decimal  "elevation_loss",           :precision => 20, :scale => 10
-    t.decimal  "elevation_change",         :precision => 20, :scale => 10
-    t.decimal  "maximum_elevation",        :precision => 20, :scale => 10
-    t.decimal  "minimum_elevation",        :precision => 20, :scale => 10
-    t.decimal  "duration",                 :precision => 20, :scale => 10
-    t.decimal  "active_duration",          :precision => 20, :scale => 10
-    t.decimal  "ascending_duration",       :precision => 20, :scale => 10
-    t.decimal  "descending_duration",      :precision => 20, :scale => 10
-    t.decimal  "flat_duration",            :precision => 20, :scale => 10
-    t.decimal  "average_pace",             :precision => 20, :scale => 10
-    t.decimal  "average_ascending_pace",   :precision => 20, :scale => 10
-    t.decimal  "average_descending_pace",  :precision => 20, :scale => 10
-    t.decimal  "average_flat_pace",        :precision => 20, :scale => 10
-    t.decimal  "average_speed",            :precision => 20, :scale => 10
-    t.decimal  "average_ascending_speed",  :precision => 20, :scale => 10
-    t.decimal  "average_descending_speed", :precision => 20, :scale => 10
-    t.decimal  "average_flat_speed",       :precision => 20, :scale => 10
-    t.decimal  "maximum_speed",            :precision => 20, :scale => 10
-    t.datetime "created_at",                                               :null => false
-    t.datetime "updated_at",                                               :null => false
+    t.decimal  "distance"
+    t.decimal  "ascending_distance"
+    t.decimal  "descending_distance"
+    t.decimal  "flat_distance"
+    t.decimal  "elevation_gain"
+    t.decimal  "elevation_loss"
+    t.decimal  "elevation_change"
+    t.decimal  "maximum_elevation"
+    t.decimal  "minimum_elevation"
+    t.decimal  "duration"
+    t.decimal  "active_duration"
+    t.decimal  "ascending_duration"
+    t.decimal  "descending_duration"
+    t.decimal  "flat_duration"
+    t.decimal  "average_pace"
+    t.decimal  "average_ascending_pace"
+    t.decimal  "average_descending_pace"
+    t.decimal  "average_flat_pace"
+    t.decimal  "average_speed"
+    t.decimal  "average_ascending_speed"
+    t.decimal  "average_descending_speed"
+    t.decimal  "average_flat_speed"
+    t.decimal  "maximum_speed"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "maximum_heart_rate"
-    t.decimal  "average_heart_rate",       :precision => 20, :scale => 10
+    t.decimal  "average_heart_rate"
   end
 
 end

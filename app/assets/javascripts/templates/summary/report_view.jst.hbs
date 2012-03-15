@@ -6,6 +6,11 @@
   </header>
 
   <div class="section-content">
+    <div class="summary ride-count">
+      <h2>Rides</h2>
+      <p>{{week_segment_count}}</p>
+    </div>
+
     <div class="summary distance">
       <h2>Distance</h2>
       <p>
@@ -18,6 +23,14 @@
       <h2>Duration</h2>
       <p>{{formatDuration week_duration}}</p>
     </div>
+
+    <div class="summary elevation">
+      <h2>Elevation</h2>
+      <p>
+        {{formatElevation week_elevation_gain}}
+        <abbr title="feet">ft</abbr>
+      </p>
+    </div>
   </div>
 </section>
 
@@ -29,6 +42,11 @@
   </header>
 
   <div class="section-content">
+    <div class="summary ride-count">
+      <h2>Rides</h2>
+      <p>{{month_segment_count}}</p>
+    </div>
+
     <div class="summary distance">
       <h2>Distance</h2>
       <p>
@@ -41,6 +59,14 @@
       <h2>Duration</h2>
       <p>{{formatDuration month_duration}}</p>
     </div>
+
+    <div class="summary elevation">
+      <h2>Elevation</h2>
+      <p>
+        {{formatElevation month_elevation_gain}}
+        <abbr title="feet">ft</abbr>
+      </p>
+    </div>
   </div>
 </section>
 
@@ -52,6 +78,11 @@
   </header>
 
   <div class="section-content">
+    <div class="summary ride-count">
+      <h2>Rides</h2>
+      <p>{{year_segment_count}}</p>
+    </div>
+
     <div class="summary distance">
       <h2>Distance</h2>
       <p>
@@ -63,6 +94,14 @@
     <div class="summary duration">
       <h2>Duration</h2>
       <p>{{formatDuration year_duration}}</p>
+    </div>
+
+    <div class="summary elevation">
+      <h2>Elevation</h2>
+      <p>
+        {{formatElevation year_elevation_gain}}
+        <abbr title="feet">ft</abbr>
+      </p>
     </div>
   </div>
 </section>
