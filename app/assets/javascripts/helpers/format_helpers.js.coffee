@@ -1,6 +1,7 @@
 App.Helpers.formatTime = (seconds) ->
   hours = 0
   minutes = 0
+  seconds ||= 0
 
   if seconds > 3600
     hours = Math.floor(seconds / 3600)
