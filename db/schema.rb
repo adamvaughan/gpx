@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120317194434) do
+ActiveRecord::Schema.define(:version => 20120317200614) do
 
   create_table "points", :force => true do |t|
     t.datetime "time"
@@ -27,19 +27,6 @@ ActiveRecord::Schema.define(:version => 20120317194434) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "heart_rate"
-  end
-
-  create_table "records", :force => true do |t|
-    t.integer  "best_distance_segment_id"
-    t.decimal  "best_year_distance"
-    t.decimal  "best_month_distance"
-    t.decimal  "best_week_distance"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.decimal  "best_year_duration"
-    t.decimal  "best_month_duration"
-    t.decimal  "best_week_duration"
-    t.integer  "best_duration_segment_id"
   end
 
   create_table "reports", :force => true do |t|
