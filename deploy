@@ -1,11 +1,23 @@
 #!/bin/sh
 source ~/.bash_profile
+
 cd /home/avaughan/rails_apps/gpx
+
 git checkout db/schema.rb
+git checkout config/environment.rb
 git checkout master
+
 git pull
+
+export RAILS_ENV=production
+
 bundle install --path vendor --without development test
-RAILS_ENV=production bundle exec rake db:migrate
+bundle exec rake db:migrate
 bundle exec rake tmp:clear
 bundle exec rake assets:precompile
+
+echo "ENV['RAILS_ENV'] = 'production'" > config/environment.rb.new
+cat config/environment.rb >> config/environment.rb.new
+mv config/environment.rb.new config/environment.rb
+
 killall dispatch.fcgi
