@@ -6,3 +6,6 @@ config/database.yml
 db/*.sqlite3
 db/data.sql
 TODO
+.rvmrc
+public/assets
+vendor/ruby

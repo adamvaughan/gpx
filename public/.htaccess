@@ -1,0 +1,13 @@
+Options +FollowSymLinks +ExecCGI
+RewriteEngine On
+RewriteRule ^$ index.html [QSA]
+RewriteRule ^([^.]+)$ $1.html [QSA]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ dispatch.fcgi [QSA,L]
+
+<ifmodule mod_expires.c>
+  <Filesmatch "\.(jpg|jpeg|png|gif|js|css|swf|ico)$">
+    ExpiresActive on
+    ExpiresDefault "access plus 1 years"
+  </Filesmatch>
+</ifmodule>
