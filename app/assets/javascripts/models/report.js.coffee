@@ -1,2 +1,3 @@
 class App.Models.Report extends Backbone.Model
-  url: "/reports/totals"
+  url: =>
+    App.hrefs.reports.totals

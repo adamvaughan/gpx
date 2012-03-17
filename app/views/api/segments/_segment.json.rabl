@@ -1,6 +1,5 @@
 object @segment
 attributes :id,
-  :name,
   :distance,
   :ascending_distance,
   :descending_distance,
@@ -27,8 +26,8 @@ attributes :id,
   :average_heart_rate,
   :maximum_heart_rate
 
-node(:href) { |segment| segment_path(segment) }
-node(:points_href) { |segment| segment_points_path(segment) }
+node(:href) { |segment| api_segment_url(segment) }
+node(:points_href) { |segment| api_segment_points_url(segment) }
 node(:start_time) { |segment| segment.start_time.to_i }
 node(:created_at) { |segment| segment.created_at.to_i }
 node(:updated_at) { |segment| segment.updated_at.to_i }

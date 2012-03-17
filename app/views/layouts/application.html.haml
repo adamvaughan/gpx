@@ -10,11 +10,14 @@
     = javascript_include_tag 'http://maps.googleapis.com/maps/api/js?sensor=false'
 
     :javascript
-      App.segments = new App.Collections.SegmentCollection(#{render :file => 'segments/index.json.rabl'})
+      App.hrefs = {
+        segments: "#{api_segments_url}",
+        reports: {
+          totals: "#{api_reports_totals_url}"
+        }
+      };
 
     = csrf_meta_tags
-
-    %meta{ :name=> 'viewport', :content => 'width=device-width, initial-scale=1.0' }
 
   %body
     %header

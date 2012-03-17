@@ -9,17 +9,20 @@ class App.Routers.ApplicationRouter extends Backbone.Router
     $('body > nav a').click @followLink
 
   index: =>
-    summaryView = new App.Views.Summary.SummaryView(collection: App.segments)
-    @changePage 'Ride Log', summaryView
+    @loadSegments =>
+      summaryView = new App.Views.Summary.SummaryView(collection: App.segments)
+      @changePage 'Ride Log', summaryView
 
   rides: =>
-    segmentsView = new App.Views.Segments.SegmentsView(collection: App.segments)
-    @changePage 'Ride Log', segmentsView
+    @loadSegments =>
+      segmentsView = new App.Views.Segments.SegmentsView(collection: App.segments)
+      @changePage 'Ride Log', segmentsView
 
   ride: (id) =>
-    segment = App.segments.get(id)
-    segmentView = new App.Views.Segments.SegmentView(model: segment)
-    @changePage 'Ride Details', segmentView
+    @loadSegments =>
+      segment = App.segments.get(id)
+      segmentView = new App.Views.Segments.SegmentView(model: segment)
+      @changePage 'Ride Details', segmentView
 
   upload: =>
     fileUploadView = new App.Views.FileUploadView
@@ -34,3 +37,9 @@ class App.Routers.ApplicationRouter extends Backbone.Router
 
   followLink: (event) ->
     App.Helpers.followLink event
+
+  loadSegments: (callback) =>
+    App.segments = new App.Collections.SegmentCollection()
+    App.segments.fetch
+      success: =>
+        callback() if _.isFunction(callback)
