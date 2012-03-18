@@ -28,10 +28,6 @@ describe Gpx::Parser::SaxHandler do
     Ox.sax_parse(handler, StringIO.new(xml))
   end
 
-  it "parses track name into segment" do
-    handler.segments.first.name.should eq('Mountain Biking 10/30/11 1:07 pm')
-  end
-
   it "parses track segments" do
     handler.segments.should have(1).item
   end

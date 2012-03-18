@@ -13,7 +13,7 @@ module Gpx
 
         case @current_state
         when [:gpx, :trk, :trkseg]
-          @segment = Segment.new(:name => @name)
+          @segment = Segment.new
         when [:gpx, :trk, :trkseg, :trkpt]
           @point = Point.new
         end
@@ -41,16 +41,8 @@ module Gpx
         end
       end
 
-      def cdata(value)
-        if @current_state == [:gpx, :trk, :name]
-          @name = value
-        end
-      end
-
       def text(value)
         case @current_state
-        when [:gpx, :trk, :name]
-          @name = value
         when [:gpx, :trk, :trkseg, :trkpt, :ele]
           @point.elevation = value.to_f
         when [:gpx, :trk, :trkseg, :trkpt, :time]
