@@ -8,6 +8,10 @@
 <td class="duration numeric">
   {{formatDuration duration}}
 </td>
+<td class="elevation numeric">
+  {{formatElevation elevation_gain}}
+  <abbr title="feet">ft</abbr>
+</td>
 <td class="speed numeric">
   {{formatSpeed average_speed}}
   <abbr title="miles per hour">mph</abbr>
@@ -15,10 +19,6 @@
 <td class="pace numeric">
   {{formatPace average_pace}}
   <abbr title="minutes per mile">min/mi</abbr>
-</td>
-<td class="elevation numeric">
-  {{formatElevation elevation_gain}}
-  <abbr title="feet">ft</abbr>
 </td>
 <td class="heart-rate numeric">
   {{formatHeartRate average_heart_rate}}
