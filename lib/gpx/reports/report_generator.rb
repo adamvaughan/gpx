@@ -21,7 +21,7 @@ module Gpx
 
           segments.each do |segment|
             report.year_distance += segment.distance
-            report.year_duration += segment.duration
+            report.year_duration += segment.active_duration
             report.year_elevation_gain += segment.elevation_gain
           end
         end
@@ -37,7 +37,7 @@ module Gpx
           segments.each do |segment|
             if segment.start_time.month == current_month
               report.month_distance += segment.distance
-              report.month_duration += segment.duration
+              report.month_duration += segment.active_duration
               report.month_elevation_gain += segment.elevation_gain
               report.month_segment_count += 1
             end
@@ -55,7 +55,7 @@ module Gpx
           segments.each do |segment|
             if segment.start_time.to_date.cweek == current_week
               report.week_distance += segment.distance
-              report.week_duration += segment.duration
+              report.week_duration += segment.active_duration
               report.week_elevation_gain += segment.elevation_gain
               report.week_segment_count += 1
             end
