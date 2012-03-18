@@ -41,7 +41,6 @@ class UploadsController < ApplicationController
 
     if count > 0
       Gpx::Reports::ReportGenerator.create_current!
-      Gpx::Records::RecordGenerator.create_current!
     else
       @error = 'Zip file did not contain any data files.'
     end
@@ -50,7 +49,6 @@ class UploadsController < ApplicationController
   def read_gpx_file(file)
     read_data_file(file.open)
     Gpx::Reports::ReportGenerator.create_current!
-    Gpx::Records::RecordGenerator.create_current!
   end
 
   def read_data_file(file)
