@@ -39,8 +39,6 @@ module Gpx
           segment.points.each { |point| point.save! }
         end
 
-        protected
-
         # Gets the starting time for the segment.
         #
         # Returns the time for the first point or nil if no points exist.
@@ -312,7 +310,7 @@ module Gpx
         def average_heart_rate(segment)
           points = segment.points.reject { |point| point.heart_rate.nil? }
           return nil if points.size == 0
-          points.map(&:heart_rate).sum / points.count
+          points.map(&:heart_rate).sum / points.count.to_f
         end
 
         # Calculates the maximum heart rate between two points on a segment.
