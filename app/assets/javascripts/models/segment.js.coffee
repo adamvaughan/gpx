@@ -1,3 +1,6 @@
 class App.Models.Segment extends Backbone.Model
   url: =>
-    @get 'href'
+    if @get('href')?
+      @get 'href'
+    else
+      "#{App.hrefs.segments}/#{@id}"

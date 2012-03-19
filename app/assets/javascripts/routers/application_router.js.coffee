@@ -20,8 +20,7 @@ class App.Routers.ApplicationRouter extends Backbone.Router
       @changePage 'Ride Log', segmentsView
 
   ride: (id) =>
-    @loadSegments =>
-      segment = App.segments.get(id)
+    @loadSegment id, (segment) =>
       segmentView = new App.Views.Segments.SegmentView(model: segment)
       @changePage 'Ride Details', segmentView
 
@@ -47,3 +46,14 @@ class App.Routers.ApplicationRouter extends Backbone.Router
     App.segments.fetch
       success: =>
         callback() if _.isFunction(callback)
+
+  loadSegment: (id, callback) =>
+    segment = App.segments.get(id) if App.segments?
+
+    if segment?
+      callback(segment) if _.isFunction(callback)
+    else
+      segment = new App.Models.Segment(id: id)
+      segment.fetch
+        success: =>
+          callback(segment) if _.isFunction(callback)
