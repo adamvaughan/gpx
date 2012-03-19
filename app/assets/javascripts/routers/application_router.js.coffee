@@ -2,6 +2,7 @@ class App.Routers.ApplicationRouter extends Backbone.Router
   routes:
     '': 'index'
     'rides': 'rides'
+    'rides/page/:page': 'rides'
     'rides/:id': 'ride'
     'upload': 'upload'
 
@@ -13,8 +14,8 @@ class App.Routers.ApplicationRouter extends Backbone.Router
       summaryView = new App.Views.Summary.SummaryView(collection: App.segments)
       @changePage 'Ride Log', summaryView
 
-  rides: =>
-    @loadSegments =>
+  rides: (page = 1) =>
+    @loadSegmentsPage page, =>
       segmentsView = new App.Views.Segments.SegmentsView(collection: App.segments)
       @changePage 'Ride Log', segmentsView
 
@@ -38,8 +39,11 @@ class App.Routers.ApplicationRouter extends Backbone.Router
   followLink: (event) ->
     App.Helpers.followLink event
 
-  loadSegments: (callback) =>
-    App.segments = new App.Collections.SegmentCollection()
+  loadSegmentsPage: (page, callback) =>
+    @loadSegments callback, page
+
+  loadSegments: (callback, page = 1) =>
+    App.segments = new App.Collections.SegmentCollection(page: page)
     App.segments.fetch
       success: =>
         callback() if _.isFunction(callback)

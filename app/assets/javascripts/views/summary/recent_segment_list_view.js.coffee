@@ -13,7 +13,7 @@ class App.Views.Summary.RecentSegmentListView extends Backbone.View
     segmentListView = new App.Views.SegmentListView(collection: recentSegments)
     $(@el).find('.read-more').before segmentListView.render().el
 
-    if @collection.size() > 5
+    if @collection.pager.totalEntries > 5
       $(@el).find('.read-more').show()
     else
       $(@el).find('.read-more').hide()

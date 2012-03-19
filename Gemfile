@@ -11,6 +11,7 @@ gem 'haml'
 gem 'ox'
 gem 'rabl', '~> 0.6.0'
 gem 'yajl-ruby', :require => 'yajl'
+gem 'kaminari'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'

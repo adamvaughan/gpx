@@ -1,0 +1,25 @@
+{{#if isFirstPage}}
+  <span class="disabled">Previous</span>
+{{/if}}
+
+{{#unless isFirstPage}}
+  <a href="{{previousPath}}">Previous</a>
+{{/unless}}
+
+{{#pages}}
+  {{#createLink}}
+    <a href="{{path}}">{{page}}</a>
+  {{/createLink}}
+
+  {{^createLink}}
+    <span>{{page}}</span>
+  {{/createLink}}
+{{/pages}}
+
+{{#if isLastPage}}
+  <span class="disabled">Next</span>
+{{/if}}
+
+{{#unless isLastPage}}
+  <a href="{{nextPath}}">Next</a>
+{{/unless}}
