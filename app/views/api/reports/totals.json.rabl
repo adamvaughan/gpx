@@ -14,7 +14,7 @@ attributes :id,
   :week_segment_count
 
 node(:href) { |report| api_reports_totals_url }
-node(:week_start_time) { |report| Date.commercial(report.year, report.week).beginning_of_day.to_i }
+node(:week_start_time) { |report| Date.commercial(report.year, report.week).beginning_of_week.beginning_of_day.to_i }
 node(:week_end_time) { |report| Date.commercial(report.year, report.week).end_of_week.end_of_day.to_i }
 node(:created_at) { |report| report.created_at.to_i }
 node(:updated_at) { |report| report.updated_at.to_i }
