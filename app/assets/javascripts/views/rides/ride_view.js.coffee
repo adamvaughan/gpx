@@ -1,8 +1,8 @@
-class App.Views.Segments.SegmentView extends Backbone.View
-  id: 'segment'
+class App.Views.Rides.RideView extends Backbone.View
+  id: 'ride'
 
   render: =>
-    $(@el).html JST['templates/segments/segment_view'](@model.toJSON())
+    $(@el).html JST['templates/rides/ride_view'](@model.toJSON())
     App.Helpers.prepareExpandingSections @el
 
     @loadPoints (points) =>
@@ -17,7 +17,7 @@ class App.Views.Segments.SegmentView extends Backbone.View
       success: => callback points
 
   loadMap: (points) =>
-    mapView = new App.Views.Segments.MapView points: points
+    mapView = new App.Views.Rides.MapView points: points
     mapView.render()
 
   loadCharts: (points) =>
@@ -27,25 +27,25 @@ class App.Views.Segments.SegmentView extends Backbone.View
     # @loadHeartRateChart points
 
   loadElevationChart: (points) =>
-    elevationChartView = new App.Views.Segments.ElevationChartView
+    elevationChartView = new App.Views.Rides.ElevationChartView
       el: $(@el).find('.chart.elevation').get(0)
       points: points
     elevationChartView.render()
 
   # loadSpeedChart: (points) =>
-  #   speedChartView = new App.Views.Segments.SpeedChartView
+  #   speedChartView = new App.Views.Rides.SpeedChartView
   #     el: $(@el).find('.chart.speed').get(0)
   #     points: points
   #   speedChartView.render()
 
   # loadPaceChart: (points) =>
-  #   paceChartView = new App.Views.Segments.PaceChartView
+  #   paceChartView = new App.Views.Rides.PaceChartView
   #     el: $(@el).find('.chart.pace').get(0)
   #     points: points
   #   paceChartView.render()
 
   # loadHeartRateChart: (points) =>
-  #   heartRateChartView = new App.Views.Segments.HeartRateChartView
+  #   heartRateChartView = new App.Views.Rides.HeartRateChartView
   #     el: $(@el).find('.chart.heart-rate').get(0)
   #     points: points
   #   heartRateChartView.render()

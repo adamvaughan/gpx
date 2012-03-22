@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120317200614) do
+ActiveRecord::Schema.define(:version => 20120322033458) do
 
   create_table "points", :force => true do |t|
     t.datetime "time"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(:version => 20120317200614) do
     t.decimal  "active_duration", :precision => 20, :scale => 10
     t.decimal  "pace",            :precision => 20, :scale => 10
     t.decimal  "speed",           :precision => 20, :scale => 10
-    t.integer  "segment_id"
+    t.integer  "ride_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "heart_rate"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(:version => 20120317200614) do
     t.integer  "year"
     t.integer  "month"
     t.integer  "week"
-    t.integer  "year_segment_count"
+    t.integer  "year_ride_count"
     t.decimal  "year_distance",        :precision => 20, :scale => 10
     t.decimal  "year_duration",        :precision => 20, :scale => 10
     t.decimal  "month_distance",       :precision => 20, :scale => 10
@@ -42,14 +42,14 @@ ActiveRecord::Schema.define(:version => 20120317200614) do
     t.decimal  "week_duration",        :precision => 20, :scale => 10
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "week_segment_count"
-    t.integer  "month_segment_count"
+    t.integer  "week_ride_count"
+    t.integer  "month_ride_count"
     t.decimal  "year_elevation_gain",  :precision => 20, :scale => 10
     t.decimal  "month_elevation_gain", :precision => 20, :scale => 10
     t.decimal  "week_elevation_gain",  :precision => 20, :scale => 10
   end
 
-  create_table "segments", :force => true do |t|
+  create_table "rides", :force => true do |t|
     t.datetime "start_time"
     t.decimal  "distance"
     t.decimal  "ascending_distance"

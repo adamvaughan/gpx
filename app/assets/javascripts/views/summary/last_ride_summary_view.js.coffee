@@ -1,7 +1,7 @@
-class App.Views.Summary.LastSegmentSummaryView extends Backbone.View
+class App.Views.Summary.LastRideSummaryView extends Backbone.View
   tagName: 'section'
 
-  id: 'last_segment'
+  id: 'last_ride'
 
   sparklineOptions:
     spotRadius: 0
@@ -14,7 +14,7 @@ class App.Views.Summary.LastSegmentSummaryView extends Backbone.View
     'click .read-more a': 'followLink'
 
   render: =>
-    $(@el).html JST['templates/summary/last_segment_summary_view'](@model.toJSON())
+    $(@el).html JST['templates/summary/last_ride_summary_view'](@model.toJSON())
     @drawSparklines()
     @
 

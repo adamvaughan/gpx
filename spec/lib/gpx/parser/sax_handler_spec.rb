@@ -28,31 +28,31 @@ describe Gpx::Parser::SaxHandler do
     Ox.sax_parse(handler, StringIO.new(xml))
   end
 
-  it "parses track segments" do
-    handler.segments.should have(1).item
+  it "parses track rides" do
+    handler.rides.should have(1).item
   end
 
-  it "parses track segment points" do
-    handler.segments.first.points.should have(1).items
+  it "parses track ride points" do
+    handler.rides.first.points.should have(1).items
   end
 
   it "parses track point latitude" do
-    handler.segments.first.points.first.latitude.should eq(39.385208000)
+    handler.rides.first.points.first.latitude.should eq(39.385208000)
   end
 
   it "parses track point longitude" do
-    handler.segments.first.points.first.longitude.should eq(-105.274872000)
+    handler.rides.first.points.first.longitude.should eq(-105.274872000)
   end
 
   it "parses track point elevation" do
-    handler.segments.first.points.first.elevation.should eq(2047.5)
+    handler.rides.first.points.first.elevation.should eq(2047.5)
   end
 
   it "parses track point time" do
-    handler.segments.first.points.first.time.to_s.should eq('2011-10-30 13:07:34 UTC')
+    handler.rides.first.points.first.time.to_s.should eq('2011-10-30 13:07:34 UTC')
   end
 
   it "parses track point heart rate" do
-    handler.segments.first.points.first.heart_rate.should eq(161)
+    handler.rides.first.points.first.heart_rate.should eq(161)
   end
 end

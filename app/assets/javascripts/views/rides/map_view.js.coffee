@@ -1,4 +1,4 @@
-class App.Views.Segments.MapView extends Backbone.View
+class App.Views.Rides.MapView extends Backbone.View
   initialize: (options) ->
     @points = options.points
 

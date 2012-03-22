@@ -1,152 +1,152 @@
 module Gpx
   module Statistics
-    module SegmentStatistics
+    module RideStatistics
       class << self
-        # Computes all statistics for a segment.
-        def calculate(segment)
-          segment.start_time = start_time(segment)
-          segment.distance = distance(segment)
-          segment.ascending_distance = ascending_distance(segment)
-          segment.descending_distance = descending_distance(segment)
-          segment.flat_distance = flat_distance(segment)
-          segment.elevation_gain = elevation_gain(segment)
-          segment.elevation_loss = elevation_loss(segment)
-          segment.elevation_change = elevation_change(segment)
-          segment.maximum_elevation = maximum_elevation(segment)
-          segment.minimum_elevation = minimum_elevation(segment)
-          segment.duration = duration(segment)
-          segment.active_duration = active_duration(segment)
-          segment.ascending_duration = ascending_duration(segment)
-          segment.descending_duration = descending_duration(segment)
-          segment.flat_duration = flat_duration(segment)
-          segment.average_pace = average_pace(segment)
-          segment.average_ascending_pace = average_ascending_pace(segment)
-          segment.average_descending_pace = average_descending_pace(segment)
-          segment.average_flat_pace = average_flat_pace(segment)
-          segment.average_speed = average_speed(segment)
-          segment.average_ascending_speed = average_ascending_speed(segment)
-          segment.average_descending_speed = average_descending_speed(segment)
-          segment.average_flat_speed = average_flat_speed(segment)
-          segment.maximum_speed = maximum_speed(segment)
-          segment.average_heart_rate = average_heart_rate(segment)
-          segment.maximum_heart_rate = maximum_heart_rate(segment)
+        # Computes all statistics for a ride.
+        def calculate(ride)
+          ride.start_time = start_time(ride)
+          ride.distance = distance(ride)
+          ride.ascending_distance = ascending_distance(ride)
+          ride.descending_distance = descending_distance(ride)
+          ride.flat_distance = flat_distance(ride)
+          ride.elevation_gain = elevation_gain(ride)
+          ride.elevation_loss = elevation_loss(ride)
+          ride.elevation_change = elevation_change(ride)
+          ride.maximum_elevation = maximum_elevation(ride)
+          ride.minimum_elevation = minimum_elevation(ride)
+          ride.duration = duration(ride)
+          ride.active_duration = active_duration(ride)
+          ride.ascending_duration = ascending_duration(ride)
+          ride.descending_duration = descending_duration(ride)
+          ride.flat_duration = flat_duration(ride)
+          ride.average_pace = average_pace(ride)
+          ride.average_ascending_pace = average_ascending_pace(ride)
+          ride.average_descending_pace = average_descending_pace(ride)
+          ride.average_flat_pace = average_flat_pace(ride)
+          ride.average_speed = average_speed(ride)
+          ride.average_ascending_speed = average_ascending_speed(ride)
+          ride.average_descending_speed = average_descending_speed(ride)
+          ride.average_flat_speed = average_flat_speed(ride)
+          ride.maximum_speed = maximum_speed(ride)
+          ride.average_heart_rate = average_heart_rate(ride)
+          ride.maximum_heart_rate = maximum_heart_rate(ride)
         end
 
-        # Computes all statistics for a segment and saves the calculations.
-        def calculate!(segment)
-          calculate(segment)
-          segment.save!
-          segment.points.each { |point| point.save! }
+        # Computes all statistics for a ride and saves the calculations.
+        def calculate!(ride)
+          calculate(ride)
+          ride.save!
+          ride.points.each { |point| point.save! }
         end
 
-        # Gets the starting time for the segment.
+        # Gets the starting time for the ride.
         #
         # Returns the time for the first point or nil if no points exist.
-        def start_time(segment)
-          return nil unless segment.points.any?
-          segment.points.first.time
+        def start_time(ride)
+          return nil unless ride.points.any?
+          ride.points.first.time
         end
 
-        # Calculates the total distance traveled between points on a segment.
+        # Calculates the total distance traveled between points on a ride.
         #
         # Returns the distance traveled in meters.
-        def distance(segment)
-          point_pairs(segment).inject(0) do |total, pair|
+        def distance(ride)
+          point_pairs(ride).inject(0) do |total, pair|
             pair.first.distance = total
             pair.last.distance = total + distance_between(*pair)
           end
         end
 
         # Calculates the distance traveled between points while ascending on a
-        # segment.
+        # ride.
         #
         # Returns the distance traveled while ascending in meters.
-        def ascending_distance(segment)
-          ascending_point_pairs(segment).inject(0) { |total, pair| total + distance_between(*pair) }
+        def ascending_distance(ride)
+          ascending_point_pairs(ride).inject(0) { |total, pair| total + distance_between(*pair) }
         end
 
         # Calculates the distance traveled between points while descending on a
-        # segment.
+        # ride.
         #
         # Returns the distance traveled while descending in meters.
-        def descending_distance(segment)
-          descending_point_pairs(segment).inject(0) { |total, pair| total + distance_between(*pair) }
+        def descending_distance(ride)
+          descending_point_pairs(ride).inject(0) { |total, pair| total + distance_between(*pair) }
         end
 
         # Calculates the distance traveled between points with little to no
-        # elevation change on a segment.
+        # elevation change on a ride.
         #
         # Returns the distance traveled with no elevation change in meters.
-        def flat_distance(segment)
-          flat_point_pairs(segment).inject(0) { |total, pair| total + distance_between(*pair) }
+        def flat_distance(ride)
+          flat_point_pairs(ride).inject(0) { |total, pair| total + distance_between(*pair) }
         end
 
         # Calculates the total positive elevation change between points on a
-        # segment.
+        # ride.
         #
         # Returns the elevation gained in meters.
-        def elevation_gain(segment)
-          ascending_point_pairs(segment).inject(0) { |total, pair| total + elevation_between(*pair) }
+        def elevation_gain(ride)
+          ascending_point_pairs(ride).inject(0) { |total, pair| total + elevation_between(*pair) }
         end
 
         # Calculates the total negative elevation change between points on a
-        # segment.
+        # ride.
         #
         # Returns the elevation lost in meters.
-        def elevation_loss(segment)
-          descending_point_pairs(segment).inject(0) { |total, pair| total + elevation_between(*pair) } * -1
+        def elevation_loss(ride)
+          descending_point_pairs(ride).inject(0) { |total, pair| total + elevation_between(*pair) } * -1
         end
 
-        # Calculates the elevation change between points on a segment.
+        # Calculates the elevation change between points on a ride.
         #
         # Returns the elevation change in meters.
-        def elevation_change(segment)
-          maximum_elevation(segment) - minimum_elevation(segment)
+        def elevation_change(ride)
+          maximum_elevation(ride) - minimum_elevation(ride)
         end
 
-        # Calculates the maximum elevation reached on a segment.
+        # Calculates the maximum elevation reached on a ride.
         #
         # Returns the maximum elevation in meters.
-        def maximum_elevation(segment)
-          segment.points.map(&:elevation).max || 0
+        def maximum_elevation(ride)
+          ride.points.map(&:elevation).max || 0
         end
 
-        # Calculates the minimum elevation reached on a segment.
+        # Calculates the minimum elevation reached on a ride.
         #
         # Returns the minimum elevation in meters.
-        def minimum_elevation(segment)
-          segment.points.map(&:elevation).min || 0
+        def minimum_elevation(ride)
+          ride.points.map(&:elevation).min || 0
         end
 
-        # Calculates the time elapsed between points on a segment.
+        # Calculates the time elapsed between points on a ride.
         #
         # Returns the duration in seconds.
-        def duration(segment)
-          if segment.points.size < 2
-            segment.points.each { |point| point.duration = 0 }
+        def duration(ride)
+          if ride.points.size < 2
+            ride.points.each { |point| point.duration = 0 }
             return 0
           end
 
-          point_pairs(segment).inject(0) do |total, pair|
+          point_pairs(ride).inject(0) do |total, pair|
             pair.first.duration = total
             pair.last.duration = total + time_between(*pair)
           end
         end
 
-        # Calculates the time elapsed between points on a segment where the points
+        # Calculates the time elapsed between points on a ride where the points
         # are actually moving. To be considered moving, the speed between to
         # points has to be over 0.5 m/s.
         #
         # Returns the active duration in seconds.
-        def active_duration(segment)
-          if segment.points.size < 2
-            segment.points.each { |point| point.active_duration = 0 }
+        def active_duration(ride)
+          if ride.points.size < 2
+            ride.points.each { |point| point.active_duration = 0 }
             return 0
           end
 
-          segment.points.first.active_duration = 0
+          ride.points.first.active_duration = 0
 
-          point_pairs(segment).inject(0) do |total, pair|
+          point_pairs(ride).inject(0) do |total, pair|
             if active_between?(*pair)
               pair.last.active_duration = total + time_between(*pair)
             else
@@ -156,11 +156,11 @@ module Gpx
           end
         end
 
-        # Calculates the time elapsed between points while ascending on a segment.
+        # Calculates the time elapsed between points while ascending on a ride.
         #
         # Returns the elapsed time while ascending in seconds.
-        def ascending_duration(segment)
-          point_pairs(segment).inject(0) do |total, pair|
+        def ascending_duration(ride)
+          point_pairs(ride).inject(0) do |total, pair|
             if active_between?(*pair) && ascending_between?(*pair)
               total + time_between(*pair)
             else
@@ -170,11 +170,11 @@ module Gpx
         end
 
         # Calculates the time elapsed between points while descending on a
-        # segment.
+        # ride.
         #
         # Returns the elapsed time while descending in seconds.
-        def descending_duration(segment)
-          point_pairs(segment).inject(0) do |total, pair|
+        def descending_duration(ride)
+          point_pairs(ride).inject(0) do |total, pair|
             if active_between?(*pair) && descending_between?(*pair)
               total + time_between(*pair)
             else
@@ -184,11 +184,11 @@ module Gpx
         end
 
         # Calculates the time elapsed between points with little to no elevation
-        # change on a segment.
+        # change on a ride.
         #
         # Returns the elapsed time with no elevation change in seconds.
-        def flat_duration(segment)
-          point_pairs(segment).inject(0) do |total, pair|
+        def flat_duration(ride)
+          point_pairs(ride).inject(0) do |total, pair|
             if active_between?(*pair) && flat_between?(*pair)
               total + time_between(*pair)
             else
@@ -197,127 +197,128 @@ module Gpx
           end
         end
 
-        # Calculates the average pace traveled between points on a segment. Only active periods are considered.
+        # Calculates the average pace traveled between points on a ride. Only active periods are considered.
         #
         # Returns the average pace in seconds per meter.
-        def average_pace(segment)
-          if segment.points.size < 2
-            segment.points.each { |point| point.pace = 0 }
+        def average_pace(ride)
+          if ride.points.size < 2
+            ride.points.each { |point| point.pace = 0 }
             return 0
           end
 
-          segment.points.first.pace = 0
+          ride.points.first.pace = 0
 
-          point_pairs(segment).each do |pair|
+          point_pairs(ride).each do |pair|
             pair.last.pace = pace_between(*pair)
           end
 
-          distance = distance(segment)
+          distance = distance(ride)
           return 0 if distance == 0
-          active_duration(segment) / distance
+          active_duration(ride) / distance
         end
 
-        # Calculates the average pace between points while ascending on a segment.
+        # Calculates the average pace between points while ascending on a ride.
         #
         # Returns the average pace while ascending in seconds per meter.
-        def average_ascending_pace(segment)
-          distance = ascending_distance(segment)
+        def average_ascending_pace(ride)
+          distance = ascending_distance(ride)
           return 0 if distance == 0
-          ascending_duration(segment) / distance
+          ascending_duration(ride) / distance
         end
 
         # Calculates the average pace between points while descending on a
-        # segment.
+        # ride.
         #
         # Returns the average pace while descending in seconds per meter.
-        def average_descending_pace(segment)
-          distance = descending_distance(segment)
+        def average_descending_pace(ride)
+          distance = descending_distance(ride)
           return 0 if distance == 0
-          descending_duration(segment) / distance
+          descending_duration(ride) / distance
         end
 
         # Calculates the average pace between points with little to no elevation
-        # change on a segment.
+        # change on a ride.
         #
         # Returns the average pace with no elevation change in seconds per meter.
-        def average_flat_pace(segment)
-          distance = flat_distance(segment)
+        def average_flat_pace(ride)
+          distance = flat_distance(ride)
           return 0 if distance == 0
-          flat_duration(segment) / distance
+          flat_duration(ride) / distance
         end
 
-        # Calculates the average speed traveled between points on a segment. Only active periods are considered.
+        # Calculates the average speed traveled between points on a ride. Only
+        # active periods are considered.
         #
         # Returns the average speed in meters per second.
-        def average_speed(segment)
-          if segment.points.size < 2
-            segment.points.each { |point| point.speed = 0 }
+        def average_speed(ride)
+          if ride.points.size < 2
+            ride.points.each { |point| point.speed = 0 }
             return 0
           end
 
-          segment.points.first.speed = 0
+          ride.points.first.speed = 0
 
-          point_pairs(segment).each do |pair|
+          point_pairs(ride).each do |pair|
             pair.last.speed = speed_between(*pair)
           end
 
-          duration = active_duration(segment)
+          duration = active_duration(ride)
           return 0 if duration == 0
-          distance(segment) / duration
+          distance(ride) / duration
         end
 
         # Calculates the average speed between points while ascending on a
-        # segment.
+        # ride.
         #
         # Returns the average speed while ascending in meters per second.
-        def average_ascending_speed(segment)
-          duration = ascending_duration(segment)
+        def average_ascending_speed(ride)
+          duration = ascending_duration(ride)
           return 0 if duration == 0
-          ascending_distance(segment) / duration
+          ascending_distance(ride) / duration
         end
 
         # Calculates the average speed between points while descending on a
-        # segment.
+        # ride.
         #
         # Returns the average speed while descending in meters per second.
-        def average_descending_speed(segment)
-          duration = descending_duration(segment)
+        def average_descending_speed(ride)
+          duration = descending_duration(ride)
           return 0 if duration == 0
-          descending_distance(segment) / duration
+          descending_distance(ride) / duration
         end
 
         # Calculates the average speed between points with little to no elevation
-        # change on a segment.
+        # change on a ride.
         #
         # Returns the average speed with no elevation change in meters per second.
-        def average_flat_speed(segment)
-          duration = flat_duration(segment)
+        def average_flat_speed(ride)
+          duration = flat_duration(ride)
           return 0 if duration == 0
-          flat_distance(segment) / duration
+          flat_distance(ride) / duration
         end
 
-        # Calculates the maximum speed traveled between points on a segment.
+        # Calculates the maximum speed traveled between points on a ride.
         #
         # Returns the maximum speed in meters per second.
-        def maximum_speed(segment)
-          return 0 if segment.points.size < 2
-          point_pairs(segment).map { |pair| speed_between(*pair) }.max
+        def maximum_speed(ride)
+          return 0 if ride.points.size < 2
+          point_pairs(ride).map { |pair| speed_between(*pair) }.max
         end
 
-        # Calculates the average heart rate between points on a segment.
+        # Calculates the average heart rate between points on a ride.
         #
         # Returns the average heart rate in beats per minute.
-        def average_heart_rate(segment)
-          points = segment.points.reject { |point| point.heart_rate.nil? }
+        def average_heart_rate(ride)
+          points = ride.points.reject { |point| point.heart_rate.nil? }
           return nil if points.size == 0
           points.map(&:heart_rate).sum / points.count.to_f
         end
 
-        # Calculates the maximum heart rate between two points on a segment.
+        # Calculates the maximum heart rate between two points on a ride.
         #
         # Returns the maximum heart rate in beats per minute.
-        def maximum_heart_rate(segment)
-          points = segment.points.reject { |point| point.heart_rate.nil? }
+        def maximum_heart_rate(ride)
+          points = ride.points.reject { |point| point.heart_rate.nil? }
           return nil if points.size == 0
           points.map(&:heart_rate).max
         end
@@ -329,12 +330,12 @@ module Gpx
         # If a block is given it is called once with each point pair.
         #
         # Otherwise, returns an array of the point pairs.
-        def point_pairs(segment)
+        def point_pairs(ride)
           pairs = []
 
-          segment.points.each_with_index do |point, index|
-            if index < segment.points.size - 1
-              next_point = segment.points[index + 1]
+          ride.points.each_with_index do |point, index|
+            if index < ride.points.size - 1
+              next_point = ride.points[index + 1]
 
               if block_given?
                 yield(point, next_point)
@@ -352,10 +353,10 @@ module Gpx
         # If a block is given it is called once with each point pair.
         #
         # Otherwise, returns an array of the point pairs.
-        def ascending_point_pairs(segment)
+        def ascending_point_pairs(ride)
           pairs = []
 
-          point_pairs(segment) do |point, next_point|
+          point_pairs(ride) do |point, next_point|
             if ascending_between?(point, next_point)
               if block_given?
                 yield(point, next_point)
@@ -373,10 +374,10 @@ module Gpx
         # If a block is given it is called once with each point pair.
         #
         # Otherwise, returns an array of the point pairs.
-        def descending_point_pairs(segment)
+        def descending_point_pairs(ride)
           pairs = []
 
-          point_pairs(segment) do |point, next_point|
+          point_pairs(ride) do |point, next_point|
             if descending_between?(point, next_point)
               if block_given?
                 yield(point, next_point)
@@ -394,10 +395,10 @@ module Gpx
         # If a block is given it is called once with each point pair.
         #
         # Otherwise, returns an enumerator for the point pairs.
-        def flat_point_pairs(segment)
+        def flat_point_pairs(ride)
           pairs = []
 
-          point_pairs(segment) do |point, next_point|
+          point_pairs(ride) do |point, next_point|
             if active_between?(point, next_point) && flat_between?(point, next_point)
               if block_given?
                 yield(point, next_point)

@@ -26,7 +26,7 @@ class App.Views.FileUploadView extends Backbone.View
         if response.error?
           @showError JSON.parse(response.error)
         else
-          App.segments.add response.segments
+          App.rides.add response.rides
           App.router.navigate '/', trigger: true
       catch error
         @showError 'An error occurred while processing the file. Please try again.'

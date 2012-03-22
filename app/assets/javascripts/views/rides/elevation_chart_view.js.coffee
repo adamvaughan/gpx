@@ -1,4 +1,4 @@
-class App.Views.Segments.HeartRateChartView extends Backbone.View
+class App.Views.Rides.ElevationChartView extends Backbone.View
   events:
     'click .menu a': 'selectChart'
 
@@ -18,7 +18,7 @@ class App.Views.Segments.HeartRateChartView extends Backbone.View
     @points = options.points
 
   render: =>
-    $(@el).find('.menu').html JST['templates/segments/chart_menu_view'](charts: @availableCharts)
+    $(@el).find('.menu').html JST['templates/rides/chart_menu_view'](charts: @availableCharts)
     @renderChart _.first(@availableCharts).rel
     @
 
@@ -36,7 +36,8 @@ class App.Views.Segments.HeartRateChartView extends Backbone.View
 
     @points.each (point) =>
       distance = App.Helpers.metersToMiles(point.get('distance'))
-      data.push [distance, point.get('heart_rate')]
+      elevation = App.Helpers.metersToFeet(point.get('elevation'))
+      data.push [distance, elevation]
 
     data
 
@@ -47,7 +48,8 @@ class App.Views.Segments.HeartRateChartView extends Backbone.View
       time = point.get('active_duration') * 1000
 
       if time > 0
-        data.push [time, point.get('heart_rate')]
+        elevation = App.Helpers.metersToFeet(point.get('elevation'))
+        data.push [time, elevation]
 
     data
 
@@ -58,7 +60,7 @@ class App.Views.Segments.HeartRateChartView extends Backbone.View
           text: ''
       tooltip:
         formatter: ->
-          "<strong>Distance:</strong>#{Highcharts.numberFormat(this.x, 1)}<br><strong>Heart Rate:</strong>#{Highcharts.numberFormat(this.y, 0)} bpm"
+          "<strong>Distance:</strong>#{Highcharts.numberFormat(this.x, 1)} mi<br><strong>Elevation:</strong>#{Highcharts.numberFormat(this.y, 1)} ft"
       series: [
         _.extend @commonSeriesOptions(), {data: @distanceDataPoints()}
       ]
@@ -72,7 +74,7 @@ class App.Views.Segments.HeartRateChartView extends Backbone.View
         type: 'datetime'
       tooltip:
         formatter: ->
-          "<strong>Elapsed Time:</strong>#{App.Helpers.formatTime(this.x / 1000)}<br><strong>Heart Rate:</strong>#{Highcharts.numberFormat(this.y, 0)} bpm"
+          "<strong>Elapsed Time:</strong>#{App.Helpers.formatTime(this.x / 1000)} mi<br><strong>Elevation:</strong>#{Highcharts.numberFormat(this.y, 1)} ft"
       series: [
         _.extend @commonSeriesOptions(), {data: @elapsedTimeDataPoints()}
       ]
@@ -83,7 +85,7 @@ class App.Views.Segments.HeartRateChartView extends Backbone.View
       renderTo: $(@el).find('.highchart').get(0)
     yAxis:
       title:
-        text: 'Heart Rate (bpm)'
+        text: 'Elevation (ft)'
 
   commonSeriesOptions: =>
     marker:
@@ -100,4 +102,4 @@ class App.Views.Segments.HeartRateChartView extends Backbone.View
     states:
       hover:
         lineWidth: 3
-    name: 'Heart Rate'
+    name: 'Elevation'

@@ -1,11 +1,11 @@
 module Gpx
   module Parser
     class SaxHandler < Ox::Sax
-      attr_accessor :segments
+      attr_accessor :rides
 
       def initialize
         @current_state = []
-        @segments = []
+        @rides = []
       end
 
       def start_element(name)
@@ -13,7 +13,7 @@ module Gpx
 
         case @current_state
         when [:gpx, :trk, :trkseg]
-          @segment = Segment.new
+          @ride = Ride.new
         when [:gpx, :trk, :trkseg, :trkpt]
           @point = Point.new
         end
@@ -22,9 +22,9 @@ module Gpx
       def end_element(name)
         case @current_state
         when [:gpx, :trk, :trkseg]
-          @segments << @segment
+          @rides << @ride
         when [:gpx, :trk, :trkseg, :trkpt]
-          @segment.points << @point
+          @ride.points << @point
         end
 
         @current_state.pop

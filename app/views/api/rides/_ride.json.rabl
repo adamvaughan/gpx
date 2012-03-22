@@ -1,4 +1,4 @@
-object @segment
+object @ride
 attributes :id,
   :distance,
   :ascending_distance,
@@ -26,8 +26,8 @@ attributes :id,
   :average_heart_rate,
   :maximum_heart_rate
 
-node(:href) { |segment| api_segment_url(segment) }
-node(:points_href) { |segment| api_segment_points_url(segment) }
-node(:start_time) { |segment| segment.start_time.to_i }
-node(:created_at) { |segment| segment.created_at.to_i }
-node(:updated_at) { |segment| segment.updated_at.to_i }
+node(:href) { |ride| api_ride_url(ride) }
+node(:points_href) { |ride| api_ride_points_url(ride) }
+node(:start_time) { |ride| ride.start_time.to_i }
+node(:created_at) { |ride| ride.created_at.to_i }
+node(:updated_at) { |ride| ride.updated_at.to_i }

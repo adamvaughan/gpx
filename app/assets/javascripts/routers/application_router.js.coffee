@@ -10,19 +10,19 @@ class App.Routers.ApplicationRouter extends Backbone.Router
     $('body > nav a').click @followLink
 
   index: =>
-    @loadSegments =>
-      summaryView = new App.Views.Summary.SummaryView(collection: App.segments)
+    @loadRides =>
+      summaryView = new App.Views.Summary.SummaryView(collection: App.rides)
       @changePage 'Ride Log', summaryView
 
   rides: (page = 1) =>
-    @loadSegmentsPage page, =>
-      segmentsView = new App.Views.Segments.SegmentsView(collection: App.segments)
-      @changePage 'Ride Log', segmentsView
+    @loadRidesPage page, =>
+      ridesView = new App.Views.Rides.RidesView(collection: App.rides)
+      @changePage 'Ride Log', ridesView
 
   ride: (id) =>
-    @loadSegment id, (segment) =>
-      segmentView = new App.Views.Segments.SegmentView(model: segment)
-      @changePage 'Ride Details', segmentView
+    @loadRide id, (ride) =>
+      rideView = new App.Views.Rides.RideView(model: ride)
+      @changePage 'Ride Details', rideView
 
   upload: =>
     fileUploadView = new App.Views.FileUploadView
@@ -38,22 +38,22 @@ class App.Routers.ApplicationRouter extends Backbone.Router
   followLink: (event) ->
     App.Helpers.followLink event
 
-  loadSegmentsPage: (page, callback) =>
-    @loadSegments callback, page
+  loadRidesPage: (page, callback) =>
+    @loadRides callback, page
 
-  loadSegments: (callback, page = 1) =>
-    App.segments = new App.Collections.SegmentCollection(page: page)
-    App.segments.fetch
+  loadRides: (callback, page = 1) =>
+    App.rides = new App.Collections.RideCollection(page: page)
+    App.rides.fetch
       success: =>
         callback() if _.isFunction(callback)
 
-  loadSegment: (id, callback) =>
-    segment = App.segments.get(id) if App.segments?
+  loadRide: (id, callback) =>
+    ride = App.rides.get(id) if App.rides?
 
-    if segment?
-      callback(segment) if _.isFunction(callback)
+    if ride?
+      callback(ride) if _.isFunction(callback)
     else
-      segment = new App.Models.Segment(id: id)
-      segment.fetch
+      ride = new App.Models.Ride(id: id)
+      ride.fetch
         success: =>
-          callback(segment) if _.isFunction(callback)
+          callback(ride) if _.isFunction(callback)

@@ -1,4 +1,4 @@
-class Segment < ActiveRecord::Base
+class Ride < ActiveRecord::Base
   has_many :points, :dependent => :delete_all
 
   default_scope :order => 'start_time DESC, created_at DESC'

@@ -1,14 +1,6 @@
 class UploadsController < ApplicationController
-  def show
-    last_modified = Segment.maximum(:updated_at)
-
-    if stale?(:last_modified => last_modified, :etag => last_modified)
-      @segments = Segment.all
-    end
-  end
-
   def create
-    @segments = []
+    @rides = []
 
     if params['file']
       case params['file'].original_filename
@@ -55,12 +47,12 @@ class UploadsController < ApplicationController
     handler = Gpx::Parser::SaxHandler.new
     Ox.sax_parse(handler, file)
 
-    if handler.segments.any?
+    if handler.rides.any?
       begin
-        handler.segments.each { |segment| Gpx::Statistics::SegmentStatistics.calculate(segment) }
+        handler.rides.each { |ride| Gpx::Statistics::RideStatistics.calculate(ride) }
 
-        if handler.segments.all?(&:save)
-          @segments = handler.segments
+        if handler.rides.all?(&:save)
+          @rides = handler.rides
         else
           @error = 'The uploaded file could not be saved.'
         end

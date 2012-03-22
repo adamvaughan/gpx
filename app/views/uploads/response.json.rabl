@@ -1,5 +1,5 @@
 if @error
   node(:error) { @error.to_json }
 else
-  node(:segments) { partial 'segments/_segment', :object => @segments }
+  node(:rides) { partial 'rides/_ride', :object => @rides }
 end

@@ -1,11 +1,11 @@
-class App.Collections.SegmentCollection extends Backbone.Collection
-  model: App.Models.Segment
+class App.Collections.RideCollection extends Backbone.Collection
+  model: App.Models.Ride
 
   initialize: (options) ->
     @page = options.page
 
   url: =>
-    baseUrl = App.hrefs.segments
+    baseUrl = App.hrefs.rides
     baseUrl = "#{baseUrl}/page/#{@page}" if @page?
     baseUrl
 
@@ -13,5 +13,5 @@ class App.Collections.SegmentCollection extends Backbone.Collection
     @pager = new App.Models.Pager(@, _.extend(response, url: '/rides'))
     response.items
 
-  comparator: (segment) ->
-    segment.get('start_time') * -1
+  comparator: (ride) ->
+    ride.get('start_time') * -1

@@ -1,4 +1,4 @@
-class App.Views.Segments.PaceChartView extends Backbone.View
+class App.Views.Rides.SpeedChartView extends Backbone.View
   events:
     'click .menu a': 'selectChart'
 
@@ -18,7 +18,7 @@ class App.Views.Segments.PaceChartView extends Backbone.View
     @points = options.points
 
   render: =>
-    $(@el).find('.menu').html JST['templates/segments/chart_menu_view'](charts: @availableCharts)
+    $(@el).find('.menu').html JST['templates/rides/chart_menu_view'](charts: @availableCharts)
     @renderChart _.first(@availableCharts).rel
     @
 
@@ -36,8 +36,8 @@ class App.Views.Segments.PaceChartView extends Backbone.View
 
     @points.each (point) =>
       distance = App.Helpers.metersToMiles(point.get('distance'))
-      pace = App.Helpers.secondsPerMeterToMinutesPerMile(point.get('pace'))
-      data.push [distance, pace]
+      speed = App.Helpers.metersPerSecondToMilesPerHour(point.get('speed'))
+      data.push [distance, speed]
 
     App.Helpers.reduceData data
 
@@ -48,8 +48,8 @@ class App.Views.Segments.PaceChartView extends Backbone.View
       time = point.get('active_duration') * 1000
 
       if time > 0
-        pace = App.Helpers.secondsPerMeterToMinutesPerMile(point.get('pace'))
-        data.push [time, pace]
+        speed = App.Helpers.metersPerSecondToMilesPerHour(point.get('speed'))
+        data.push [time, speed]
 
     App.Helpers.reduceData data
 
@@ -60,7 +60,7 @@ class App.Views.Segments.PaceChartView extends Backbone.View
           text: ''
       tooltip:
         formatter: ->
-          "<strong>Distance:</strong>#{Highcharts.numberFormat(this.x, 1)} mi<br><strong>Pace:</strong>#{App.Helpers.formatTime(this.y * 60)} per mile"
+          "<strong>Distance:</strong>#{Highcharts.numberFormat(this.x, 1)} mi<br><strong>Speed:</strong>#{Highcharts.numberFormat(this.y, 1)} mph"
       series: [
         _.extend @commonSeriesOptions(), {data: @distanceDataPoints()}
       ]
@@ -74,7 +74,7 @@ class App.Views.Segments.PaceChartView extends Backbone.View
         type: 'datetime'
       tooltip:
         formatter: ->
-          "<strong>Elapsed Time:</strong>#{App.Helpers.formatTime(this.x / 1000)}<br><strong>Pace:</strong>#{App.Helpers.formatTime(this.y * 60)} per mile"
+          "<strong>Elapsed Time:</strong>#{App.Helpers.formatTime(this.x / 1000)} mi<br><strong>Speed:</strong>#{Highcharts.numberFormat(this.y, 1)} mph"
       series: [
         _.extend @commonSeriesOptions(), {data: @elapsedTimeDataPoints()}
       ]
@@ -86,7 +86,7 @@ class App.Views.Segments.PaceChartView extends Backbone.View
     yAxis:
       min: 0
       title:
-        text: 'Pace (min/mile)'
+        text: 'Speed (mph)'
 
   commonSeriesOptions: =>
     marker:
@@ -103,4 +103,4 @@ class App.Views.Segments.PaceChartView extends Backbone.View
     states:
       hover:
         lineWidth: 3
-    name: 'Pace'
+    name: 'Speed'

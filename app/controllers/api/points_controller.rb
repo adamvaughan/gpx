@@ -1,9 +1,9 @@
 class Api::PointsController < Api::BaseController
   def index
-    @segment = Segment.find(params[:segment_id])
+    @ride = Ride.find(params[:ride_id])
 
-    if stale?(@segment)
-      @points = @segment.points
+    if stale?(@ride)
+      @points = @ride.points
     end
   end
 end
