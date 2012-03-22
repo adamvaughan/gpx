@@ -12,25 +12,27 @@ class App.Routers.ApplicationRouter extends Backbone.Router
   index: =>
     @loadRides =>
       summaryView = new App.Views.Summary.SummaryView(collection: App.rides)
-      @changePage 'Ride Log', summaryView
+      @changePage summaryView
 
   rides: (page = 1) =>
     @loadRidesPage page, =>
       ridesView = new App.Views.Rides.RidesView(collection: App.rides)
-      @changePage 'Ride Log', ridesView
+      @changePage ridesView, 'All Rides'
 
   ride: (id) =>
     @loadRide id, (ride) =>
       rideView = new App.Views.Rides.RideView(model: ride)
-      @changePage 'Ride Details', rideView
+      @changePage rideView, 'Ride Details'
 
   upload: =>
     fileUploadView = new App.Views.FileUploadView
-    @changePage 'Upload', fileUploadView
+    @changePage fileUploadView, 'Upload'
 
-  changePage: (title, view) =>
+  changePage: (view, title) =>
+    document.title = if title? then "Ride Log - #{title}" else 'Ride Log'
+
+    title = 'Ride Log' unless title?
     $('body > header > h1').text title
-    document.title = title
 
     $('#container').empty()
     $('#container').append view.render().el
