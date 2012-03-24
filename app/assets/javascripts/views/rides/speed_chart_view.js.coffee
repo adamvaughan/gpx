@@ -32,26 +32,29 @@ class App.Views.Rides.SpeedChartView extends Backbone.View
     @renderChart $(event.target).closest('a').attr('rel')
 
   distanceDataPoints: =>
-    data = []
+    distances = []
+    speeds = []
 
     @points.each (point) =>
-      distance = App.Helpers.metersToMiles(point.get('distance'))
-      speed = App.Helpers.metersPerSecondToMilesPerHour(point.get('speed'))
-      data.push [distance, speed]
+      if point.isActive()
+        distances.push App.Helpers.metersToMiles(point.get('distance'))
+        speeds.push App.Helpers.metersPerSecondToMilesPerHour(point.get('speed'))
 
-    App.Helpers.reduceData data
+    _.zip distances, App.Helpers.movingAverage(speeds)
 
   elapsedTimeDataPoints: =>
-    data = []
+    times = []
+    speeds = []
 
     @points.each (point) =>
-      time = point.get('active_duration') * 1000
+      if point.isActive()
+        time = point.get('active_duration') * 1000
 
-      if time > 0
-        speed = App.Helpers.metersPerSecondToMilesPerHour(point.get('speed'))
-        data.push [time, speed]
+        if time > 0
+          times.push time
+          speeds.push App.Helpers.metersPerSecondToMilesPerHour(point.get('speed'))
 
-    App.Helpers.reduceData data
+    _.zip times, App.Helpers.movingAverage(speeds)
 
   distanceChartOptions: =>
     _.extend @commonChartOptions(), {

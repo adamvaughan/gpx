@@ -27,7 +27,7 @@ class App.Views.Summary.LastRideSummaryView extends Backbone.View
 
   drawSparkline: (measurement, values) =>
     sparkline = $(@el).find(".summary.#{measurement} .sparkline")
-    sparkline.sparkline values, @sparklineOptions
+    sparkline.sparkline App.Helpers.movingAverage(values), @sparklineOptions
 
   fetchPointData: (callback) =>
     pointCollection = new App.Collections.PointCollection(href: @model.get('points_href'))

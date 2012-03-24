@@ -32,26 +32,29 @@ class App.Views.Rides.ElevationChartView extends Backbone.View
     @renderChart $(event.target).closest('a').attr('rel')
 
   distanceDataPoints: =>
-    data = []
+    distances = []
+    elevations = []
 
     @points.each (point) =>
-      distance = App.Helpers.metersToMiles(point.get('distance'))
-      elevation = App.Helpers.metersToFeet(point.get('elevation'))
-      data.push [distance, elevation]
+      if point.isActive()
+        distances.push App.Helpers.metersToMiles(point.get('distance'))
+        elevations.push App.Helpers.metersToFeet(point.get('elevation'))
 
-    data
+    _.zip distances, App.Helpers.movingAverage(elevations)
 
   elapsedTimeDataPoints: =>
-    data = []
+    times = []
+    elevations = []
 
     @points.each (point) =>
-      time = point.get('active_duration') * 1000
+      if point.isActive()
+        time = point.get('active_duration') * 1000
 
-      if time > 0
-        elevation = App.Helpers.metersToFeet(point.get('elevation'))
-        data.push [time, elevation]
+        if time > 0
+          times.push time
+          elevations.push App.Helpers.metersToFeet(point.get('elevation'))
 
-    data
+    _.zip times, App.Helpers.movingAverage(elevations)
 
   distanceChartOptions: =>
     _.extend @commonChartOptions(), {

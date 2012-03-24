@@ -11,17 +11,17 @@ class App.Collections.PointCollection extends Backbone.Collection
     point.get('time')
 
   speedValues: =>
-    values = @map (point) -> point.get('speed') if point.get('speed') > 0.5
-    _.compact(values)
+    values = @map (point) -> parseFloat(point.get('speed')) if point.isActive()
+    _.compact values
 
   paceValues: =>
-    values = @map (point) -> point.get('pace') if point.get('pace') > 0 and point.get('pace') < 1
-    _.compact(values)
+    values = @map (point) -> parseFloat(point.get('pace')) if point.isActive()
+    _.compact values
 
   elevationValues: =>
-    values = @map (point) -> point.get('elevation') if point.get('speed') > 0.5
-    _.compact(values)
+    values = @map (point) -> parseFloat(point.get('elevation')) if point.isActive()
+    _.compact values
 
   heartRateValues: =>
-    values = @map (point) -> point.get('heart_rate')
-    _.compact(values)
+    values = @map (point) -> parseFloat(point.get('heart_rate')) if point.isActive()
+    _.compact values

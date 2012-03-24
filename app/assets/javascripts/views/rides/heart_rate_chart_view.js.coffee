@@ -32,24 +32,29 @@ class App.Views.Rides.HeartRateChartView extends Backbone.View
     @renderChart $(event.target).closest('a').attr('rel')
 
   distanceDataPoints: =>
-    data = []
+    distances = []
+    heartRates = []
 
     @points.each (point) =>
-      distance = App.Helpers.metersToMiles(point.get('distance'))
-      data.push [distance, point.get('heart_rate')]
+      if point.isActive()
+        distances.push App.Helpers.metersToMiles(point.get('distance'))
+        heartRates.push point.get('heart_rate')
 
-    data
+    _.zip distances, App.Helpers.movingAverage(heartRates)
 
   elapsedTimeDataPoints: =>
-    data = []
+    times = []
+    heartRates = []
 
     @points.each (point) =>
-      time = point.get('active_duration') * 1000
+      if point.isActive()
+        time = point.get('active_duration') * 1000
 
-      if time > 0
-        data.push [time, point.get('heart_rate')]
+        if time > 0
+          times.push time
+          heartRates.push point.get('heart_rate')
 
-    data
+    _.zip times, heartRates
 
   distanceChartOptions: =>
     _.extend @commonChartOptions(), {
