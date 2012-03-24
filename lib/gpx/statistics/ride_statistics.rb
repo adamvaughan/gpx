@@ -335,12 +335,12 @@ module Gpx
 
           ride.points.each_with_index do |point, index|
             if index < ride.points.size - 1
-              next_point = ride.points[index + 1]
+              pair = [point, ride.points[index + 1]]
 
               if block_given?
-                yield(point, next_point)
+                yield pair
               else
-                pairs << [point, next_point]
+                pairs << pair
               end
             end
           end
@@ -356,12 +356,12 @@ module Gpx
         def ascending_point_pairs(ride)
           pairs = []
 
-          point_pairs(ride) do |point, next_point|
-            if ascending_between?(point, next_point)
+          point_pairs(ride) do |pair|
+            if ascending_between?(*pair)
               if block_given?
-                yield(point, next_point)
+                yield pair
               else
-                pairs << [point, next_point]
+                pairs << pair
               end
             end
           end
@@ -377,12 +377,12 @@ module Gpx
         def descending_point_pairs(ride)
           pairs = []
 
-          point_pairs(ride) do |point, next_point|
-            if descending_between?(point, next_point)
+          point_pairs(ride) do |pair|
+            if descending_between?(*pair)
               if block_given?
-                yield(point, next_point)
+                yield pair
               else
-                pairs << [point, next_point]
+                pairs << pair
               end
             end
           end
@@ -398,12 +398,12 @@ module Gpx
         def flat_point_pairs(ride)
           pairs = []
 
-          point_pairs(ride) do |point, next_point|
-            if active_between?(point, next_point) && flat_between?(point, next_point)
+          point_pairs(ride) do |pair|
+            if active_between?(*pair) && flat_between?(*pair)
               if block_given?
-                yield(point, next_point)
+                yield pair
               else
-                pairs << [point, next_point]
+                pairs << pair
               end
             end
           end
