@@ -21,6 +21,8 @@
   <abbr title="minutes per mile">min/mi</abbr>
 </td>
 <td class="heart-rate numeric">
-  {{formatHeartRate average_heart_rate}}
-  <abbr title="beats per minute">bpm</abbr>
+  {{#if average_heart_rate}}
+    {{formatHeartRate average_heart_rate}}
+    <abbr title="beats per minute">bpm</abbr>
+  {{/if}}
 </td>

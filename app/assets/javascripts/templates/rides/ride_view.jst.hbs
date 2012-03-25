@@ -246,31 +246,33 @@
   </div>
 </section>
 
-<section class="heart-rate">
-  <header>
-    <h1>Heart Rate</h1>
-  </header>
+{{#if average_heart_rate}}
+  <section class="heart-rate">
+    <header>
+      <h1>Heart Rate</h1>
+    </header>
 
-  <div class="section-content">
-    <div class="chart heart-rate">
-      <div class="highchart"></div>
-      <ul class="menu"></ul>
-    </div>
+    <div class="section-content">
+      <div class="chart heart-rate">
+        <div class="highchart"></div>
+        <ul class="menu"></ul>
+      </div>
 
-    <div class="summary heart-rate">
-      <h2>Average Heart Rate</h2>
-      <p>
-        {{formatHeartRate average_heart_rate}}
-        <abbr title="beats per minute">bpm</abbr>
-      </p>
-    </div>
+      <div class="summary heart-rate">
+        <h2>Average Heart Rate</h2>
+        <p>
+          {{formatHeartRate average_heart_rate}}
+          <abbr title="beats per minute">bpm</abbr>
+        </p>
+      </div>
 
-    <div class="summary heart-rate maximum">
-      <h2>Maximum Heart Rate</h2>
-      <p>
-        {{formatHeartRate maximum_heart_rate}}
-        <abbr title="beats per minute">bpm</abbr>
-      </p>
+      <div class="summary heart-rate maximum">
+        <h2>Maximum Heart Rate</h2>
+        <p>
+          {{formatHeartRate maximum_heart_rate}}
+          <abbr title="beats per minute">bpm</abbr>
+        </p>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+{{/if}}
