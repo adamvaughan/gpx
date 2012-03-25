@@ -16,7 +16,7 @@ class App.Views.Summary.ReportView extends Backbone.View
 
   weekEndTime: =>
     endDate = if Date.today().getDay() == 0
-                Date.today
+                Date.today()
               else
                 Date.today().moveToDayOfWeek(0, 1)
 
