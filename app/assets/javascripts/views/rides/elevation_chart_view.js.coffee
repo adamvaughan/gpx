@@ -100,9 +100,9 @@ class App.Views.Rides.ElevationChartView extends Backbone.View
       states:
         hover:
           enabled: true
-    lineWidth: 3
+    lineWidth: 2
     shadow: false
     states:
       hover:
-        lineWidth: 3
+        lineWidth: 2
     name: 'Elevation'
