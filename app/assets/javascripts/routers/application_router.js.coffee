@@ -36,6 +36,7 @@ class App.Routers.ApplicationRouter extends Backbone.Router
 
     $('#container').empty()
     $('#container').append view.render().el
+    $('html, body').scrollTop 0
 
   followLink: (event) ->
     App.Helpers.followLink event
