@@ -31,9 +31,6 @@ class App.Routers.ApplicationRouter extends Backbone.Router
   changePage: (view, title) =>
     document.title = if title? then "Ride Log - #{title}" else 'Ride Log'
 
-    title = 'Ride Log' unless title?
-    $('body > header > h1').text title
-
     $('#container').empty()
     $('#container').append view.render().el
     $('html, body').scrollTop 0
