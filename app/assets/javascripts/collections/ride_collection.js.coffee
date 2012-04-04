@@ -3,10 +3,19 @@ class App.Collections.RideCollection extends Backbone.Collection
 
   initialize: (options) ->
     @page = options.page
+    @from = options.from
+    @to = options.to
 
   url: =>
     baseUrl = App.hrefs.rides
-    baseUrl = "#{baseUrl}/page/#{@page}" if @page?
+
+    if @page?
+      baseUrl = "#{baseUrl}/page/#{@page}"
+    else if @from? and @to?
+      from = Math.floor(@from.clearTime().getTime() / 1000)
+      to = Math.floor(@to.clearTime().getTime() / 1000)
+      baseUrl = "#{baseUrl}?from=#{from}&to=#{to}"
+
     baseUrl
 
   parse: (response) =>

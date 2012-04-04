@@ -2,8 +2,12 @@ class Api::RidesController < Api::BaseController
   def index
     last_modified = Ride.maximum(:updated_at)
 
-    if stale?(:last_modified => last_modified, :etag => [last_modified, params[:page]])
-      @rides = Ride.page(params[:page])
+    if stale?(:last_modified => last_modified, :etag => [last_modified, params])
+      if params[:from] && params[:to]
+        @rides = Ride.between params[:from], params[:to]
+      else
+        @rides = Ride.page(params[:page])
+      end
     end
   end
 
