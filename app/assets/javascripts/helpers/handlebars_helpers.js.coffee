@@ -48,6 +48,12 @@ Handlebars.registerHelper 'formatDate', (value) ->
     value = new Date(value * 1000)
     value.toString('MMMM d, yyyy')
 
+Handlebars.registerHelper 'formatShortDate', (date) ->
+  if date.getFullYear() == Date.today().getFullYear()
+    date.toString("MMM d")
+  else
+    date.toString("MMM d, yyyy")
+
 Handlebars.registerHelper 'formatNumber', (value) ->
   if _.isUndefined(value)
     '--'
