@@ -40,7 +40,7 @@ class App.Views.Rides.ElevationChartView extends Backbone.View
         distances.push App.Helpers.metersToMiles(point.get('distance'))
         elevations.push App.Helpers.metersToFeet(point.get('elevation'))
 
-    _.zip distances, App.Helpers.movingAverage(elevations)
+    _.zip distances, elevations
 
   elapsedTimeDataPoints: =>
     times = []
@@ -54,7 +54,7 @@ class App.Views.Rides.ElevationChartView extends Backbone.View
           times.push time
           elevations.push App.Helpers.metersToFeet(point.get('elevation'))
 
-    _.zip times, App.Helpers.movingAverage(elevations)
+    _.zip times, elevations
 
   distanceChartOptions: =>
     _.extend @commonChartOptions(), {
