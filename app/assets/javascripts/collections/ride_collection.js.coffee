@@ -18,6 +18,11 @@ class App.Collections.RideCollection extends Backbone.Collection
 
     baseUrl
 
+  getByDate: (date) =>
+    @select (ride) ->
+      rideDate = new Date(ride.get('start_time') * 1000)
+      rideDate.getFullYear() == date.getFullYear() and rideDate.getMonth() == date.getMonth() and rideDate.getDate() == date.getDate()
+
   parse: (response) =>
     @pager = new App.Models.Pager(@, _.extend(response, url: '/rides'))
     response.items
