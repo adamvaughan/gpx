@@ -59,3 +59,9 @@ Handlebars.registerHelper 'formatNumber', (value) ->
     '--'
   else
     accounting.formatNumber(value, 0, ',')
+
+Handlebars.registerHelper 'formatRideCount', (value) ->
+  if value == 1
+    "#{value} Ride"
+  else
+    "#{value} Rides"

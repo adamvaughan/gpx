@@ -2,16 +2,11 @@
   <header>
     <hgroup>
       <h1>This Week</h1>
-      <h2>{{formatDate week_start_time}} - {{formatDate week_end_time}}</h2>
+      <h2>{{formatRideCount week_ride_count}} ({{formatDate week_start_time}} - {{formatDate week_end_time}})</h2>
     </hgroup>
   </header>
 
   <div class="section-content">
-    <div class="summary ride-count">
-      <h2>Rides</h2>
-      <p>{{formatNumber week_ride_count}}</p>
-    </div>
-
     <div class="summary distance">
       <h2>Distance</h2>
       <p>
@@ -32,26 +27,22 @@
         <abbr title="feet">ft</abbr>
       </p>
     </div>
-  </div>
 
-  <p class="read-more">
-    <a href="/summary/weekly" title="View Weekly Summary">View Weekly Summary</a>
-  </p>
+    <div class="summary read-more">
+      <a href="/summary/weekly" title="View Weekly Summary">View Weekly Summary</a>
+    </div>
+  </div>
 </section>
 
 <section>
   <header>
     <hgroup>
       <h1>This Month</h1>
+      <h2>{{formatRideCount month_ride_count}}</h2>
     </hgroup>
   </header>
 
   <div class="section-content">
-    <div class="summary ride-count">
-      <h2>Rides</h2>
-      <p>{{formatNumber month_ride_count}}</p>
-    </div>
-
     <div class="summary distance">
       <h2>Distance</h2>
       <p>
@@ -72,6 +63,10 @@
         <abbr title="feet">ft</abbr>
       </p>
     </div>
+
+    <div class="summary read-more">
+      <a href="/summary/monthly" title="View Monthly Summary">View Monthly Summary</a>
+    </div>
   </div>
 </section>
 
@@ -79,15 +74,11 @@
   <header>
     <hgroup>
       <h1>This Year</h1>
+      <h2>{{formatRideCount year_ride_count}}</h2>
     </hgroup>
   </header>
 
   <div class="section-content">
-    <div class="summary ride-count">
-      <h2>Rides</h2>
-      <p>{{formatNumber year_ride_count}}</p>
-    </div>
-
     <div class="summary distance">
       <h2>Distance</h2>
       <p>
@@ -107,6 +98,10 @@
         {{formatElevation year_elevation_gain}}
         <abbr title="feet">ft</abbr>
       </p>
+    </div>
+
+    <div class="summary read-more">
+      <a href="/summary/yearly" title="View Yearly Summary">View Yearly Summary</a>
     </div>
   </div>
 </section>
