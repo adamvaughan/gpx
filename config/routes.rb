@@ -14,6 +14,7 @@ Gpx::Application.routes.draw do
   get 'rides/page/:page' => 'page#index'
   get 'rides/:id' => 'page#index'
   get 'upload' => 'page#index'
+  get 'summary/weekly' => 'page#index'
 
   root :to => 'page#index'
 end

@@ -5,6 +5,7 @@ class App.Routers.ApplicationRouter extends Backbone.Router
     'rides/page/:page': 'rides'
     'rides/:id': 'ride'
     'upload': 'upload'
+    'summary/weekly': 'weeklySummary'
 
   initialize: =>
     $('body > nav a').click @followLink
@@ -27,6 +28,10 @@ class App.Routers.ApplicationRouter extends Backbone.Router
   upload: =>
     fileUploadView = new App.Views.FileUploadView
     @changePage fileUploadView, 'Upload'
+
+  weeklySummary: =>
+    weeklySummaryView = new App.Views.Summary.WeeklySummaryView
+    @changePage weeklySummaryView, 'Weekly Summary'
 
   changePage: (view, title) =>
     document.title = if title? then "Ride Log - #{title}" else 'Ride Log'

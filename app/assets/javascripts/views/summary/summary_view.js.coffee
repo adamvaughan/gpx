@@ -1,4 +1,7 @@
 class App.Views.Summary.SummaryView extends Backbone.View
+  events:
+    'click .read-more a': 'followLink'
+
   render: =>
     unless @collection.isEmpty()
       lastRide = @collection.first()
@@ -15,3 +18,6 @@ class App.Views.Summary.SummaryView extends Backbone.View
       App.Helpers.prepareExpandingSections @el
       report.fetch()
     @
+
+  followLink: (event) ->
+    App.Helpers.followLink event

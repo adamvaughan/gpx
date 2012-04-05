@@ -24,6 +24,9 @@ a:hover
   color: #a9d5de
   text-decoration: underline
 
+abbr
+  color: #666
+
 input[type='text']
   cursor: text
 
@@ -93,9 +96,7 @@ div.summary
     width: 140px
 
     abbr
-      color: #666
       font-size: 20px
-      font-weight: normal
 
   .sparkline
     display: inline-block
@@ -127,7 +128,7 @@ table.rides
           text-align: right
 
         abbr
-          color: #666
+          font-size: 14px
 
 nav
   float: right
@@ -230,6 +231,48 @@ form.file-upload
       color: #fff
       display: block
       text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25)
+
+.calendar
+  margin-top: 20px
+
+  th
+    padding-top: 20px
+    padding-bottom: 20px
+
+    &.totals
+      background: #fff
+      border: 1px solid #eee
+
+  td
+    width: 121px
+    height: 140px
+    vertical-align: top
+    border: 1px solid #eee
+
+    &.ride
+      background: rgba(255, 255, 200, 0.3)
+
+    &.totals
+      background: #fff
+
+    .date
+      font-size: 14px
+      color: #666
+      padding: 3px
+
+    .heading
+      color: #ccc
+      font-size: 16px
+      font-weight: normal
+      margin: 0 0 0 6px
+      text-transform: uppercase
+
+    .distance, .duration
+      display: block
+      margin: 0 0 0 40px
+
+    abbr
+      font-size: 14px
 
 .pagination
   margin-top: 20px

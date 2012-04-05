@@ -1,0 +1,71 @@
+<section>
+  <header>
+    <h1>Weekly Summary</h1>
+  </header>
+
+  {{#if weeks}}
+    <table class="calendar">
+      <thead>
+        <tr>
+          <th>Sunday</th>
+          <th>Monday</th>
+          <th>Tuesday</th>
+          <th>Wednesday</th>
+          <th>Thursday</th>
+          <th>Friday</th>
+          <th>Saturday</th>
+          <th class="totals">Totals</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each weeks}}
+          <tr>
+            {{#each days}}
+              <td class="{{class}}">
+                <span class="date">{{formatShortDate date}}</span>
+
+                {{#if distance}}
+                  <p>
+                    <span class="heading">Distance</span>
+                    <span class="distance">
+                      {{formatDistance distance}}
+                      <abbr title="miles">mi</abbr>
+                    </span>
+                  </p>
+                {{/if}}
+
+                {{#if duration}}
+                  <p>
+                    <span class="heading">Duration</span>
+                    <span class="duration">{{formatDuration duration}}</span>
+                  </p>
+                {{/if}}
+              </td>
+            {{/each}}
+
+            {{#with totals}}
+              <td class="totals">
+                {{#if distance}}
+                  <p>
+                    <span class="heading">Distance</span>
+                    <span class="distance">
+                      {{formatDistance distance}}
+                      <abbr title="miles">mi</abbr>
+                    </span>
+                  </p>
+                {{/if}}
+
+                {{#if duration}}
+                  <p>
+                    <span class="heading">Duration</span>
+                    <span class="duration">{{formatDuration duration}}</span>
+                  </p>
+                {{/if}}
+              </td>
+            {{/with}}
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  {{/if}}
+</section>
