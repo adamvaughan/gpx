@@ -37,6 +37,7 @@ class App.Views.Summary.WeeklySummaryView extends Backbone.View
         weekData.days.push
           class: ''
           date: currentDate
+          today: date.equals(currentDate)
 
         dayData = weekData.days[day]
 

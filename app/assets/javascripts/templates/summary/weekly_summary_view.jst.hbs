@@ -22,7 +22,13 @@
           <tr>
             {{#each days}}
               <td class="{{class}}">
-                <span class="date">{{formatShortDate date}}</span>
+                {{#if today}}
+                  <span class="today date">
+                {{else}}
+                  <span class="date">
+                {{/if}}
+                  {{formatShortDate date}}
+                </span>
 
                 {{#if distance}}
                   <p>
