@@ -14,6 +14,7 @@ class App.Routers.ApplicationRouter extends Backbone.Router
     @loadRides =>
       summaryView = new App.Views.Summary.SummaryView(collection: App.rides)
       @changePage summaryView
+      @hideMenuItem 'Home'
 
   rides: (page = 1) =>
     @loadRidesPage page, =>
@@ -28,6 +29,7 @@ class App.Routers.ApplicationRouter extends Backbone.Router
   upload: =>
     fileUploadView = new App.Views.FileUploadView
     @changePage fileUploadView, 'Upload'
+    @hideMenuItem 'Upload'
 
   weeklySummary: =>
     weeklySummaryView = new App.Views.Summary.WeeklySummaryView
@@ -39,6 +41,10 @@ class App.Routers.ApplicationRouter extends Backbone.Router
     $('#container').empty()
     $('#container').append view.render().el
     $('html, body').scrollTop 0
+    $('nav a').show()
+
+  hideMenuItem: (title) =>
+    $("nav a:contains('#{title}')").hide()
 
   followLink: (event) ->
     App.Helpers.followLink event
