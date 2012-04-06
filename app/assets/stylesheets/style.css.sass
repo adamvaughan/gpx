@@ -296,3 +296,27 @@ iframe
   display: none
   width: 0
   height: 0
+
+@media screen and (max-width: 999px)
+  body
+    width: 100%
+    padding: 10px
+
+  .chart
+    display: none
+
+@media screen and (max-width: 480px)
+  table.rides
+    thead, .heart-rate, .pace, .speed, .elevation, .duration, .distance
+      display: none
+
+    td
+      padding: 6px 15px
+
+  nav .upload
+    display: inline-block
+    text-indent: -9999px
+    overflow: hidden
+
+  #this_week .read-more
+    display: none

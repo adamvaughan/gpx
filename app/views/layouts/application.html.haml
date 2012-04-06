@@ -2,6 +2,8 @@
 %html
   %head
     %title Ride Log
+    %meta{ 'charset' => 'UTF-8' }
+    %meta{ 'name' => 'viewport', 'content' => 'width=device-width' }
 
     = stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz'
     = stylesheet_link_tag 'application'
@@ -26,9 +28,9 @@
     %nav
       %ul
         %li
-          %a{ :href => '/', :title => 'Home' } Home
+          %a.home{ :href => '/', :title => 'Home' } Home
         %li
-          %a{ :href => '/upload', :title => 'Upload' } Upload
+          %a.upload{ :href => '/upload', :title => 'Upload' } Upload
 
     #container
       = yield
