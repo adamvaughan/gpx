@@ -47,6 +47,7 @@ class App.Views.Rides.MapView extends Backbone.View
       flat: true
       map: map
       position: _.first(mapPoints)
+      icon: 'http://maps.google.com/mapfiles/dd-start.png'
 
     startMarker = new google.maps.Marker(startMarkerOptions)
 
@@ -55,6 +56,7 @@ class App.Views.Rides.MapView extends Backbone.View
       flat: true
       map: map
       position: _.last(mapPoints)
+      icon: 'http://maps.google.com/mapfiles/dd-end.png'
 
     stopMarker = new google.maps.Marker(stopMarkerOptions)
 
