@@ -31,4 +31,5 @@ gem 'rubyzip'
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
+  gem 'quiet_assets'
 end
