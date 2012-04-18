@@ -28,7 +28,6 @@ class App.Views.Rides.MapView extends Backbone.View
       zoom: 4
       center: new google.maps.LatLng(centerLatitude, centerLongitude)
       mapTypeId: google.maps.MapTypeId.TERRAIN
-      disableDefaultUI: true
       keyboardShortcuts: false
 
     map = new google.maps.Map(document.getElementById('map'), mapOptions)
