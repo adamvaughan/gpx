@@ -3,7 +3,9 @@ class App.Views.Summary.SummaryView extends Backbone.View
     'click .read-more a': 'followLink'
 
   render: =>
-    unless @collection.isEmpty()
+    if @collection.isEmpty()
+      $(@el).html JST['templates/summary/empty_summary_view']({})
+    else
       lastRide = @collection.first()
       lastRideSummaryView = new App.Views.Summary.LastRideSummaryView(model: lastRide)
       $(@el).append lastRideSummaryView.render().el
