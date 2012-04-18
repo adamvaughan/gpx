@@ -1,6 +1,6 @@
 Gpx::Application.routes.draw do
   namespace :api do
-    resources :rides, :only => [:index, :show] do
+    resources :rides, :only => [:index, :show, :destroy] do
       get 'page/:page', :action => :index, :on => :collection
       resources :points, :only => :index
     end

@@ -1,6 +1,9 @@
 class App.Views.Rides.RideView extends Backbone.View
   id: 'ride'
 
+  events:
+    'click .delete a': 'deleteRide'
+
   render: =>
     $(@el).html JST['templates/rides/ride_view'](@model.toJSON())
     App.Helpers.prepareExpandingSections @el
@@ -28,3 +31,11 @@ class App.Views.Rides.RideView extends Backbone.View
       el: $(@el).find('.chart.elevation').get(0)
       points: points
     elevationChartView.render()
+
+  deleteRide: (event) =>
+    event.preventDefault()
+
+    if confirm('Are you sure you want to delete this ride?')
+      @model.destroy
+        success: =>
+          App.router.navigate '/', trigger: true
