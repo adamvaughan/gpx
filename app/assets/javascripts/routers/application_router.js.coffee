@@ -23,8 +23,11 @@ class App.Routers.ApplicationRouter extends Backbone.Router
 
   ride: (id) =>
     @loadRide id, (ride) =>
-      rideView = new App.Views.Rides.RideView(model: ride)
-      @changePage rideView, 'Ride Details'
+      if ride?
+        rideView = new App.Views.Rides.RideView(model: ride)
+        @changePage rideView, 'Ride Details'
+      else
+        App.router.navigate '/', trigger: true
 
   upload: =>
     fileUploadView = new App.Views.FileUploadView
@@ -68,3 +71,5 @@ class App.Routers.ApplicationRouter extends Backbone.Router
       ride.fetch
         success: =>
           callback(ride) if _.isFunction(callback)
+        error: =>
+          callback(null) if _.isFunction(callback)
