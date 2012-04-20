@@ -160,6 +160,37 @@ nav
   height: 298px
   border: 1px solid #ccc
 
+  .chart-container
+    width: 998px
+    height: 258px
+
+    .axis
+      text
+        font-family: Arial
+        font-size: 12px
+        fill: #404040
+
+      &.x, &.y
+        line, path
+          stroke: none
+          fill: none
+
+      &.y
+        line
+          stroke: #eee
+          stroke-width: 1
+          shape-rendering: crispEdges
+
+    .line
+      stroke: #439aab
+      stroke-width: 2
+      fill: none
+
+    .area
+      stroke: none
+      fill: #a9d5de
+      opacity: 0.5
+
   .menu
     list-style: none
     text-align: center
