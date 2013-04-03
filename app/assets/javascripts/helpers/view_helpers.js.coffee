@@ -5,6 +5,6 @@ App.Helpers.followLink = (event) ->
   App.router.navigate link.attr('href'), trigger: true
 
 App.Helpers.prepareExpandingSections = (parent) ->
-  $(parent).find('section header h1').live 'click', (event) ->
+  $(parent).on 'click', 'section header h1', (event) ->
     section = $(event.target).closest('section')
     section.toggleClass('collapsed')
