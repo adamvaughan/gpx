@@ -30,6 +30,7 @@ module Gpx
           ride.maximum_speed = maximum_speed(ride)
           ride.average_heart_rate = average_heart_rate(ride)
           ride.maximum_heart_rate = maximum_heart_rate(ride)
+          ride.average_cadence = average_cadence(ride)
         end
 
         # Computes all statistics for a ride and saves the calculations.
@@ -321,6 +322,15 @@ module Gpx
           points = ride.points.reject { |point| point.heart_rate.nil? }
           return nil if points.size == 0
           points.map(&:heart_rate).max
+        end
+
+        # Calculates the average cadence between points on a ride.
+        #
+        # Returns the average cadence in revolutions per minute.
+        def average_cadence(ride)
+          points = ride.points.reject { |point| point.cadence.nil? }
+          return nil if points.size == 0
+          points.map(&:cadence).sum / points.count.to_f
         end
 
         private

@@ -10,7 +10,9 @@ class CreatePoints < ActiveRecord::Migration
       t.decimal :active_duration, :precision => 20, :scale => 10
       t.decimal :pace, :precision => 20, :scale => 10
       t.decimal :speed, :precision => 20, :scale => 10
-      t.references :segment
+      t.integer :heart_rate
+      t.integer :cadence
+      t.references :ride
       t.timestamps
     end
   end

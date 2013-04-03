@@ -1,9 +1,7 @@
-class CreateSegments < ActiveRecord::Migration
+class CreateRides < ActiveRecord::Migration
   def change
-    create_table :segments do |t|
-      t.string :name
+    create_table :rides do |t|
       t.datetime :start_time
-      t.decimal :latitude, :precision => 20, :scale => 10
       t.decimal :distance, :precision => 20, :scale => 10
       t.decimal :ascending_distance, :precision => 20, :scale => 10
       t.decimal :descending_distance, :precision => 20, :scale => 10
@@ -19,16 +17,17 @@ class CreateSegments < ActiveRecord::Migration
       t.decimal :descending_duration, :precision => 20, :scale => 10
       t.decimal :flat_duration, :precision => 20, :scale => 10
       t.decimal :average_pace, :precision => 20, :scale => 10
-      t.decimal :average_active_pace, :precision => 20, :scale => 10
       t.decimal :average_ascending_pace, :precision => 20, :scale => 10
       t.decimal :average_descending_pace, :precision => 20, :scale => 10
       t.decimal :average_flat_pace, :precision => 20, :scale => 10
       t.decimal :average_speed, :precision => 20, :scale => 10
-      t.decimal :average_active_speed, :precision => 20, :scale => 10
       t.decimal :average_ascending_speed, :precision => 20, :scale => 10
       t.decimal :average_descending_speed, :precision => 20, :scale => 10
       t.decimal :average_flat_speed, :precision => 20, :scale => 10
       t.decimal :maximum_speed, :precision => 20, :scale => 10
+      t.integer :maximum_heart_rate
+      t.decimal :average_heart_rate, :precision => 20, :scale => 10
+      t.decimal :average_cadence, :precision => 20, :scale => 10
       t.timestamps
     end
   end
