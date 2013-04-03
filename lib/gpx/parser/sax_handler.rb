@@ -49,6 +49,8 @@ module Gpx
           @point.time = Time.parse(value)
         when [:gpx, :trk, :trkseg, :trkpt, :extensions, :'gpxtpx:TrackPointExtension', :'gpxtpx:hr']
           @point.heart_rate = value.to_i
+        when [:gpx, :trk, :trkseg, :trkpt, :extensions, :'gpxtpx:TrackPointExtension', :'gpxtpx:cad']
+          @point.cadence = value.to_i
         end
       end
     end

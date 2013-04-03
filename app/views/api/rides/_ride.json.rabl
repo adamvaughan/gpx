@@ -24,7 +24,8 @@ attributes :id,
   :average_flat_speed,
   :maximum_speed,
   :average_heart_rate,
-  :maximum_heart_rate
+  :maximum_heart_rate,
+  :average_cadence
 
 node(:href) { |ride| api_ride_url(ride) }
 node(:points_href) { |ride| api_ride_points_url(ride) }

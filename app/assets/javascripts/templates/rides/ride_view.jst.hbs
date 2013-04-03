@@ -267,3 +267,21 @@
     </div>
   </section>
 {{/if}}
+
+{{#if average_cadence}}
+  <section class="cadence">
+    <header>
+      <h1>Cadence</h1>
+    </header>
+
+    <div class="section-content">
+      <div class="summary cadence">
+        <h2>Average Cadence</h2>
+        <p>
+          {{formatCadence average_cadence}}
+          <abbr title="revolutions per minute">rpm</abbr>
+        </p>
+      </div>
+    </div>
+  </section>
+{{/if}}

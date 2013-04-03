@@ -17,6 +17,7 @@ describe Gpx::Parser::SaxHandler do
               <extensions>
                 <gpxtpx:TrackPointExtension>
                   <gpxtpx:hr>161</gpxtpx:hr>
+                  <gpxtpx:cad>84</gpxtpx:cad>
                 </gpxtpx:TrackPointExtension>
               </extensions>
             </trkpt>
@@ -54,5 +55,9 @@ describe Gpx::Parser::SaxHandler do
 
   it "parses track point heart rate" do
     handler.rides.first.points.first.heart_rate.should eq(161)
+  end
+
+  it "parses track point cadence" do
+    handler.rides.first.points.first.cadence.should eq(84)
   end
 end

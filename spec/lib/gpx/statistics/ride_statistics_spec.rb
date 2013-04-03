@@ -1047,7 +1047,7 @@ describe Gpx::Statistics::RideStatistics do
     end
   end
 
-  describe "maximum_heart_rate" do
+  describe ".maximum_heart_rate" do
     context "when no points exist" do
       it "is nil" do
         Gpx::Statistics::RideStatistics.maximum_heart_rate(ride).should be_nil
@@ -1086,6 +1086,50 @@ describe Gpx::Statistics::RideStatistics do
 
         it "correctly computes the maximum heart rate between points" do
           Gpx::Statistics::RideStatistics.maximum_heart_rate(ride).should eq(150)
+        end
+      end
+    end
+  end
+
+  describe ".average_cadence" do
+    context "when no points exist" do
+      it "is nil" do
+        Gpx::Statistics::RideStatistics.average_cadence(ride).should be_nil
+      end
+    end
+
+    context "when one point exists" do
+      before do
+        ride.points << Point.new(:cadence => 84)
+      end
+
+      it "is the cadence value of the only point" do
+        Gpx::Statistics::RideStatistics.average_cadence(ride).should eq(84)
+      end
+    end
+
+    context "when multiple points exist" do
+      context "when no cadence data is present" do
+        before do
+          ride.points << Point.new
+          ride.points << Point.new
+          ride.points << Point.new
+        end
+
+        it "is nil" do
+          Gpx::Statistics::RideStatistics.average_cadence(ride).should be_nil
+        end
+      end
+
+      context "when cadence data is present" do
+        before do
+          ride.points << Point.new(:cadence => 83)
+          ride.points << Point.new(:cadence => 80)
+          ride.points << Point.new(:cadence => 81)
+        end
+
+        it "correctly computes the average cadence between points" do
+          Gpx::Statistics::RideStatistics.average_cadence(ride).should be_within(0.0000001).of(81.3333333)
         end
       end
     end

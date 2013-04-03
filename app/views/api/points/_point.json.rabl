@@ -8,7 +8,8 @@ attributes :latitude,
   :active_duration,
   :pace,
   :speed,
-  :heart_rate
+  :heart_rate,
+  :cadence
 
 node(:time) { |point| point.time.to_i }
 node(:created_at) { |point| point.created_at.to_i }

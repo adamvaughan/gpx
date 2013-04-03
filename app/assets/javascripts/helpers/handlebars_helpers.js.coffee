@@ -34,6 +34,12 @@ Handlebars.registerHelper 'formatHeartRate', (value) ->
   else
     accounting.formatNumber(value, 0, ',')
 
+Handlebars.registerHelper 'formatCadence', (value) ->
+  if _.isUndefined(value)
+    '--'
+  else
+    accounting.formatNumber(value, 0, ',')
+
 Handlebars.registerHelper 'formatDateTime', (value) ->
   if _.isUndefined(value)
     ''
